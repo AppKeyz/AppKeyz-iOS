@@ -22,86 +22,83 @@ static AppKeyz* sAppKeyz = nil;
     return sAppKeyz;
 }
 
--(void)submitAppKey:(NSString*)key
+-(NSString*)generateUid
 {
-
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:kAppKeyzHost]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:@"validate" forKey:@"ApiAction"];
-    [request setPostValue:kAppToken forKey:@"AppToken"];
-    [request setPostValue:key forKey:@"AppKey"];
-    [request setDelegate:self];
-    [request startAsynchronous];
-
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: 10];
+    for (int i=0; i<10; i++) {
+        [randomString appendFormat: @"%c", [letters characterAtIndex: arc4random()%[letters length]]];
+    }
+    return [NSString stringWithFormat:@"%@", randomString];
 }
 
--(void)revalidateAppKey:(NSString*)key
+-(void)akPost:(NSDictionary*)params command:(Command)cmd
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:kAppKeyzHost]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:@"revalidate" forKey:@"ApiAction"];
-    [request setPostValue:kAppToken forKey:@"AppToken"];
-    [request setPostValue:key forKey:@"AppKey"];
-    [request setDelegate:self];
-    [request startAsynchronous];
-}
-
--(void)getUserFromKey:(NSString*)key
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:kAppKeyzHost]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:@"getuser" forKey:@"ApiAction"];
-    [request setPostValue:kAppToken forKey:@"AppToken"];
-    [request setPostValue:key forKey:@"AppKey"];
-    [request setDelegate:self];
-    [request startAsynchronous];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-    NSString *responseString = [request responseString];
-    NSDictionary *responseDict = [responseString JSONValue];
-    NSLog(@"AServer Response %@", responseDict);
+    NSURL *baseURL = [NSURL URLWithString:[NSString stringWithFormat:kAppKeyzHost]];
     
-    if ([[responseDict objectForKey:@"ValidKey"]intValue] == 1) {
-        [[NSNotificationCenter defaultCenter] postNotificationName: @"appkeyzsuccess"
-                                                            object: nil
-                                                          userInfo: nil];
-        
-        UIAlertView* appKeyzSuccess = [[[UIAlertView alloc] initWithTitle:@"App Keyz"
-                                                                  message:@"Your code was accepted. Enjoy your upgrade."
-                                                                 delegate:nil
-                                                        cancelButtonTitle:@"OK"
-                                                        otherButtonTitles: nil] autorelease];
-        [appKeyzSuccess show];
-    } else {
-        UIAlertView* appKeyzFailure = [[[UIAlertView alloc] initWithTitle:@"App Keyz"
-                                                                  message:[responseDict objectForKey:@"ErrorMessage"]
-                                                                 delegate:nil
-                                                        cancelButtonTitle:@"OK"
-                                                        otherButtonTitles: nil] autorelease];
-        [appKeyzFailure show];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    
+    [client postPath:@""
+          parameters:params
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 [self consumeResponse:responseObject withCommand:cmd];
+                 
+             }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Communication Error"
+                                                              message:[NSString stringWithFormat:@"%@",error]
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                 [av show];
+                 
+             }
+     ];
+}
+
+-(void)consumeResponse:(id)responseObject withCommand:(Command)cmd
+{
+    switch (cmd) {
+        case createuser:
+            switch ([[responseObject objectForKey:@"Error"] intValue]) {
+                case 0:
+                    <#statements#>
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+            
+        default:
+            break;
     }
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request
+-(void)createUserWithEmail:(NSString*)email
+                  password:(NSString*)pw
+                     fname:(NSString*)fn
+                     lname:(NSString*)ln
+                       lat:(NSString*)lat
+                       lon:(NSString*)lon
+                    active:(BOOL)active
 {
-    // [MBProgressHUD hideHUDForView:self.previousViewController.view animated:YES];
-    NSError *error = [request error];
-    NSLog(@"Failure! %@", error);
-    NSLog(@"headers: %@", [request responseHeaders]);
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:@"createuser" forKey:@"apiaction"];
+    [parameters setObject:kAppToken forKey:@"apptoken"];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: @"commFailure"
-                                                        object: nil
-                                                      userInfo: nil];
+    [parameters setObject:email forKey:@"email"];
+    [parameters setObject:pw forKey:@"password"];
+    [parameters setObject:fn forKey:@"firstname"];
+    [parameters setObject:ln forKey:@"lastname"];
+    [parameters setObject:lat forKey:@"latitude"];
+    [parameters setObject:lon forKey:@"longitude"];
+    [parameters setObject:(active) ? @"true" : @"false" forKey:@"active"];
+    [parameters setObject:[self generateUid] forKey:@"uniqueid"];
     
-    UIAlertView* aServerFail = [[[UIAlertView alloc] initWithTitle:@"Communication Failure"
-                                                           message:@"StoryPress failed to contact the server. Please try again soon."
-                                                          delegate:nil
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles: nil] autorelease];
+    [self akPost:parameters command:createuser];
     
-    [aServerFail show];
 }
 
 

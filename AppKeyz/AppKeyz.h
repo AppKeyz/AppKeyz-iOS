@@ -7,11 +7,40 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-#import "JSON.h"
+
+typedef enum tag_Command {
+    createuser,
+    readuser,
+    updateuser,
+    forgotpassword,
+    createpurchase,
+    listpurchases,
+    readpurchase,
+    updatepurchase,
+    deactivatepurchase,
+    createdevice,
+    listdevices,
+    readdevice,
+    updatedevice,
+    deletedevice
+} Command;
 
 @interface AppKeyz : NSObject
 
 +(AppKeyz*)shared;
+
+-(NSString*)generateUid;
+-(void)akPost:(NSDictionary*)params command:(Command)cmd;
+-(void)consumeResponse:(id)responseObject withCommand:(Command)cmd;
+
+-(void)createUserWithEmail:(NSString*)email
+                  password:(NSString*)pw
+                     fname:(NSString*)fn
+                     lname:(NSString*)ln
+                       lat:(NSString*)lat
+                       lon:(NSString*)lon
+                    active:(BOOL)active;
+
 
 -(void)submitAppKey:(NSString*)key;
 -(void)revalidateAppKey:(NSString*)key;
