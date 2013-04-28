@@ -92,60 +92,70 @@ NSString* const kAppToken = @"c70kgvqj"; //REPLACE WITH YOUR APP TOKEN
     {
         switch (cmd) {
             case createuser:
-                
                 break;
             case readuser:
-                
+                [responseObject objectForKey:@"firstname"]; //String
+                [responseObject objectForKey:@"lastname"]; //String
+                [responseObject objectForKey:@"deviceids"]; //Array
+                [responseObject objectForKey:@"productskus"]; //Array
+                [responseObject objectForKey:@"consumables"]; //Array
+                [responseObject objectForKey:@"uniqueid"]; //String
+                [responseObject objectForKey:@"longitude"]; //String
+                [responseObject objectForKey:@"latitude"]; //String
+                [[responseObject objectForKey:@"active"] boolValue];// BOOL
+                [responseObject objectForKey:@"lastlogin"]; //String
+                [responseObject objectForKey:@"created"]; //String
+                [responseObject objectForKey:@"updated"]; //String
                 break;
             case updateuser:
-                
                 break;
             case forgotpassword:
-                
                 break;
             case createpurchase:
-                
                 break;
             case listpurchases:
-                
+                [responseObject objectForKey:@"productskus"]; //Array
                 break;
             case readpurchase:
-                
+                [responseObject objectForKey:@"productsku"]; //String
+                [[responseObject objectForKey:@"purchaseprice"] floatValue]; //float
+                [responseObject objectForKey:@"purchasedate"]; //String 2013-01-01 format
+                [[responseObject objectForKey:@"balance"] floatValue]; //float
+                [responseObject objectForKey:@"expiration"]; //String
+                [[responseObject objectForKey:@"active"] boolValue]; //BOOL
                 break;
             case updatepurchase:
-                
                 break;
             case deactivatepurchase:
-                
                 break;
             case createdevice:
-                
                 break;
             case listdevices:
-                
+                [responseObject objectForKey:@"deviceids"]; //Array
                 break;
             case readdevice:
-                
+                [responseObject objectForKey:@"deviceid"]; //String
+                [responseObject objectForKey:@"devicetype"]; //String
+                [responseObject objectForKey:@"deviceip"]; //String
+                [responseObject objectForKey:@"devicetoken"]; //String
                 break;
             case updatedevice:
-                
                 break;
             case deletedevice:
-                
                 break;
             case listconsumables:
-                
+                [responseObject objectForKey:@"consumables"]; //Array
                 break;
             case readconsumable:
-                
+                [responseObject objectForKey:@"name"]; //String
+                [responseObject objectForKey:@"balance"]; //Integer
                 break;
             case updateconsumable:
-                
                 break;
         }
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName: [NSString stringWithFormat:@"aK%@", [cmdStrings objectAtIndex:cmd]]
+    [[NSNotificationCenter defaultCenter] postNotificationName: [NSString stringWithFormat:@"AK%@", [cmdStrings objectAtIndex:cmd]] //exa. AKcreateuser
                                                         object: nil
                                                       userInfo: nil];
     
