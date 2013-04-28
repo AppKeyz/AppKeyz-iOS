@@ -31,6 +31,8 @@
 		BA5A274B172A368C006B5B25 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BA5A273A172A368C006B5B25 /* LICENSE */; };
 		BA5A274C172A368C006B5B25 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BA5A273B172A368C006B5B25 /* README.md */; };
 		BA5A274D172A368C006B5B25 /* AppKeyz.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5A273D172A368C006B5B25 /* AppKeyz.m */; };
+		BA5A277B172DB20C006B5B25 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5A2778172DB20C006B5B25 /* NSString+MD5Addition.m */; };
+		BA5A277C172DB20C006B5B25 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5A277A172DB20C006B5B25 /* UIDevice+IdentifierAddition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,10 @@
 		BA5A273B172A368C006B5B25 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BA5A273C172A368C006B5B25 /* AppKeyz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppKeyz.h; sourceTree = "<group>"; };
 		BA5A273D172A368C006B5B25 /* AppKeyz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppKeyz.m; sourceTree = "<group>"; };
+		BA5A2777172DB20C006B5B25 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
+		BA5A2778172DB20C006B5B25 /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
+		BA5A2779172DB20C006B5B25 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
+		BA5A277A172DB20C006B5B25 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +163,7 @@
 		BA5A2724172A368C006B5B25 /* AppKeyz */ = {
 			isa = PBXGroup;
 			children = (
+				BA5A2776172DB20C006B5B25 /* UIDevice-with-UniqueIdentifier-for-iOS-5 */,
 				BA5A2725172A368C006B5B25 /* AFNetworking */,
 				BA5A273C172A368C006B5B25 /* AppKeyz.h */,
 				BA5A273D172A368C006B5B25 /* AppKeyz.m */,
@@ -198,6 +205,17 @@
 				BA5A2739172A368C006B5B25 /* UIImageView+AFNetworking.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		BA5A2776172DB20C006B5B25 /* UIDevice-with-UniqueIdentifier-for-iOS-5 */ = {
+			isa = PBXGroup;
+			children = (
+				BA5A2777172DB20C006B5B25 /* NSString+MD5Addition.h */,
+				BA5A2778172DB20C006B5B25 /* NSString+MD5Addition.m */,
+				BA5A2779172DB20C006B5B25 /* UIDevice+IdentifierAddition.h */,
+				BA5A277A172DB20C006B5B25 /* UIDevice+IdentifierAddition.m */,
+			);
+			path = "UIDevice-with-UniqueIdentifier-for-iOS-5";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +300,8 @@
 				BA5A2749172A368C006B5B25 /* AFXMLRequestOperation.m in Sources */,
 				BA5A274A172A368C006B5B25 /* UIImageView+AFNetworking.m in Sources */,
 				BA5A274D172A368C006B5B25 /* AppKeyz.m in Sources */,
+				BA5A277B172DB20C006B5B25 /* NSString+MD5Addition.m in Sources */,
+				BA5A277C172DB20C006B5B25 /* UIDevice+IdentifierAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +399,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppKeyz Sample Application/AppKeyz Sample Application-Prefix.pch";
 				INFOPLIST_FILE = "AppKeyz Sample Application/AppKeyz Sample Application-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -390,6 +411,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppKeyz Sample Application/AppKeyz Sample Application-Prefix.pch";
 				INFOPLIST_FILE = "AppKeyz Sample Application/AppKeyz Sample Application-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
