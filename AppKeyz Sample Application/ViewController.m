@@ -18,12 +18,29 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    akSuite = AppKeyzSuite.new;
+    
+    
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    
+    [akSuite loadLoginScheme:self];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)fakeLogin:(id)sender
+{
+    [[AppKeyz shared] createUserWithEmail:@"blah" password:@"blah" fname:@"blah" lname:@"blah" lat:@"blah" lon:@"blah" active:YES];
 }
 
 @end

@@ -8,7 +8,7 @@
 #import "AppKeyz.h"
 
 NSString* const kAppKeyzHost = @"https://www.appkeyz.com/mobileapp/appkeyz";
-NSString* const kAppToken = @"c70kgvqj"; //REPLACE WITH YOUR APP TOKEN
+NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
 
 
 
@@ -24,7 +24,7 @@ NSString* const kAppToken = @"c70kgvqj"; //REPLACE WITH YOUR APP TOKEN
 
 -(id)init
 {
-    cmdStrings = [[NSArray alloc] initWithObjects:@"createuser",@"readuser",@"updateuser",@"forgotpassword",@"createpurchas",
+    cmdStrings = [[NSArray alloc] initWithObjects:@"createuser",@"readuser",@"updateuser",@"forgotpassword",@"createpurchase",
                   @"listpurchases",@"readpurchase",@"updatepurchase",@"deactivatepurchase",@"createdevice",
                   @"listdevices",@"readdevice",@"updatedevice",@"deletedevice",@"listconsumables",
                   @"readconsumable",@"updateconsumable", nil];
@@ -68,6 +68,7 @@ NSString* const kAppToken = @"c70kgvqj"; //REPLACE WITH YOUR APP TOKEN
     [client postPath:@""
           parameters:params
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 NSLog(@"%@", responseObject);
                  [self consumeResponse:responseObject withCommand:cmd];
                  
              }

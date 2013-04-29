@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppKeyzSuite.h"
+#import "AKiPadLandingVC.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController {
+    AppKeyzSuite* akSuite;
+}
 
 @end
