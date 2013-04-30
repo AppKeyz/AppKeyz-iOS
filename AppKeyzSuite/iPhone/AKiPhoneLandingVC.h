@@ -11,7 +11,8 @@
 
 @interface AKiPhoneLandingVC : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView* loginTableView;
-    IBOutlet UIImageView* bgImage;
+    UIImageView* bgImage;
 }
+@property(strong) IBOutlet UIImageView* bgImage;
 
 @end

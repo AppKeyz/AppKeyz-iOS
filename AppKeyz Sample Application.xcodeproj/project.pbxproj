@@ -44,6 +44,14 @@
 		BA7F31B6172E46530005AD47 /* AKiPadLandingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31B4172E46520005AD47 /* AKiPadLandingVC.xib */; };
 		BA7F31B9172E4D910005AD47 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31B8172E4D910005AD47 /* Default-Landscape@2x.png */; };
 		BA7F31BB172E4DCD0005AD47 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31BA172E4DCD0005AD47 /* Default-568h@2x.png */; };
+		BA7F31C8172FA18A0005AD47 /* 10-medical.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C0172FA18A0005AD47 /* 10-medical.png */; };
+		BA7F31C9172FA18A0005AD47 /* 10-medical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C1172FA18A0005AD47 /* 10-medical@2x.png */; };
+		BA7F31CA172FA18A0005AD47 /* 111-user.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C2172FA18A0005AD47 /* 111-user.png */; };
+		BA7F31CB172FA18A0005AD47 /* 111-user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C3172FA18A0005AD47 /* 111-user@2x.png */; };
+		BA7F31CC172FA18A0005AD47 /* 30-key.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C4172FA18A0005AD47 /* 30-key.png */; };
+		BA7F31CD172FA18A0005AD47 /* 30-key@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C5172FA18A0005AD47 /* 30-key@2x.png */; };
+		BA7F31CE172FA18A0005AD47 /* 40-inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C6172FA18A0005AD47 /* 40-inbox.png */; };
+		BA7F31CF172FA18A0005AD47 /* 40-inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C7172FA18A0005AD47 /* 40-inbox@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +116,14 @@
 		BA7F31B4172E46520005AD47 /* AKiPadLandingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKiPadLandingVC.xib; path = iPad/AKiPadLandingVC.xib; sourceTree = "<group>"; };
 		BA7F31B8172E4D910005AD47 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x.png"; sourceTree = "<group>"; };
 		BA7F31BA172E4DCD0005AD47 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		BA7F31C0172FA18A0005AD47 /* 10-medical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10-medical.png"; sourceTree = "<group>"; };
+		BA7F31C1172FA18A0005AD47 /* 10-medical@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10-medical@2x.png"; sourceTree = "<group>"; };
+		BA7F31C2172FA18A0005AD47 /* 111-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "111-user.png"; sourceTree = "<group>"; };
+		BA7F31C3172FA18A0005AD47 /* 111-user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "111-user@2x.png"; sourceTree = "<group>"; };
+		BA7F31C4172FA18A0005AD47 /* 30-key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "30-key.png"; sourceTree = "<group>"; };
+		BA7F31C5172FA18A0005AD47 /* 30-key@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "30-key@2x.png"; sourceTree = "<group>"; };
+		BA7F31C6172FA18A0005AD47 /* 40-inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "40-inbox.png"; sourceTree = "<group>"; };
+		BA7F31C7172FA18A0005AD47 /* 40-inbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "40-inbox@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +272,7 @@
 		BA5A278A172DEA57006B5B25 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				BA7F31BF172FA18A0005AD47 /* Resources */,
 				BA5A2785172DEA4E006B5B25 /* AKiPhoneLandingVC.h */,
 				BA5A2786172DEA4E006B5B25 /* AKiPhoneLandingVC.m */,
 				BA5A2787172DEA4E006B5B25 /* AKiPhoneLandingVC.xib */,
@@ -277,6 +294,21 @@
 				BA7F31B4172E46520005AD47 /* AKiPadLandingVC.xib */,
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		BA7F31BF172FA18A0005AD47 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BA7F31C0172FA18A0005AD47 /* 10-medical.png */,
+				BA7F31C1172FA18A0005AD47 /* 10-medical@2x.png */,
+				BA7F31C2172FA18A0005AD47 /* 111-user.png */,
+				BA7F31C3172FA18A0005AD47 /* 111-user@2x.png */,
+				BA7F31C4172FA18A0005AD47 /* 30-key.png */,
+				BA7F31C5172FA18A0005AD47 /* 30-key@2x.png */,
+				BA7F31C6172FA18A0005AD47 /* 40-inbox.png */,
+				BA7F31C7172FA18A0005AD47 /* 40-inbox@2x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +375,14 @@
 				BA7F31B6172E46530005AD47 /* AKiPadLandingVC.xib in Resources */,
 				BA7F31B9172E4D910005AD47 /* Default-Landscape@2x.png in Resources */,
 				BA7F31BB172E4DCD0005AD47 /* Default-568h@2x.png in Resources */,
+				BA7F31C8172FA18A0005AD47 /* 10-medical.png in Resources */,
+				BA7F31C9172FA18A0005AD47 /* 10-medical@2x.png in Resources */,
+				BA7F31CA172FA18A0005AD47 /* 111-user.png in Resources */,
+				BA7F31CB172FA18A0005AD47 /* 111-user@2x.png in Resources */,
+				BA7F31CC172FA18A0005AD47 /* 30-key.png in Resources */,
+				BA7F31CD172FA18A0005AD47 /* 30-key@2x.png in Resources */,
+				BA7F31CE172FA18A0005AD47 /* 40-inbox.png in Resources */,
+				BA7F31CF172FA18A0005AD47 /* 40-inbox@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,11 +508,15 @@
 		BA5A267D172A2E76006B5B25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Hayes (6KBDY6WHY9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Hayes (6KBDY6WHY9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppKeyz Sample Application/AppKeyz Sample Application-Prefix.pch";
 				INFOPLIST_FILE = "AppKeyz Sample Application/AppKeyz Sample Application-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "83D2C678-844C-4432-B515-CF537B30D85A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "83D2C678-844C-4432-B515-CF537B30D85A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -480,11 +524,15 @@
 		BA5A267E172A2E76006B5B25 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Hayes (6KBDY6WHY9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Hayes (6KBDY6WHY9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppKeyz Sample Application/AppKeyz Sample Application-Prefix.pch";
 				INFOPLIST_FILE = "AppKeyz Sample Application/AppKeyz Sample Application-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "83D2C678-844C-4432-B515-CF537B30D85A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "83D2C678-844C-4432-B515-CF537B30D85A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

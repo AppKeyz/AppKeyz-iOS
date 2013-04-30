@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AKiPhoneLoginRegisterVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AKiPhoneLoginRegisterVC : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    IBOutlet UITableView* loginRegTableView;
+    UIImageView* bgImage;
+    
+    BOOL login;
+    UITextField* fieldText;
+}
+@property(assign)BOOL login;
+@property(strong)IBOutlet UIImageView* bgImage;
 
 @end

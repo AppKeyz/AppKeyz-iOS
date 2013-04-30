@@ -13,6 +13,7 @@
 @end
 
 @implementation AKiPhoneLandingVC
+@synthesize bgImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,14 +29,12 @@
     [super viewDidLoad];
 
     if (UIScreen.mainScreen.bounds.size.height == 568)
-        bgImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default-568h@2x.png"]];
-    else bgImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default@2x.png"]];
+        self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
+    else self.bgImage.image = [UIImage imageNamed:@"Default.png"];
     
-    //self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:bg];
-    self.navigationController.navigationBar.hidden = YES;
-    //self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-    
-    //loginTableView.backgroundColor = [UIColor clearColor];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    //self.navigationController.navigationBar.hidden = YES;
+
     loginTableView.delegate = self;
     loginTableView.dataSource = self;
 }
@@ -67,6 +66,9 @@
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.backgroundColor = [UIColor colorWithWhite:0.25 alpha:0.75];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
     
     switch (indexPath.row) {
         case 0:
@@ -86,9 +88,11 @@
     
     switch (indexPath.row) {
         case 0:
+            akilrvc.login = true;
             [self.navigationController pushViewController:akilrvc animated:true];
             break;
         case 1:
+            akilrvc.login = false;
             [self.navigationController pushViewController:akilrvc animated:true];
             break;
     }
