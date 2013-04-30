@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AKiPhoneLoginRegisterVC.h"
 
 @interface AKiPhoneLandingVC : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     IBOutlet UITableView* loginTableView;
+    IBOutlet UIImageView* bgImage;
 }
 
 @end

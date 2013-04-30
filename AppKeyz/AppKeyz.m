@@ -149,7 +149,7 @@ NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
                 break;
             case readconsumable:
                 [responseObject objectForKey:@"name"]; //String
-                [responseObject objectForKey:@"balance"]; //Integer
+                [[responseObject objectForKey:@"balance"] floatValue]; //float
                 break;
             case updateconsumable:
                 break;
@@ -259,7 +259,7 @@ NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
                       password:(NSString*)pw
                     productSku:(NSString*)sku
                  purchasePrice:(float)price
-                       balance:(int)balance
+                       balance:(float)balance
                     expiration:(NSString*)expiration
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -270,7 +270,7 @@ NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
     [parameters setObject:pw forKey:@"password"];
     [parameters setObject:sku forKey:@"productsku"];
     [parameters setObject:[NSString stringWithFormat:@"%f",price] forKey:@"purchaseprice"];
-    [parameters setObject:[NSString stringWithFormat:@"%i", balance] forKey:@"balance"];
+    [parameters setObject:[NSString stringWithFormat:@"%f", balance] forKey:@"balance"];
     [parameters setObject:expiration forKey:@"expiration"];
     
     [self postParams:parameters command:createpurchase];
@@ -307,7 +307,7 @@ NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
 -(void)updatepurchaseWithEmail:(NSString*)email
                       password:(NSString*)pw
                     productSku:(NSString*)sku
-                       balance:(int)balance
+                       balance:(float)balance
                     expiration:(NSString*)expiration
                         active:(BOOL)active
 {
@@ -318,7 +318,7 @@ NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
     [parameters setObject:sku forKey:@"productsku"];
-    [parameters setObject:[NSString stringWithFormat:@"%i", balance] forKey:@"balance"];
+    [parameters setObject:[NSString stringWithFormat:@"%f", balance] forKey:@"balance"];
     [parameters setObject:expiration forKey:@"expiration"];
     [parameters setObject:[self boolString:active] forKey:@"active"];
     
@@ -458,8 +458,8 @@ NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
 -(void)updateconsumableWithEmail:(NSString*)email
                         password:(NSString*)pw
                     consumableId:(int)consumableId
-                   adjustBalance:(int)addToBalance
-                      setBalance:(int)setBalance
+                   adjustBalance:(float)addToBalance
+                      setBalance:(float)setBalance
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:@"updateconsumable" forKey:@"apiaction"];
@@ -468,8 +468,8 @@ NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
     [parameters setObject:[NSString stringWithFormat:@"%i",consumableId] forKey:@"consumableid"];
-    [parameters setObject:[NSString stringWithFormat:@"%i",addToBalance] forKey:@"adjustbalance"];
-    [parameters setObject:[NSString stringWithFormat:@"%i",setBalance] forKey:@"setbalance"];
+    [parameters setObject:[NSString stringWithFormat:@"%f",addToBalance] forKey:@"adjustbalance"];
+    [parameters setObject:[NSString stringWithFormat:@"%f",setBalance] forKey:@"setbalance"];
     
     [self postParams:parameters command:updateconsumable];
 }

@@ -18,7 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -26,11 +26,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    if (UIScreen.mainScreen.bounds.size.height == 568)
+        bgImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default-568h@2x.png"]];
+    else bgImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default@2x.png"]];
     
+    //self.navigationController.view.backgroundColor = [UIColor colorWithPatternImage:bg];
+    self.navigationController.navigationBar.hidden = YES;
+    //self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    
+    //loginTableView.backgroundColor = [UIColor clearColor];
     loginTableView.delegate = self;
     loginTableView.dataSource = self;
-    loginTableView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,6 +66,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     switch (indexPath.row) {
         case 0:
@@ -74,13 +82,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    AKiPhoneLoginRegisterVC* akilrvc = AKiPhoneLoginRegisterVC.new;
+    
+    switch (indexPath.row) {
+        case 0:
+            [self.navigationController pushViewController:akilrvc animated:true];
+            break;
+        case 1:
+            [self.navigationController pushViewController:akilrvc animated:true];
+            break;
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 

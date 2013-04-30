@@ -66,7 +66,7 @@ typedef enum tag_Command {
                       password:(NSString*)pw
                     productSku:(NSString*)sku
                  purchasePrice:(float)price
-                       balance:(int)balance
+                       balance:(float)balance
                     expiration:(NSString*)expiration;
 -(void)listpurchasesWithEmail:(NSString*)email
                      password:(NSString*)pw;
@@ -76,7 +76,7 @@ typedef enum tag_Command {
 -(void)updatepurchaseWithEmail:(NSString*)email
                       password:(NSString*)pw
                     productSku:(NSString*)sku
-                       balance:(int)balance
+                       balance:(float)balance
                     expiration:(NSString*)expiration
                         active:(BOOL)active;
 -(void)deactivatepurchaseWithEmail:(NSString*)email
@@ -114,6 +114,6 @@ typedef enum tag_Command {
 -(void)updateconsumableWithEmail:(NSString*)email
                         password:(NSString*)pw
                     consumableId:(int)consumableId
-                   adjustBalance:(int)addToBalance
-                      setBalance:(int)setBalance;
+                   adjustBalance:(float)addToBalance
+                      setBalance:(float)setBalance;
 @end
