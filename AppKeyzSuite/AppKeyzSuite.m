@@ -16,23 +16,72 @@
     return self;
 }
 
++(void)setupUserPlist
+{
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *destinationPath = [documentsDirectory stringByAppendingPathComponent:@"User.plist"];
+    
+    if ([NSDictionary dictionaryWithContentsOfFile:destinationPath]==nil) {
+        NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"User.plist"];
+        
+        NSError *error = nil;
+        if([[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:destinationPath error:&error]){
+            NSLog(@"File successfully copied");
+        } else {
+            NSLog(@"Error description-%@ \n", [error localizedDescription]);
+            NSLog(@"Error reason-%@", [error localizedFailureReason]);
+        }
+        
+    }
+}
+
 +(void)loadLoginScheme:(UIViewController*)vc
 {
     //self.viewController = vc;
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        AKiPadLandingVC* landing = AKiPadLandingVC.new;
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
-        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [vc presentModalViewController:navController animated:YES];
+    if ([AKUser shared].isLoggedIn==false) {
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            AKiPadLandingVC* landing = AKiPadLandingVC.new;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
+            navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [vc presentModalViewController:navController animated:YES];
+        }
+        else
+        {
+            AKiPhoneLandingVC* landing = AKiPhoneLandingVC.new;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
+            navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [vc presentModalViewController:navController animated:YES];
+        }
     }
-    else
-    {
-        AKiPhoneLandingVC* landing = AKiPhoneLandingVC.new;
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
-        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [vc presentModalViewController:navController animated:YES];
+}
+
++(void)editUser:(UIViewController*)vc
+{
+    if ([AKUser shared].didNotRegister==true) {
+        
+        [self loadLoginScheme:vc];
+        UIAlertView *noReg = [[UIAlertView alloc] initWithTitle:@"You didn't register!"
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [noReg show];
+    } else {
+        if ([AKUser shared].isLoggedIn==true) {
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+                
+            }
+            else
+            {
+                AKiPhoneLoginRegisterVC* akilrvc = AKiPhoneLoginRegisterVC.new;
+                akilrvc.controllerMode = editMode;
+                UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:akilrvc];
+                navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                [vc presentModalViewController:navController animated:YES];
+            }
+        }
     }
 }
 

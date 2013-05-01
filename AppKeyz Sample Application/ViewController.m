@@ -34,9 +34,9 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)fakeLogin:(id)sender
+-(IBAction)editUser:(id)sender
 {
-    [[AppKeyz shared] createUserWithEmail:@"blah@blah.com" password:@"blah11" fname:@"blah" lname:@"blah" lat:@"blah" lon:@"blah" active:YES];
+    [AppKeyzSuite editUser:self];
 }
 
 @end

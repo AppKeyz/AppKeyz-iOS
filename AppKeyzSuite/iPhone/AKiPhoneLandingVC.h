@@ -9,10 +9,25 @@
 #import <UIKit/UIKit.h>
 #import "AKiPhoneLoginRegisterVC.h"
 
-@interface AKiPhoneLandingVC : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface AKiPhoneLandingVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
     IBOutlet UITableView* loginTableView;
     UIImageView* bgImage;
+    
+    IBOutlet UIView* popupBackground;
+    IBOutlet UIView* popupView;
+    IBOutlet UITextField* popupBox;
+    
+    IBOutlet UILabel* why;
+    IBOutlet UIButton* close;
+    
+    UITextField* fieldText;
+    
 }
 @property(strong) IBOutlet UIImageView* bgImage;
+
+-(IBAction)whySignUp:(id)sender;
+-(IBAction)noThanks:(id)sender;
+-(IBAction)closePopover:(id)sender;
+-(void)onCompleteCancelPopup;
 
 @end

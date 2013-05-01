@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppKeyzSuite.h"
-#import "AKiPadLandingVC.h"
 
-@interface ViewController : UIViewController {
-    AppKeyzSuite* akSuite;
-}
+@interface ViewController : UIViewController
 
+-(IBAction)editUser:(id)sender;
 @end

@@ -13,7 +13,7 @@
 @end
 
 @implementation AKiPhoneLoginRegisterVC
-@synthesize login, bgImage;
+@synthesize controllerMode, bgImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,12 +56,16 @@
 {
     int rows = 1;
     
-    if (login==true) {
-        if (section==0) rows = 2;
-        else rows = 1;
-    } else {
-        if (section==0) rows = 5;
-        else rows = 1;
+    switch (controllerMode) {
+        case loginMode:
+            if (section==0) rows = 2;
+            else rows = 1;
+            break;
+        case registerMode:
+        case editMode:
+            if (section==0) rows = 4;
+            else rows = 1;
+            break;
     }
     return rows;
 }
@@ -82,6 +86,7 @@
         fieldText.autoresizingMask = UIViewAutoresizingNone;
         fieldText.textColor = [UIColor whiteColor];
         fieldText.backgroundColor = [UIColor clearColor];
+        fieldText.delegate = self;
         [cell.contentView addSubview:fieldText];
         
     } else {
@@ -95,56 +100,63 @@
     {
         case 0:
             cell.accessoryType = UITableViewCellAccessoryNone;
-            if (login==false)
-            {
-                switch (indexPath.row) {
-                    case 0:
-                        fieldText.placeholder = @"First Name";
-                        cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
-                        break;
-                    case 1:
-                        fieldText.placeholder = @"Last Name";
-                        cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
-                        break;
-                    case 2:
-                        fieldText.placeholder = @"Email";
-                        cell.imageView.image = [UIImage imageNamed:@"40-inbox.png"];
-                        break;
-                    case 3:
-                        fieldText.placeholder = @"Password";
-                        cell.imageView.image = [UIImage imageNamed:@"30-key.png"];
-                        break;
-                    case 4:
-                        fieldText.placeholder = @"Password Confirmation";
-                        cell.imageView.image = [UIImage imageNamed:@"30-key.png"];
-                        break;
-                } 
-            }
-            else
-            {
-                switch (indexPath.row) {
-                    case 0:
-                        fieldText.placeholder = @"Email";
-                        cell.imageView.image = [UIImage imageNamed:@"40-inbox.png"];
-                        break;
-                    case 1:
-                        fieldText.placeholder = @"Password";
-                        cell.imageView.image = [UIImage imageNamed:@"30-key.png"];
-                        break;
-                }
+            switch (controllerMode) {
+                case registerMode:
+                case editMode:
+                    switch (indexPath.row) {
+                        case 0:
+                            fieldText.placeholder = @"First Name";
+                            cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
+                            break;
+                        case 1:
+                            fieldText.placeholder = @"Last Name";
+                            cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
+                            break;
+                        case 2:
+                            fieldText.placeholder = @"Email";
+                            cell.imageView.image = [UIImage imageNamed:@"40-inbox.png"];
+                            break;
+                        case 3:
+                            fieldText.placeholder = @"Password";
+                            cell.imageView.image = [UIImage imageNamed:@"30-key.png"];
+                            break;
+                     /*   case 4:
+                            fieldText.placeholder = @"Password Confirmation";
+                            cell.imageView.image = [UIImage imageNamed:@"30-key.png"];
+                            break; */
+                    }
+                    break;
+                case loginMode:
+                    switch (indexPath.row) {
+                        case 0:
+                            fieldText.placeholder = @"Email";
+                            cell.imageView.image = [UIImage imageNamed:@"40-inbox.png"];
+                            break;
+                        case 1:
+                            fieldText.placeholder = @"Password";
+                            cell.imageView.image = [UIImage imageNamed:@"30-key.png"];
+                            break;
+                    }
+                    break;
             }
             break;
         case 1:
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             fieldText.enabled = false;
             
-            if (login==true) {
-                fieldText.placeholder = @"Log In";
-                cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
-            } else {
-                fieldText.placeholder = @"Create Account";
-                cell.imageView.image = [UIImage imageNamed:@"10-medical.png"];
-
+            switch (controllerMode) {
+                case loginMode:
+                    fieldText.text = @"Log In";
+                    cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
+                    break;
+                case registerMode:
+                    fieldText.text = @"Create Account";
+                    cell.imageView.image = [UIImage imageNamed:@"10-medical.png"];
+                    break;
+                case editMode:
+                    fieldText.text = @"Save Profile";
+                    cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
+                    break;
             }
             break;
     }
@@ -156,8 +168,43 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    switch (controllerMode) {
+        case loginMode:
+            [self loginUser];
+            break;
+        case registerMode:
+            [self registerUser];
+            break;
+        case editMode:
+            [self updateUser];
+            break;
+    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([string isEqualToString:@"\n"]) {
+        [textField resignFirstResponder];
+        return false;
+    }
+    return true;
+}
+
+-(void)registerUser
+{
+    
+}
+
+-(void)loginUser
+{
+    
+}
+
+-(void)updateUser
+{
+    
 }
 
 

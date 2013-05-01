@@ -8,14 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AKiPhoneLoginRegisterVC : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+typedef enum tag_ControllerMode {
+    loginMode,
+    registerMode,
+    editMode
+} ControllerMode;
+
+@interface AKiPhoneLoginRegisterVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     IBOutlet UITableView* loginRegTableView;
     UIImageView* bgImage;
     
     BOOL login;
     UITextField* fieldText;
 }
-@property(assign)BOOL login;
+@property(assign)ControllerMode controllerMode;
 @property(strong)IBOutlet UIImageView* bgImage;
+
+-(void)registerUser;
+-(void)loginUser;
+-(void)updateUser;
 
 @end

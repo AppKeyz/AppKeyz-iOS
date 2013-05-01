@@ -10,12 +10,15 @@
 #import "AppKeyz.h"
 #import "AKiPhoneLandingVC.h"
 #import "AKiPadLandingVC.h"
+#import "AKiPhoneLoginRegisterVC.h"
 
-@interface AppKeyzSuite : NSObject {
+@interface AppKeyzSuite : NSObject  {
     UIViewController* viewController;
 }
 @property(nonatomic) UIViewController* viewController;
 
 +(void)loadLoginScheme:(UIViewController*)vc;
++(void)editUser:(UIViewController*)vc;
++(void)setupUserPlist;
 
 @end
