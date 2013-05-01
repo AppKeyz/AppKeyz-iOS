@@ -16,6 +16,6 @@
 }
 @property(nonatomic) UIViewController* viewController;
 
--(void)loadLoginScheme:(UIViewController*)vc;
++(void)loadLoginScheme:(UIViewController*)vc;
 
 @end

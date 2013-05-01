@@ -7,8 +7,8 @@
 
 #import "AppKeyz.h"
 
-NSString* const kAppKeyzHost = @"https://www.appkeyz.com/mobileapp/appkeyz";
-NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
+NSString* const kAppKeyzHost = @"https://www.appkeyz.com/mobileapp/appkeyzapi";
+NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 
 
 
@@ -86,8 +86,8 @@ NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
 -(void)consumeResponse:(id)responseObject withCommand:(Command)cmd
 {
     NSString* appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-    int rspCode = [[responseObject objectForKey:@"Error"] intValue];
-    NSString* message = [responseObject objectForKey:@"ErrorMessage"];
+    int rspCode = [[responseObject objectForKey:@"error"] intValue];
+    NSString* message = [responseObject objectForKey:@"debug"];
     
     if (rspCode==0)
     {
@@ -160,22 +160,11 @@ NSString* const kAppToken = @"ddq8a5z2"; //REPLACE WITH YOUR APP TOKEN
                                                         object: nil
                                                       userInfo: nil];
     
-    if ([[responseObject objectForKey:@"ValidKey"] intValue]==0)
-    {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"App Keyz Error"
-                                                     message:@"Invalid API Token"
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [av show];
-    }
-    else
-    {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@ says:", appName]
-                                                     message:message
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [av show];
-    }
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@ says:", appName]
+                                                 message:message
+                                                delegate:nil
+                                       cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
     
 }
 

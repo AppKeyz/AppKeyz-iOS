@@ -16,23 +16,23 @@
     return self;
 }
 
--(void)loadLoginScheme:(UIViewController*)vc
++(void)loadLoginScheme:(UIViewController*)vc
 {
-    self.viewController = vc;
+    //self.viewController = vc;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         AKiPadLandingVC* landing = AKiPadLandingVC.new;
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self.viewController presentModalViewController:navController animated:YES];
+        [vc presentModalViewController:navController animated:YES];
     }
     else
     {
         AKiPhoneLandingVC* landing = AKiPhoneLandingVC.new;
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self.viewController presentModalViewController:navController animated:YES];
+        [vc presentModalViewController:navController animated:YES];
     }
 }
 
