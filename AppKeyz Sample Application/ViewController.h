@@ -11,4 +11,5 @@
 @interface ViewController : UIViewController
 
 -(IBAction)editUser:(id)sender;
+-(IBAction)logout:(id)sender;
 @end

@@ -39,4 +39,9 @@
     [AppKeyzSuite editUser:self];
 }
 
+-(IBAction)logout:(id)sender
+{
+    [AppKeyzSuite logout:self];
+}
+
 @end

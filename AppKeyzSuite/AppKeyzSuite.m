@@ -61,12 +61,21 @@
 {
     if ([AKUser shared].didNotRegister==true) {
         
-        [self loadLoginScheme:vc];
-        UIAlertView *noReg = [[UIAlertView alloc] initWithTitle:@"You didn't register!"
-                                                        message:nil
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [noReg show];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            AKiPadLandingVC* landing = AKiPadLandingVC.new;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
+            navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [vc presentModalViewController:navController animated:YES];
+        }
+        else
+        {
+            AKiPhoneLandingVC* landing = AKiPhoneLandingVC.new;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
+            navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [vc presentModalViewController:navController animated:YES];
+        }
+        
     } else {
         if ([AKUser shared].isLoggedIn==true) {
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -82,6 +91,28 @@
                 [vc presentModalViewController:navController animated:YES];
             }
         }
+    }
+}
+
++(void)logout:(UIViewController*)vc
+{
+    if ([AKUser shared].isLoggedIn==true) {
+        [[AKUser shared] logout];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            AKiPadLandingVC* landing = AKiPadLandingVC.new;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
+            navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [vc presentModalViewController:navController animated:YES];
+        }
+        else
+        {
+            AKiPhoneLandingVC* landing = AKiPhoneLandingVC.new;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
+            navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [vc presentModalViewController:navController animated:YES];
+        }
+
     }
 }
 

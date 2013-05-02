@@ -19,6 +19,7 @@
 
 +(void)loadLoginScheme:(UIViewController*)vc;
 +(void)editUser:(UIViewController*)vc;
++(void)logout:(UIViewController*)vc;
 +(void)setupUserPlist;
 
 @end

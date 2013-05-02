@@ -93,24 +93,30 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     {
         switch (cmd) {
             case createuser:
+                message = @"User created successfully.";
                 break;
             case readuser:
-                [responseObject objectForKey:@"firstname"]; //String
-                [responseObject objectForKey:@"lastname"]; //String
+                message = @"User accout retreived successfully";
+                [AKUser shared].userNameFirst = [responseObject objectForKey:@"firstname"]; //String
+                [AKUser shared].userNameLast = [responseObject objectForKey:@"lastname"]; //String
                 [responseObject objectForKey:@"deviceids"]; //Array
                 [responseObject objectForKey:@"productskus"]; //Array
                 [responseObject objectForKey:@"consumables"]; //Array
-                [responseObject objectForKey:@"uniqueid"]; //String
-                [responseObject objectForKey:@"longitude"]; //String
-                [responseObject objectForKey:@"latitude"]; //String
-                [[responseObject objectForKey:@"active"] boolValue];// BOOL
+                [AKUser shared].uniqueId = [responseObject objectForKey:@"uniqueid"]; //String
+                [AKUser shared].latitude = [responseObject objectForKey:@"longitude"]; //String
+                [AKUser shared].longitude = [responseObject objectForKey:@"latitude"]; //String
+                [AKUser shared].active = [[responseObject objectForKey:@"active"] boolValue];// BOOL
                 [responseObject objectForKey:@"lastlogin"]; //String
                 [responseObject objectForKey:@"created"]; //String
                 [responseObject objectForKey:@"updated"]; //String
+                NSLog(@"%i",[[responseObject objectForKey:@"active"] intValue]);
+                [[AKUser shared] saveSettings];
                 break;
             case updateuser:
+                message = @"User information updated successfully.";
                 break;
             case forgotpassword:
+                message = @"Password reset email sent.";
                 break;
             case createpurchase:
                 break;

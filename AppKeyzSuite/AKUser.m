@@ -84,7 +84,6 @@ static AKUser* sUser;
     }
     
 }
-#warning turn saving back on
 
 - (void)logout
 {
@@ -98,20 +97,20 @@ static AKUser* sUser;
     self.active = NO;
     self.didNotRegister = false;
     self.uniqueId = @"";
-    //[self saveSettings];
+    [self saveSettings];
 }
 
 - (void)login
 {
     self.isLoggedIn = YES;
-    //[self saveSettings];
+    [self saveSettings];
 }
 
 - (void)notRegister
 {
     self.isLoggedIn = YES;
     self.didNotRegister = true;
-    //[self saveSettings];
+    [self saveSettings];
 }
 
 -(void)inspect
@@ -127,7 +126,7 @@ static AKUser* sUser;
     NSString* isActive = self.active ? @"TRUE" : @"FALSE";
     [inspectDict setObject:isActive forKey:@"active"];
     NSString* noRegister = self.didNotRegister ? @"TRUE" : @"FALSE";
-    [inspectDict setObject:noRegister forKey:@"active"];
+    [inspectDict setObject:noRegister forKey:@"notRegistered"];
     [inspectDict setObject:self.latitude forKey:@"latitude"];
     [inspectDict setObject:self.longitude forKey:@"longitude"];
 
