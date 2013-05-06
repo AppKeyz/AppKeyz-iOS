@@ -13,6 +13,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 
 
 @implementation AppKeyz
+@synthesize registerFields;
 
 +(AppKeyz*)shared
 {

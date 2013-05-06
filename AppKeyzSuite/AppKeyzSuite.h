@@ -15,11 +15,12 @@
 @interface AppKeyzSuite : NSObject  {
     UIViewController* viewController;
 }
-@property(nonatomic) UIViewController* viewController;
+@property(strong) UIViewController* viewController;
 
 +(void)loadLoginScheme:(UIViewController*)vc;
 +(void)editUser:(UIViewController*)vc;
 +(void)logout:(UIViewController*)vc;
 +(void)setupUserPlist;
++(void)setRegisterFields:(NSArray*)array;
 
 @end

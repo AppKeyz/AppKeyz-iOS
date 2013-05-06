@@ -25,6 +25,12 @@
                                                      name: @"AKreaduser"
                                                    object: nil];
         
+        // Successful Login Verified
+        [[NSNotificationCenter defaultCenter] addObserver: self
+                                                 selector: @selector(dismiss:)
+                                                     name: @"AKreaduserverified"
+                                                   object: nil];
+        
         // Successful Account Creation
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(dismiss:)
@@ -47,6 +53,11 @@
     
     user = [AKUser shared];
     appKeyz = [AppKeyz shared];
+    
+    registerFieldLabels = [NSArray arrayWithArray:appKeyz.registerFields];
+    
+    registerFields = [[NSArray alloc] initWithObjects:@"age", @"sex", @"custom1", @"custom2", @"custom3", @"custom4", @"custom5", @"custom6", nil];
+
     
     if (UIScreen.mainScreen.bounds.size.height == 568)
         self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
@@ -77,7 +88,9 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    int sections = 2;
+    if (controllerMode==loginMode) sections = 3;
+    return sections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -91,11 +104,46 @@
             break;
         case registerMode:
         case editMode:
-            if (section==0) rows = 4;
+            if (section==0) rows = 4 + [registerFieldLabels count];
             else rows = 1;
             break;
     }
     return rows;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section==2 && controllerMode==loginMode)
+        return 50;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    if (controllerMode==loginMode) {
+        if(footerView == nil) {
+            //allocate the view if it doesn't exist yet
+            footerView  = [[UIView alloc] init];
+            
+            //create the button
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            
+            //the button should be as big as a table view cell
+            [button setFrame:CGRectMake(10, 3, 300, 44)];
+            
+            //set title, font size and font color
+            [button setTitle:@"Forgot Password?" forState:UIControlStateNormal];
+            [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+            [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            
+            //set action of the button
+            [button addTarget:self action:@selector(forgotPassword:)
+             forControlEvents:UIControlEventTouchUpInside];
+            
+            //add the button to the view
+            [footerView addSubview:button];
+        }
+    }
+    //return the view for the footer
+    return footerView;
 }
 
 #define FIELD_TEXT_TAG 10
@@ -132,43 +180,79 @@
             switch (controllerMode) {
                 case registerMode:
                 case editMode:
+                    fieldText.secureTextEntry = NO;
+                    fieldText.keyboardType = UIKeyboardTypeDefault;
+                    fieldText.autocapitalizationType = UITextAutocapitalizationTypeWords;
                     switch (indexPath.row) {
                         case 0:
                             fieldText.placeholder = @"First Name";
                             fieldText.text = user.userNameFirst;
-                            fieldText.secureTextEntry = NO;
-                            fieldText.keyboardType = UIKeyboardTypeDefault;
-                            fieldText.autocapitalizationType = UITextAutocapitalizationTypeWords;
-                            cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
+                            cell.imageView.image = [UIImage imageNamed:@"user.png"];
                             break;
                         case 1:
                             fieldText.placeholder = @"Last Name";
                             fieldText.text = user.userNameLast;
-                            fieldText.secureTextEntry = NO;
-                            fieldText.keyboardType = UIKeyboardTypeDefault;
-                            fieldText.autocapitalizationType = UITextAutocapitalizationTypeWords;
-                            cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
+                            cell.imageView.image = [UIImage imageNamed:@"user.png"];
                             break;
                         case 2:
                             fieldText.placeholder = @"Email";
                             fieldText.text = user.userEmail;
-                            fieldText.secureTextEntry = NO;
                             fieldText.keyboardType = UIKeyboardTypeEmailAddress;
                             fieldText.autocapitalizationType = UITextAutocapitalizationTypeNone;
-                            cell.imageView.image = [UIImage imageNamed:@"40-inbox.png"];
+                            cell.imageView.image = [UIImage imageNamed:@"inbox.png"];
                             break;
                         case 3:
                             fieldText.placeholder = @"Password";
                             fieldText.text = user.userPassword;
-                            fieldText.secureTextEntry = NO;
-                            fieldText.keyboardType = UIKeyboardTypeDefault;
                             fieldText.autocapitalizationType = UITextAutocapitalizationTypeNone;
-                            cell.imageView.image = [UIImage imageNamed:@"30-key.png"];
+                            cell.imageView.image = [UIImage imageNamed:@"key.png"];
                             break;
-                     /*   case 4:
-                            fieldText.placeholder = @"Password Confirmation";
-                            cell.imageView.image = [UIImage imageNamed:@"30-key.png"];
-                            break; */
+                        case 4:
+                            if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
+                                cell.imageView.image = nil;
+                            }
+                            break;
+                        case 5:
+                            if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
+                                cell.imageView.image = nil;
+                            }
+                            break;
+                        case 6:
+                            if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
+                                cell.imageView.image = nil;
+                            }
+                            break;
+                        case 7:
+                            if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
+                                cell.imageView.image = nil;
+                            }
+                            break;
+                        case 8:
+                            if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
+                                cell.imageView.image = nil;
+                            }
+                        case 9:
+                            if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
+                                cell.imageView.image = nil;
+                            }
+                        case 10:
+                            if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
+                                cell.imageView.image = nil;
+                            }
+                            break;
+                        case 11:
+                            if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
+                                cell.imageView.image = nil;
+                            }
+                            break;
                     }
                     break;
                 case loginMode:
@@ -210,6 +294,15 @@
                     break;
             }
             break;
+        case 2:
+            if (controllerMode==loginMode) {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                fieldText.enabled = false;
+                UIImageView* akLogin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_keyz_button.png"]];
+                //[cell.contentView addSubview:akLogin];
+                cell.backgroundView = akLogin;
+            }
+            break;
     }
     
     
@@ -232,6 +325,7 @@
                 break;
         }
     }
+    if (indexPath.section==2) [self loginUserVerified];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -239,10 +333,37 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if ([string isEqualToString:@"\n"]) {
+        [self moveView:0];
         [textField resignFirstResponder];
         return false;
     }
     return true;
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    NSLog(@"textfield origin_y %f",textField.superview.superview.frame.origin.y);
+    
+    [self moveView:textField.superview.superview.frame.origin.y];
+    
+    return true;
+}
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    
+    
+    return true;
+}
+
+-(void)moveView:(float)offset
+{
+    CGRect rect = self.view.frame;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    rect.origin.y = -offset;
+    self.view.frame = rect;
+    [UIView commitAnimations];
 }
 
 -(void)registerUser
@@ -282,11 +403,37 @@
     user.userEmail = [self captureString:0];
     user.userPassword = [self captureString:1];
     
-    [user saveSettings];
-    
-    [appKeyz readUserWithEmail:user.userEmail password:user.userPassword];
-
+    if ([self captureString:0].length>0 && [self captureString:1].length > 0) {
+        [user saveSettings];
+        [appKeyz readUserWithEmail:user.userEmail password:user.userPassword];
+    } else {
+        UIAlertView* noStuff = [[UIAlertView alloc] initWithTitle:@"Invalid Email or Password"
+                                                           message:@"Please enter something here."
+                                                          delegate:nil
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles: nil];
+        [noStuff show];
+    }
 }
+
+-(void)loginUserVerified
+{
+    user.userEmail = [self captureString:0];
+    user.userPassword = [self captureString:1];
+    
+    if ([self captureString:0].length>0 && [self captureString:1].length > 0) {
+        [user saveSettings];
+        [appKeyz readUserVerifiedWithEmail:user.userEmail password:user.userPassword];
+    } else {
+        UIAlertView* noStuff = [[UIAlertView alloc] initWithTitle:@"Invalid Email or Password"
+                                                          message:@"Please enter something here."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles: nil];
+        [noStuff show];
+    }
+}
+
 
 -(void)updateUser
 {
@@ -317,6 +464,37 @@
         [pwLength show];
     }
 
+}
+
+-(IBAction)forgotPassword:(id)sender
+{
+    UIAlertView* forgotPass = [[UIAlertView alloc] initWithTitle:@"Forgot Password?"
+                                                         message:@"Enter email to receive password reset instructions"
+                                                        delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    forgotPass.alertViewStyle = UIAlertViewStylePlainTextInput;
+    forgotPass.tag = 22;
+    [forgotPass show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (alertView.tag) {
+        case 22:
+            if (buttonIndex==1) {
+                UITextField* tf = (UITextField*)[alertView textFieldAtIndex:0];
+                if (IsValidEmail(tf.text)) {
+                    [appKeyz forgotpasswordWithEmail:tf.text];
+                } else {
+                    UIAlertView* badEmail = [[UIAlertView alloc] initWithTitle:@"Invalid Email"
+                                                                       message:@"Please enter a valid email."
+                                                                      delegate:nil
+                                                             cancelButtonTitle:@"OK"
+                                                             otherButtonTitles: nil];
+                    [badEmail show];
+                }
+            }
+            break;
+    }
 }
 
 -(NSString*)captureString:(int)row

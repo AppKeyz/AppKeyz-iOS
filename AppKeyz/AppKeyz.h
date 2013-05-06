@@ -32,7 +32,9 @@ typedef enum tag_Command {
 
 @interface AppKeyz : NSObject {
     NSArray* cmdStrings;
+    NSArray* registerFields;
 }
+@property(strong) NSArray* registerFields;
 
 +(AppKeyz*)shared;
 

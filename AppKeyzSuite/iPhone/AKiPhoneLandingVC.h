@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AKiPhoneLoginRegisterVC.h"
-#import "AppKeyzLogin.h"
 
 @interface AKiPhoneLandingVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
     IBOutlet UITableView* loginTableView;
@@ -29,7 +28,6 @@
 -(IBAction)whySignUp:(id)sender;
 -(IBAction)noThanks:(id)sender;
 -(IBAction)closePopover:(id)sender;
--(IBAction)appKeyzLogin:(id)sender;
 -(void)onCompleteCancelPopup;
 
 @end

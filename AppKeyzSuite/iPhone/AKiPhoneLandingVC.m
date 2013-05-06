@@ -99,11 +99,11 @@
     switch (indexPath.row) {
         case 0:
             fieldText.text = @"Log In";
-            cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
+            cell.imageView.image = [UIImage imageNamed:@"user.png"];
             break;
         case 1:
             fieldText.text = @"Create Account";
-            cell.imageView.image = [UIImage imageNamed:@"10-medical.png"];
+            cell.imageView.image = [UIImage imageNamed:@"plus.png"];
             break;
     }
     
@@ -126,12 +126,6 @@
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
--(IBAction)appKeyzLogin:(id)sender
-{
-    AppKeyzLogin* akl = AppKeyzLogin.new;
-    [self.navigationController pushViewController:akl animated:YES];
 }
 
 -(IBAction)whySignUp:(id)sender

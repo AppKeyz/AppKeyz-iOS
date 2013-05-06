@@ -16,7 +16,7 @@ typedef enum tag_ControllerMode {
 
 @class AKUser;
 
-@interface AKiPhoneLoginRegisterVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
+@interface AKiPhoneLoginRegisterVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate> {
     IBOutlet UITableView* loginRegTableView;
     UIImageView* bgImage;
     
@@ -25,12 +25,17 @@ typedef enum tag_ControllerMode {
     
     AKUser* user;
     AppKeyz* appKeyz;
+    
+    NSArray* registerFields, *registerFieldLabels;
+    
+    UIView* footerView;
 }
 @property(assign)ControllerMode controllerMode;
 @property(strong)IBOutlet UIImageView* bgImage;
 
 -(void)registerUser;
 -(void)loginUser;
+-(void)loginUserVerified;
 -(void)updateUser;
 
 -(NSString*)captureString:(int)row;

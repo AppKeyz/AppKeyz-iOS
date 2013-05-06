@@ -25,6 +25,8 @@
 {
     [super viewDidAppear:YES];
     
+    [AppKeyzSuite setRegisterFields:[NSArray arrayWithObjects:@"Age", @"Sex", @"Custom Field1", nil]];
+    
     [AppKeyzSuite loadLoginScheme:self];
 }
 

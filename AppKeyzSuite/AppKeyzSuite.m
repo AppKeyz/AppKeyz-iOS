@@ -16,6 +16,12 @@
     return self;
 }
 
++(void)setRegisterFields:(NSArray*)array
+{
+    [AppKeyz shared].registerFields = [NSArray arrayWithArray:array];
+}
+
+
 +(void)setupUserPlist
 {
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
