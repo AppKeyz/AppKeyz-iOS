@@ -128,6 +128,12 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+-(IBAction)appKeyzLogin:(id)sender
+{
+    AppKeyzLogin* akl = AppKeyzLogin.new;
+    [self.navigationController pushViewController:akl animated:YES];
+}
+
 -(IBAction)whySignUp:(id)sender
 {
 

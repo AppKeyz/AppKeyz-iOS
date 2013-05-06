@@ -12,6 +12,7 @@
 typedef enum tag_Command {
     createuser,
     readuser,
+    readuserverified,
     updateuser,
     forgotpassword,
     createpurchase,
@@ -50,6 +51,7 @@ typedef enum tag_Command {
                        lon:(NSString*)lon
                     active:(BOOL)active;
 -(void)readUserWithEmail:(NSString*)email password:(NSString*)pw;
+-(void)readUserVerifiedWithEmail:(NSString*)email password:(NSString*)pw;
 -(void)updateUserWithEmail:(NSString*)email
                   password:(NSString*)pw
                   newemail:(NSString*)newemail

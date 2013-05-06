@@ -83,6 +83,32 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
      ];
 }
 
+-(void)consumeUser:(NSDictionary*)responseObject
+{
+    [AKUser shared].userNameFirst = [responseObject objectForKey:@"firstname"]; //String
+    [AKUser shared].userNameLast = [responseObject objectForKey:@"lastname"]; //String
+    [responseObject objectForKey:@"deviceids"]; //Array
+    [responseObject objectForKey:@"productskus"]; //Array
+    [responseObject objectForKey:@"consumables"]; //Array
+    [AKUser shared].uniqueId = [responseObject objectForKey:@"uniqueid"]; //String
+    [AKUser shared].latitude = [responseObject objectForKey:@"longitude"]; //String
+    [AKUser shared].longitude = [responseObject objectForKey:@"latitude"]; //String
+    [AKUser shared].active = [[responseObject objectForKey:@"active"] boolValue];// BOOL
+    [responseObject objectForKey:@"lastlogin"]; //String
+    [responseObject objectForKey:@"created"]; //String
+    [responseObject objectForKey:@"updated"]; //String
+    [[responseObject objectForKey:@"emailverified"] boolValue]; //BOOL
+    [responseObject objectForKey:@"sex"];
+    [responseObject objectForKey:@"age"];
+    [responseObject objectForKey:@"custom1"];
+    [responseObject objectForKey:@"custom2"];
+    [responseObject objectForKey:@"custom3"];
+    [responseObject objectForKey:@"custom4"];
+    [responseObject objectForKey:@"custom5"];
+    [responseObject objectForKey:@"custom6"];
+    [[AKUser shared] saveSettings];
+}
+
 -(void)consumeResponse:(id)responseObject withCommand:(Command)cmd
 {
     NSString* appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
@@ -97,20 +123,12 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
                 break;
             case readuser:
                 message = @"User accout retreived successfully";
-                [AKUser shared].userNameFirst = [responseObject objectForKey:@"firstname"]; //String
-                [AKUser shared].userNameLast = [responseObject objectForKey:@"lastname"]; //String
-                [responseObject objectForKey:@"deviceids"]; //Array
-                [responseObject objectForKey:@"productskus"]; //Array
-                [responseObject objectForKey:@"consumables"]; //Array
-                [AKUser shared].uniqueId = [responseObject objectForKey:@"uniqueid"]; //String
-                [AKUser shared].latitude = [responseObject objectForKey:@"longitude"]; //String
-                [AKUser shared].longitude = [responseObject objectForKey:@"latitude"]; //String
-                [AKUser shared].active = [[responseObject objectForKey:@"active"] boolValue];// BOOL
-                [responseObject objectForKey:@"lastlogin"]; //String
-                [responseObject objectForKey:@"created"]; //String
-                [responseObject objectForKey:@"updated"]; //String
-                NSLog(@"%i",[[responseObject objectForKey:@"active"] intValue]);
-                [[AKUser shared] saveSettings];
+                [self consumeUser:responseObject];
+                break;
+            case readuserverified:
+                message = @"User accout retreived successfully";
+                if (![[responseObject objectForKey:@"emailverified"] boolValue]) message =@"App Keyz login is for verified App Keyz users. Please click the other button.";
+                [self consumeUser:responseObject];
                 break;
             case updateuser:
                 message = @"User information updated successfully.";
@@ -209,6 +227,18 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     [parameters setObject:pw forKey:@"password"];
     
     [self postParams:parameters command:readuser];
+}
+
+-(void)readUserVerifiedWithEmail:(NSString*)email password:(NSString*)pw
+{
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:@"readuserverified" forKey:@"apiaction"];
+    [parameters setObject:kAppToken forKey:@"apptoken"];
+    
+    [parameters setObject:email forKey:@"email"];
+    [parameters setObject:pw forKey:@"password"];
+    
+    [self postParams:parameters command:readuserverified];
 }
 
 -(void)updateUserWithEmail:(NSString*)email

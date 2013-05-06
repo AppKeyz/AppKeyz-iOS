@@ -55,6 +55,8 @@
 		BA7F31CE172FA18A0005AD47 /* 40-inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C6172FA18A0005AD47 /* 40-inbox.png */; };
 		BA7F31CF172FA18A0005AD47 /* 40-inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C7172FA18A0005AD47 /* 40-inbox@2x.png */; };
 		BA7F31D11730E2AA0005AD47 /* User.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31D01730E2AA0005AD47 /* User.plist */; };
+		BAEAD32A1736FD1800C0B7F1 /* app_keyz_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEAD3201736FD1800C0B7F1 /* app_keyz_button.png */; };
+		BAEAD32B1736FD1800C0B7F1 /* app_keyz_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEAD3211736FD1800C0B7F1 /* app_keyz_button@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +132,8 @@
 		BA7F31C6172FA18A0005AD47 /* 40-inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "40-inbox.png"; sourceTree = "<group>"; };
 		BA7F31C7172FA18A0005AD47 /* 40-inbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "40-inbox@2x.png"; sourceTree = "<group>"; };
 		BA7F31D01730E2AA0005AD47 /* User.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = User.plist; sourceTree = "<group>"; };
+		BAEAD3201736FD1800C0B7F1 /* app_keyz_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_keyz_button.png; sourceTree = "<group>"; };
+		BAEAD3211736FD1800C0B7F1 /* app_keyz_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_keyz_button@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +213,7 @@
 		BA5A2686172A2F6E006B5B25 /* AppKeyzSuite */ = {
 			isa = PBXGroup;
 			children = (
+				BA7F31BF172FA18A0005AD47 /* Resources */,
 				BA5A277F172DDD3D006B5B25 /* AppKeyzSuite.h */,
 				BA5A2780172DDD3D006B5B25 /* AppKeyzSuite.m */,
 				BA5A2782172DDE17006B5B25 /* AKUser.h */,
@@ -280,7 +285,6 @@
 		BA5A278A172DEA57006B5B25 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				BA7F31BF172FA18A0005AD47 /* Resources */,
 				BA5A2785172DEA4E006B5B25 /* AKiPhoneLandingVC.h */,
 				BA5A2786172DEA4E006B5B25 /* AKiPhoneLandingVC.m */,
 				BA5A2787172DEA4E006B5B25 /* AKiPhoneLandingVC.xib */,
@@ -307,6 +311,8 @@
 		BA7F31BF172FA18A0005AD47 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BAEAD3201736FD1800C0B7F1 /* app_keyz_button.png */,
+				BAEAD3211736FD1800C0B7F1 /* app_keyz_button@2x.png */,
 				BA7F31D01730E2AA0005AD47 /* User.plist */,
 				BA7F31C0172FA18A0005AD47 /* 10-medical.png */,
 				BA7F31C1172FA18A0005AD47 /* 10-medical@2x.png */,
@@ -395,6 +401,8 @@
 				BA7F31D11730E2AA0005AD47 /* User.plist in Resources */,
 				BA72F2DD17322D6F007D3C62 /* icon.png in Resources */,
 				BA72F2DE17322D6F007D3C62 /* icon@2x.png in Resources */,
+				BAEAD32A1736FD1800C0B7F1 /* app_keyz_button.png in Resources */,
+				BAEAD32B1736FD1800C0B7F1 /* app_keyz_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
