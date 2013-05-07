@@ -55,6 +55,7 @@
 		BA7F31CE172FA18A0005AD47 /* inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C6172FA18A0005AD47 /* inbox.png */; };
 		BA7F31CF172FA18A0005AD47 /* inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C7172FA18A0005AD47 /* inbox@2x.png */; };
 		BA7F31D11730E2AA0005AD47 /* User.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31D01730E2AA0005AD47 /* User.plist */; };
+		BA8C27C21738C4A9001BF7C3 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = BA8C27C11738C4A9001BF7C3 /* blank.png */; };
 		BAEAD32A1736FD1800C0B7F1 /* app_keyz_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEAD3201736FD1800C0B7F1 /* app_keyz_button.png */; };
 		BAEAD32B1736FD1800C0B7F1 /* app_keyz_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEAD3211736FD1800C0B7F1 /* app_keyz_button@2x.png */; };
 /* End PBXBuildFile section */
@@ -132,6 +133,7 @@
 		BA7F31C6172FA18A0005AD47 /* inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inbox.png; sourceTree = "<group>"; };
 		BA7F31C7172FA18A0005AD47 /* inbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inbox@2x.png"; sourceTree = "<group>"; };
 		BA7F31D01730E2AA0005AD47 /* User.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = User.plist; sourceTree = "<group>"; };
+		BA8C27C11738C4A9001BF7C3 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
 		BAEAD3201736FD1800C0B7F1 /* app_keyz_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_keyz_button.png; sourceTree = "<group>"; };
 		BAEAD3211736FD1800C0B7F1 /* app_keyz_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_keyz_button@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -311,6 +313,7 @@
 		BA7F31BF172FA18A0005AD47 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BA8C27C11738C4A9001BF7C3 /* blank.png */,
 				BAEAD3201736FD1800C0B7F1 /* app_keyz_button.png */,
 				BAEAD3211736FD1800C0B7F1 /* app_keyz_button@2x.png */,
 				BA7F31D01730E2AA0005AD47 /* User.plist */,
@@ -403,6 +406,7 @@
 				BA72F2DE17322D6F007D3C62 /* icon@2x.png in Resources */,
 				BAEAD32A1736FD1800C0B7F1 /* app_keyz_button.png in Resources */,
 				BAEAD32B1736FD1800C0B7F1 /* app_keyz_button@2x.png in Resources */,
+				BA8C27C21738C4A9001BF7C3 /* blank.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,15 +532,15 @@
 		BA5A267D172A2E76006B5B25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Hayes (6KBDY6WHY9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Hayes (6KBDY6WHY9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppKeyz Sample Application/AppKeyz Sample Application-Prefix.pch";
 				INFOPLIST_FILE = "AppKeyz Sample Application/AppKeyz Sample Application-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "83D2C678-844C-4432-B515-CF537B30D85A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "83D2C678-844C-4432-B515-CF537B30D85A";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

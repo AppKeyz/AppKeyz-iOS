@@ -25,7 +25,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 
 -(id)init
 {
-    cmdStrings = [[NSArray alloc] initWithObjects:@"createuser",@"readuser",@"updateuser",@"forgotpassword",@"createpurchase",
+    cmdStrings = [[NSArray alloc] initWithObjects:@"createuser",@"readuser",@"readuserverified",@"updateuser",@"forgotpassword",@"createpurchase",
                   @"listpurchases",@"readpurchase",@"updatepurchase",@"deactivatepurchase",@"createdevice",
                   @"listdevices",@"readdevice",@"updatedevice",@"deletedevice",@"listconsumables",
                   @"readconsumable",@"updateconsumable", nil];
@@ -128,7 +128,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
                 break;
             case readuserverified:
                 message = @"User accout retreived successfully";
-                if (![[responseObject objectForKey:@"emailverified"] boolValue]) message =@"App Keyz login is for verified App Keyz users. Please click the other button.";
+                if (![[responseObject objectForKey:@"emailverified"] boolValue]) message =@"App Keyz login is for verified App Keyz users. Next time, click the other button or verify your account.";
                 [self consumeUser:responseObject];
                 break;
             case updateuser:
@@ -180,7 +180,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
                 break;
         }
     }
-    
+    NSLog(@"%@",[cmdStrings objectAtIndex:cmd]);
     [[NSNotificationCenter defaultCenter] postNotificationName: [NSString stringWithFormat:@"AK%@", [cmdStrings objectAtIndex:cmd]] //exa. AKcreateuser
                                                         object: nil
                                                       userInfo: nil];
@@ -233,7 +233,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 -(void)readUserVerifiedWithEmail:(NSString*)email password:(NSString*)pw
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:@"readuserverified" forKey:@"apiaction"];
+    [parameters setObject:@"readuser" forKey:@"apiaction"];
     [parameters setObject:kAppToken forKey:@"apptoken"];
     
     [parameters setObject:email forKey:@"email"];

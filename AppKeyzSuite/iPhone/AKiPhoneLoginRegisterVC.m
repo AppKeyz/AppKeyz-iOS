@@ -114,6 +114,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section==2 && controllerMode==loginMode)
         return 50;
+    else
+        return UITableViewAutomaticDimension;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -204,53 +206,54 @@
                         case 3:
                             fieldText.placeholder = @"Password";
                             fieldText.text = user.userPassword;
+                            if (controllerMode==editMode) fieldText.secureTextEntry = true;
                             fieldText.autocapitalizationType = UITextAutocapitalizationTypeNone;
                             cell.imageView.image = [UIImage imageNamed:@"key.png"];
                             break;
                         case 4:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
-                                cell.imageView.image = nil;
+                                cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                         case 5:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
-                                cell.imageView.image = nil;
+                                cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                         case 6:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
-                                cell.imageView.image = nil;
+                                cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                         case 7:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
-                                cell.imageView.image = nil;
+                                cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                         case 8:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
-                                cell.imageView.image = nil;
+                                cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                         case 9:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
-                                cell.imageView.image = nil;
+                                cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                         case 10:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
-                                cell.imageView.image = nil;
+                                cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                         case 11:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
-                                cell.imageView.image = nil;
+                                cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                     }
@@ -262,14 +265,14 @@
                             fieldText.secureTextEntry = NO;
                             fieldText.keyboardType = UIKeyboardTypeEmailAddress;
                             fieldText.autocapitalizationType = UITextAutocapitalizationTypeNone;
-                            cell.imageView.image = [UIImage imageNamed:@"40-inbox.png"];
+                            cell.imageView.image = [UIImage imageNamed:@"inbox.png"];
                             break;
                         case 1:
                             fieldText.placeholder = @"Password";
                             fieldText.secureTextEntry = YES;
                             fieldText.keyboardType = UIKeyboardTypeDefault;
                             fieldText.autocapitalizationType = UITextAutocapitalizationTypeNone;
-                            cell.imageView.image = [UIImage imageNamed:@"30-key.png"];
+                            cell.imageView.image = [UIImage imageNamed:@"key.png"];
                             break;
                     }
                     break;
@@ -282,15 +285,15 @@
             switch (controllerMode) {
                 case loginMode:
                     fieldText.text = @"Log In";
-                    cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
+                    cell.imageView.image = [UIImage imageNamed:@"user.png"];
                     break;
                 case registerMode:
                     fieldText.text = @"Create Account";
-                    cell.imageView.image = [UIImage imageNamed:@"10-medical.png"];
+                    cell.imageView.image = [UIImage imageNamed:@"plus.png"];
                     break;
                 case editMode:
                     fieldText.text = @"Save Profile";
-                    cell.imageView.image = [UIImage imageNamed:@"111-user.png"];
+                    cell.imageView.image = [UIImage imageNamed:@"user.png"];
                     break;
             }
             break;
@@ -299,6 +302,7 @@
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 fieldText.enabled = false;
                 UIImageView* akLogin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_keyz_button.png"]];
+                cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                 //[cell.contentView addSubview:akLogin];
                 cell.backgroundView = akLogin;
             }
