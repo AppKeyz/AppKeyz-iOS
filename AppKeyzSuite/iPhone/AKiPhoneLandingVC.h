@@ -19,6 +19,7 @@
     
     IBOutlet UILabel* why;
     IBOutlet UIButton* close;
+    IBOutlet UITextView* explain;
     
     UITextField* fieldText;
     

@@ -44,6 +44,7 @@
     [popupView addSubview:popupBox];
     [popupView addSubview:why];
     [popupView addSubview:close];
+    [popupView addSubview:explain];
     
     popupView.hidden = true;
     popupBackground.hidden = true;

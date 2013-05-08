@@ -337,8 +337,13 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if ([string isEqualToString:@"\n"]) {
-        [self moveView:0];
+        //[self moveView:0];
         [textField resignFirstResponder];
+        if ([[UIDevice currentDevice]  orientation] == UIInterfaceOrientationPortrait) {
+            loginRegTableView.frame = CGRectMake(0, 44, 320, self.view.frame.size.height-44);
+        } else {
+            loginRegTableView.frame = CGRectMake(0, 44, 480, self.view.frame.size.height-44);
+        }
         return false;
     }
     return true;
@@ -346,9 +351,17 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    NSLog(@"textfield origin_y %f",textField.superview.superview.frame.origin.y);
+    if ([[UIDevice currentDevice]  orientation] == UIInterfaceOrientationPortrait) {
+        loginRegTableView.frame = CGRectMake(0, 44, 320, self.view.frame.size.height-44-216.0);
+    } else {
+        loginRegTableView.frame = CGRectMake(0, 44, 480, self.view.frame.size.height-44-162.0);
+    }
+    NSLog(@"textfield %f",textField.superview.superview.frame.origin.y);
     
-    [self moveView:textField.superview.superview.frame.origin.y];
+    NSIndexPath* indexPath = [loginRegTableView indexPathForCell:textField.superview.superview];
+    
+    //[self moveView:textField.superview.superview.frame.origin.y];
+    [loginRegTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:true];
     
     return true;
 }
