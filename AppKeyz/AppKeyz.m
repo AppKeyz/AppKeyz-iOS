@@ -25,7 +25,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 
 -(id)init
 {
-    cmdStrings = [[NSArray alloc] initWithObjects:@"createuser",@"readuser",@"readuserverified",@"updateuser",@"forgotpassword",@"createpurchase",
+    cmdStrings = [[NSArray alloc] initWithObjects:@"createuser",@"readuser",@"readuserverified",@"readuserverifiedfail",@"updateuser",@"forgotpassword",@"createpurchase",
                   @"listpurchases",@"readpurchase",@"updatepurchase",@"deactivatepurchase",@"createdevice",
                   @"listdevices",@"readdevice",@"updatedevice",@"deletedevice",@"listconsumables",
                   @"readconsumable",@"updateconsumable", nil];
@@ -116,6 +116,9 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     int rspCode = [[responseObject objectForKey:@"error"] intValue];
     NSString* message = [responseObject objectForKey:@"debug"];
     
+    if (cmd==readuserverified && [[responseObject objectForKey:@"emailverified"] boolValue]==false)
+        cmd = readuserverifiedfail;
+    
     if (rspCode==0)
     {
         switch (cmd) {
@@ -127,9 +130,12 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
                 [self consumeUser:responseObject];
                 break;
             case readuserverified:
-                message = @"User accout retreived successfully";
-                if (![[responseObject objectForKey:@"emailverified"] boolValue]) message =@"App Keyz login is for verified App Keyz users. Next time, click the other button or verify your account.";
+                message = @"User accout retreived successfully"; 
+                if (![[responseObject objectForKey:@"emailverified"] boolValue]) message = @"AppKeyz login is for verified users only.";
                 [self consumeUser:responseObject];
+                break;
+            case readuserverifiedfail:
+                message = @"AppKeyz login is for verified users only.";
                 break;
             case updateuser:
                 message = @"User information updated successfully.";
@@ -179,11 +185,12 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
             case updateconsumable:
                 break;
         }
+        NSLog(@"%@",[cmdStrings objectAtIndex:cmd]);
+        [[NSNotificationCenter defaultCenter] postNotificationName: [NSString stringWithFormat:@"AK%@", [cmdStrings objectAtIndex:cmd]] //exa. AKcreateuser
+                                                            object: nil
+                                                          userInfo: nil];
     }
-    NSLog(@"%@",[cmdStrings objectAtIndex:cmd]);
-    [[NSNotificationCenter defaultCenter] postNotificationName: [NSString stringWithFormat:@"AK%@", [cmdStrings objectAtIndex:cmd]] //exa. AKcreateuser
-                                                        object: nil
-                                                      userInfo: nil];
+    
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@ says:", appName]
                                                  message:message

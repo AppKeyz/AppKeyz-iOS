@@ -13,6 +13,7 @@ typedef enum tag_Command {
     createuser,
     readuser,
     readuserverified,
+    readuserverifiedfail,
     updateuser,
     forgotpassword,
     createpurchase,
