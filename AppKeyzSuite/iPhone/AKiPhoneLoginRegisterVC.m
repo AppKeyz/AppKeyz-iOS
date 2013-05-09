@@ -340,9 +340,9 @@
         //[self moveView:0];
         [textField resignFirstResponder];
         if ([[UIDevice currentDevice]  orientation] == UIInterfaceOrientationPortrait) {
-            loginRegTableView.frame = CGRectMake(0, 44, 320, self.view.frame.size.height-44);
+            loginRegTableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44);
         } else {
-            loginRegTableView.frame = CGRectMake(0, 44, 480, self.view.frame.size.height-44);
+            loginRegTableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44);
         }
         return false;
     }
@@ -352,9 +352,9 @@
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if ([[UIDevice currentDevice]  orientation] == UIInterfaceOrientationPortrait) {
-        loginRegTableView.frame = CGRectMake(0, 44, 320, self.view.frame.size.height-44-216.0);
+        loginRegTableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44-216.0);
     } else {
-        loginRegTableView.frame = CGRectMake(0, 44, 480, self.view.frame.size.height-44-162.0);
+        loginRegTableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44-162.0);
     }
     NSLog(@"textfield %f",textField.superview.superview.frame.origin.y);
     

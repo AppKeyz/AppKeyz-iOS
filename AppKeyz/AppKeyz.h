@@ -34,8 +34,12 @@ typedef enum tag_Command {
 @interface AppKeyz : NSObject {
     NSArray* cmdStrings;
     NSArray* registerFields;
+    
+    //for testing purposes
+    NSMutableArray* productIds;
 }
 @property(strong) NSArray* registerFields;
+@property(strong) NSMutableArray* productIds;
 
 +(AppKeyz*)shared;
 
@@ -77,28 +81,27 @@ typedef enum tag_Command {
                      password:(NSString*)pw;
 -(void)readpurchaseWithEmail:(NSString*)email
                     password:(NSString*)pw
-                  productSku:(NSString*)sku;
+                  purchaseId:(NSString*)purchaseId;
 -(void)updatepurchaseWithEmail:(NSString*)email
                       password:(NSString*)pw
-                    productSku:(NSString*)sku
-                       balance:(float)balance
+                    purchaseId:(NSString*)purchaseId
                     expiration:(NSString*)expiration
                         active:(BOOL)active;
 -(void)deactivatepurchaseWithEmail:(NSString*)email
                           password:(NSString*)pw
-                        productSku:(NSString*)sku;
+                        purchaseId:(NSString*)purchaseId;
 
 //User Device Interface ***If nil is passed to deviceId, a Uid will be generated automagically
 -(void)createdeviceWithEmail:(NSString*)email
                     password:(NSString*)pw
                     deviceId:(NSString*)deviceId
-                  deviceType:(NSString*)deviceType
                     deviceIp:(NSString*)deviceIp
                  deviceToken:(NSString*)deviceToken;
 -(void)listdevicesWithEmail:(NSString*)email
                    password:(NSString*)pw;
 -(void)readdeviceWithEmail:(NSString*)email
-                  password:(NSString*)pw;
+                  password:(NSString*)pw
+                  deviceId:(NSString*)deviceId;
 -(void)updatedeviceWithEmail:(NSString*)email
                     password:(NSString*)pw
                     deviceId:(NSString*)deviceId

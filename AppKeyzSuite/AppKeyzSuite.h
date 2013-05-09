@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AppKeyz.h"
 #import "AKiPhoneLandingVC.h"
 #import "AKiPadLandingVC.h"
 #import "AKiPhoneLoginRegisterVC.h"

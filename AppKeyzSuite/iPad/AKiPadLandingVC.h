@@ -8,11 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AKiPadLandingVC : UIViewController <UITableViewDataSource, UITableViewDelegate> {
-    UIImageView* backgroundImage;
-    UITableView* loginTableView;
+@interface AKiPadLandingVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
+    IBOutlet UITableView* loginTableView;
+    UIImageView* bgImage;
+    
+    IBOutlet UIView* popupBackground;
+    IBOutlet UIView* popupView;
+    IBOutlet UITextField* popupBox;
+    
+    IBOutlet UILabel* why;
+    IBOutlet UIButton* close;
+    IBOutlet UITextView* explain;
+    
+    UITextField* fieldText;
 }
-@property(nonatomic) IBOutlet UIImageView* backgroundImage;
-@property(nonatomic) IBOutlet UITableView* loginTableView;
+@property(strong) IBOutlet UIImageView* bgImage;
+-(IBAction)whySignUp:(id)sender;
+-(IBAction)noThanks:(id)sender;
+-(IBAction)closePopover:(id)sender;
+-(void)onCompleteCancelPopup;
 
 @end

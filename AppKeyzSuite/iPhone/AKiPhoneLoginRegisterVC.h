@@ -15,6 +15,7 @@ typedef enum tag_ControllerMode {
 } ControllerMode;
 
 @class AKUser;
+@class AppKeyz;
 
 @interface AKiPhoneLoginRegisterVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate> {
     IBOutlet UITableView* loginRegTableView;

@@ -19,6 +19,7 @@
     BOOL active;
     BOOL didNotRegister;
     BOOL isLoggedIn;
+    NSString* deviceId;
 }
 @property (strong) NSString* userNameFirst;
 @property (strong) NSString* userNameLast;
@@ -30,6 +31,7 @@
 @property (assign) BOOL active;
 @property (assign) BOOL isLoggedIn;
 @property (assign) BOOL didNotRegister;
+@property (strong) NSString* deviceId;
 
 + (AKUser*)shared;
 - (void)saveSettings;

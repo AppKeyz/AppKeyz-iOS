@@ -13,4 +13,5 @@
     #import <Foundation/Foundation.h>
     #import "AppKeyzSuite.h"
     #import "AKUser.h"
+    #import "AppKeyz.h"
 #endif

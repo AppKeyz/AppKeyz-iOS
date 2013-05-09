@@ -11,7 +11,7 @@
 static AKUser* sUser;
 
 @implementation AKUser
-@synthesize userNameFirst, userNameLast, userEmail, userPassword, uniqueId, isLoggedIn, latitude, longitude, active, didNotRegister;
+@synthesize userNameFirst, userNameLast, userEmail, userPassword, uniqueId, isLoggedIn, latitude, longitude, active, didNotRegister, deviceId;
 
 +(AKUser*)shared
 {
@@ -37,6 +37,7 @@ static AKUser* sUser;
     self.longitude = @"";
     self.active = NO;
     self.didNotRegister = false;
+    self.deviceId = @"";
     
     NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/User.plist"];
     NSMutableDictionary* userDict = [NSMutableDictionary dictionaryWithContentsOfFile:plistPath];
@@ -51,6 +52,7 @@ static AKUser* sUser;
     if ([userDict objectForKey:@"uniqueId"]!=nil) self.uniqueId = [userDict objectForKey:@"uniqueId"];
     if ([userDict objectForKey:@"latitude"]!=nil) self.latitude = [userDict objectForKey:@"latitude"];
     if ([userDict objectForKey:@"longitude"]!=nil) self.longitude = [userDict objectForKey:@"longitude"];
+    if ([userDict objectForKey:@"deviceId"]!=nil) self.deviceId = [userDict objectForKey:@"deviceId"];
     return self;
 }
 
@@ -77,6 +79,7 @@ static AKUser* sUser;
             if (self.uniqueId!=nil) [userDict setObject:self.uniqueId forKey:@"uniqueId"];
             if (self.latitude!=nil) [userDict setObject:self.latitude forKey:@"latitude"];
             if (self.longitude!=nil) [userDict setObject:self.longitude forKey:@"longitude"];
+            if (self.deviceId!=nil) [userDict setObject:self.deviceId forKey:@"deviceId"];
             
             [userDict writeToFile:plistPath atomically:YES];
             [manager setAttributes:[NSDictionary dictionaryWithObject:[NSDate date] forKey:NSFileModificationDate] ofItemAtPath:NSHomeDirectory() error:nil];
@@ -129,6 +132,7 @@ static AKUser* sUser;
     [inspectDict setObject:noRegister forKey:@"notRegistered"];
     [inspectDict setObject:self.latitude forKey:@"latitude"];
     [inspectDict setObject:self.longitude forKey:@"longitude"];
+    [inspectDict setObject:self.deviceId forKey:@"deviceId"];
 
     
     NSLog(@"%@",inspectDict);

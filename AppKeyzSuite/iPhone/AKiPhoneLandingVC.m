@@ -132,8 +132,8 @@
 -(IBAction)whySignUp:(id)sender
 {
 
-    
-    popupView.frame = CGRectMake(20, self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height);
+    int marginleft = (self.view.bounds.size.width - popupView.frame.size.width)/2;
+    popupView.frame = CGRectMake(marginleft, self.view.bounds.size.height, popupView.frame.size.width, popupView.frame.size.height);
     popupBackground.alpha = 0.0;
     
     popupView.hidden = NO;
@@ -142,19 +142,20 @@
     [UIView setAnimationDuration:0.4];
     popupBackground.alpha = 0.75;
     [popupView setAlpha:1.0];
-    popupView.frame = CGRectMake(20, 64, self.view.bounds.size.width, self.view.bounds.size.height);
+    popupView.frame = CGRectMake(20, 164, self.view.bounds.size.width, self.view.bounds.size.height);
     [UIView commitAnimations];
     [UIView setAnimationDuration:0.0];
 }
 
 -(IBAction)closePopover:(id)sender
 {
+    int marginleft = (self.view.bounds.size.width - 300)/2;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(onCompleteCancelPopup)];
     [popupBackground setAlpha:0.0];
-    popupView.frame = CGRectMake(20, self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height);
+    popupView.frame = CGRectMake(marginleft, self.view.bounds.size.height, popupView.frame.size.width, popupView.frame.size.height);
     [UIView commitAnimations];
     [UIView setAnimationDuration:0.0];
 }

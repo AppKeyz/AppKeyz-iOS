@@ -13,7 +13,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 
 
 @implementation AppKeyz
-@synthesize registerFields;
+@synthesize registerFields, productIds;
 
 +(AppKeyz*)shared
 {
@@ -29,6 +29,8 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
                   @"listpurchases",@"readpurchase",@"updatepurchase",@"deactivatepurchase",@"createdevice",
                   @"listdevices",@"readdevice",@"updatedevice",@"deletedevice",@"listconsumables",
                   @"readconsumable",@"updateconsumable", nil];
+    
+    self.productIds = NSMutableArray.new;
     return self;
 }
 
@@ -47,6 +49,16 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     return [[UIDevice currentDevice] uniqueDeviceIdentifier];
 }
 
+-(NSString*)floatToString:(float)flt
+{
+    NSString* floatString;
+    if (flt==-1)
+        floatString = @"";
+    else
+        floatString = [NSString stringWithFormat:@"%f",flt];
+    return floatString;
+}
+
 -(NSString*)device
 {
     return [NSString stringWithFormat:@"%@ %@%@", [[UIDevice currentDevice] model],
@@ -60,6 +72,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 
 -(void)postParams:(NSDictionary*)params command:(Command)cmd
 {
+    NSLog(@"%@",params);
     NSURL *baseURL = [NSURL URLWithString:[NSString stringWithFormat:kAppKeyzHost]];
     
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
@@ -144,15 +157,17 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
                 message = @"Password reset email sent.";
                 break;
             case createpurchase:
+                message = @"Purchase process successfully.";
+                [self.productIds addObject:responseObject];
                 break;
             case listpurchases:
-                [responseObject objectForKey:@"productskus"]; //Array
+                self.productIds = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"purchases"]]; //Array
                 break;
             case readpurchase:
                 [responseObject objectForKey:@"productsku"]; //String
                 [[responseObject objectForKey:@"purchaseprice"] floatValue]; //float
                 [responseObject objectForKey:@"purchasedate"]; //String 2013-01-01 format
-                [[responseObject objectForKey:@"balance"] floatValue]; //float
+                [responseObject objectForKey:@"consumableid"]; //String
                 [responseObject objectForKey:@"expiration"]; //String
                 [[responseObject objectForKey:@"active"] boolValue]; //BOOL
                 break;
@@ -302,8 +317,8 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
     [parameters setObject:sku forKey:@"productsku"];
-    [parameters setObject:[NSString stringWithFormat:@"%f",price] forKey:@"purchaseprice"];
-    [parameters setObject:[NSString stringWithFormat:@"%f", balance] forKey:@"balance"];
+    [parameters setObject:[self floatToString:price] forKey:@"purchaseprice"];
+    [parameters setObject:[self floatToString:balance] forKey:@"balance"];
     [parameters setObject:expiration forKey:@"expiration"];
     
     [self postParams:parameters command:createpurchase];
@@ -324,7 +339,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 
 -(void)readpurchaseWithEmail:(NSString*)email
                     password:(NSString*)pw
-                  productSku:(NSString*)sku
+                  purchaseId:(NSString*)purchaseId
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:@"readpurchase" forKey:@"apiaction"];
@@ -332,15 +347,14 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
-    [parameters setObject:sku forKey:@"productsku"];
+    [parameters setObject:purchaseId forKey:@"purchaseid"];
     
     [self postParams:parameters command:readpurchase];
 }
 
 -(void)updatepurchaseWithEmail:(NSString*)email
                       password:(NSString*)pw
-                    productSku:(NSString*)sku
-                       balance:(float)balance
+                    purchaseId:(NSString*)purchaseId
                     expiration:(NSString*)expiration
                         active:(BOOL)active
 {
@@ -350,8 +364,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
-    [parameters setObject:sku forKey:@"productsku"];
-    [parameters setObject:[NSString stringWithFormat:@"%f", balance] forKey:@"balance"];
+    [parameters setObject:purchaseId forKey:@"purchaseid"];
     [parameters setObject:expiration forKey:@"expiration"];
     [parameters setObject:[self boolString:active] forKey:@"active"];
     
@@ -360,7 +373,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 
 -(void)deactivatepurchaseWithEmail:(NSString*)email
                           password:(NSString*)pw
-                        productSku:(NSString*)sku
+                        purchaseId:(NSString*)purchaseId
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:@"deactivatepurchase" forKey:@"apiaction"];
@@ -368,7 +381,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
-    [parameters setObject:sku forKey:@"productsku"];
+    [parameters setObject:purchaseId forKey:@"purchaseid"];
     
     [self postParams:parameters command:deactivatepurchase];
 }
@@ -386,7 +399,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
-    if (deviceId==nil) [parameters setObject:[self deviceId] forKey:@"deviceid"];
+    [parameters setObject:[self deviceId] forKey:@"deviceid"];
     [parameters setObject:[self device] forKey:@"devicetype"];
     [parameters setObject:deviceIp forKey:@"deviceip"];
     [parameters setObject:deviceToken forKey:@"devicetoken"];
@@ -416,7 +429,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
-    if (deviceId==nil) [parameters setObject:[self deviceId] forKey:@"deviceid"];
+    [parameters setObject:[self deviceId] forKey:@"deviceid"];
     
     [self postParams:parameters command:readdevice];
 }
@@ -435,7 +448,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
-    if (deviceId==nil) [parameters setObject:[self deviceId] forKey:@"deviceid"];
+    [parameters setObject:[self deviceId] forKey:@"deviceid"];
     [parameters setObject:newDeviceId forKey:@"newdeviceid"];
     [parameters setObject:[self device] forKey:@"devicetype"];
     [parameters setObject:deviceIp forKey:@"deviceip"];
@@ -454,7 +467,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
-    if (deviceId==nil) [parameters setObject:[self deviceId] forKey:@"deviceid"];
+    [parameters setObject:[self deviceId] forKey:@"deviceid"];
     
     [self postParams:parameters command:deletedevice];
 }
