@@ -26,7 +26,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 -(id)init
 {
     cmdStrings = [[NSArray alloc] initWithObjects:@"createuser",@"readuser",@"readuserverified",@"readuserverifiedfail",@"updateuser",@"forgotpassword",@"createpurchase",
-                  @"listpurchases",@"readpurchase",@"updatepurchase",@"deactivatepurchase",@"createdevice",
+                  @"listpurchases",@"readpurchase",@"updatepurchase",@"deletepurchase",@"createdevice",
                   @"listdevices",@"readdevice",@"updatedevice",@"deletedevice",@"listconsumables",
                   @"readconsumable",@"updateconsumable", nil];
     
@@ -58,6 +58,14 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
         floatString = [NSString stringWithFormat:@"%f",flt];
     return floatString;
 }
+
+-(NSString*)nilToString:(id)attr
+{
+    if (attr==nil) return @"";
+    else return (NSString*)attr;
+}
+
+
 
 -(NSString*)device
 {
@@ -173,7 +181,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
                 break;
             case updatepurchase:
                 break;
-            case deactivatepurchase:
+            case deletepurchase:
                 break;
             case createdevice:
                 break;
@@ -223,6 +231,14 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
                        lat:(NSString*)lat
                        lon:(NSString*)lon
                     active:(BOOL)active
+                       age:(NSString*)age
+                       sex:(NSString*)sex
+                   custom1:(NSString*)custom1
+                   custom2:(NSString*)custom2
+                   custom3:(NSString*)custom3
+                   custom4:(NSString*)custom4
+                   custom5:(NSString*)custom5
+                   custom6:(NSString*)custom6
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:@"createuser" forKey:@"apiaction"];
@@ -230,10 +246,18 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
-    [parameters setObject:fn forKey:@"firstname"];
-    [parameters setObject:ln forKey:@"lastname"];
+    [parameters setObject:[self nilToString:fn] forKey:@"firstname"];
+    [parameters setObject:[self nilToString:ln] forKey:@"lastname"];
     [parameters setObject:lat forKey:@"latitude"];
     [parameters setObject:lon forKey:@"longitude"];
+    [parameters setObject:[self nilToString:age] forKey:@"age"];
+    [parameters setObject:[self nilToString:sex] forKey:@"sex"];
+    [parameters setObject:[self nilToString:custom1] forKey:@"custom1"];
+    [parameters setObject:[self nilToString:custom2] forKey:@"custom2"];
+    [parameters setObject:[self nilToString:custom3] forKey:@"custom3"];
+    [parameters setObject:[self nilToString:custom4] forKey:@"custom4"];
+    [parameters setObject:[self nilToString:custom5] forKey:@"custom5"];
+    [parameters setObject:[self nilToString:custom6] forKey:@"custom6"];
     [parameters setObject:[self boolString:active] forKey:@"active"];
     [parameters setObject:[self generateUid] forKey:@"uniqueid"];
     
@@ -273,6 +297,14 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
                        lat:(NSString*)lat
                        lon:(NSString*)lon
                     active:(BOOL)active
+                       age:(NSString*)age
+                       sex:(NSString*)sex
+                   custom1:(NSString*)custom1
+                   custom2:(NSString*)custom2
+                   custom3:(NSString*)custom3
+                   custom4:(NSString*)custom4
+                   custom5:(NSString*)custom5
+                   custom6:(NSString*)custom6
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:@"updateuser" forKey:@"apiaction"];
@@ -280,12 +312,20 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
-    [parameters setObject:newemail forKey:@"newemail"];
-    [parameters setObject:newpw forKey:@"newpassword"];
-    [parameters setObject:fn forKey:@"firstname"];
-    [parameters setObject:ln forKey:@"lastname"];
+    [parameters setObject:[self nilToString:newemail] forKey:@"newemail"];
+    [parameters setObject:[self nilToString:newpw] forKey:@"newpassword"];
+    [parameters setObject:[self nilToString:fn] forKey:@"firstname"];
+    [parameters setObject:[self nilToString:ln] forKey:@"lastname"];
     [parameters setObject:lat forKey:@"latitude"];
     [parameters setObject:lon forKey:@"longitude"];
+    [parameters setObject:[self nilToString:age] forKey:@"age"];
+    [parameters setObject:[self nilToString:sex] forKey:@"sex"];
+    [parameters setObject:[self nilToString:custom1] forKey:@"custom1"];
+    [parameters setObject:[self nilToString:custom2] forKey:@"custom2"];
+    [parameters setObject:[self nilToString:custom3] forKey:@"custom3"];
+    [parameters setObject:[self nilToString:custom4] forKey:@"custom4"];
+    [parameters setObject:[self nilToString:custom5] forKey:@"custom5"];
+    [parameters setObject:[self nilToString:custom6] forKey:@"custom6"];
     [parameters setObject:(active) ? @"true" : @"false" forKey:@"active"];
     
     [self postParams:parameters command:updateuser];
@@ -371,19 +411,19 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     [self postParams:parameters command:updatepurchase];
 }
 
--(void)deactivatepurchaseWithEmail:(NSString*)email
+-(void)deletepurchaseWithEmail:(NSString*)email
                           password:(NSString*)pw
                         purchaseId:(NSString*)purchaseId
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:@"deactivatepurchase" forKey:@"apiaction"];
+    [parameters setObject:@"deletepurchase" forKey:@"apiaction"];
     [parameters setObject:kAppToken forKey:@"apptoken"];
     
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
     [parameters setObject:purchaseId forKey:@"purchaseid"];
     
-    [self postParams:parameters command:deactivatepurchase];
+    [self postParams:parameters command:deletepurchase];
 }
 
 //User Device Interface
@@ -514,8 +554,8 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     [parameters setObject:email forKey:@"email"];
     [parameters setObject:pw forKey:@"password"];
     [parameters setObject:[NSString stringWithFormat:@"%i",consumableId] forKey:@"consumableid"];
-    [parameters setObject:[NSString stringWithFormat:@"%f",addToBalance] forKey:@"adjustbalance"];
-    [parameters setObject:[NSString stringWithFormat:@"%f",setBalance] forKey:@"setbalance"];
+    if (addToBalance!=-1)[parameters setObject:[NSString stringWithFormat:@"%f",addToBalance] forKey:@"adjustbalance"];
+    if (setBalance!=-1)[parameters setObject:[NSString stringWithFormat:@"%f",setBalance] forKey:@"setbalance"];
     
     [self postParams:parameters command:updateconsumable];
 }

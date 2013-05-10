@@ -12,6 +12,8 @@ static AKUser* sUser;
 
 @implementation AKUser
 @synthesize userNameFirst, userNameLast, userEmail, userPassword, uniqueId, isLoggedIn, latitude, longitude, active, didNotRegister, deviceId;
+//Optional fields
+@synthesize gender, age, custom1, custom2, custom3, custom4, custom5, custom6;
 
 +(AKUser*)shared
 {
@@ -38,6 +40,10 @@ static AKUser* sUser;
     self.active = NO;
     self.didNotRegister = false;
     self.deviceId = @"";
+    self.gender = @"";
+    self.age = @"";
+    
+    self.custom1 = self.custom2 = self.custom3 = self.custom4 = self.custom5 = self.custom6 = @"";
     
     NSString *plistPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/User.plist"];
     NSMutableDictionary* userDict = [NSMutableDictionary dictionaryWithContentsOfFile:plistPath];
@@ -53,6 +59,8 @@ static AKUser* sUser;
     if ([userDict objectForKey:@"latitude"]!=nil) self.latitude = [userDict objectForKey:@"latitude"];
     if ([userDict objectForKey:@"longitude"]!=nil) self.longitude = [userDict objectForKey:@"longitude"];
     if ([userDict objectForKey:@"deviceId"]!=nil) self.deviceId = [userDict objectForKey:@"deviceId"];
+    if ([userDict objectForKey:@"gender"]!=nil) self.gender = [userDict objectForKey:@"gender"];
+    if ([userDict objectForKey:@"age"]!=nil) self.age = [userDict objectForKey:@"age"];
     return self;
 }
 
@@ -80,6 +88,8 @@ static AKUser* sUser;
             if (self.latitude!=nil) [userDict setObject:self.latitude forKey:@"latitude"];
             if (self.longitude!=nil) [userDict setObject:self.longitude forKey:@"longitude"];
             if (self.deviceId!=nil) [userDict setObject:self.deviceId forKey:@"deviceId"];
+            if (self.gender!=nil) [userDict setObject:self.gender forKey:@"gender"];
+            if (self.age!=nil) [userDict setObject:self.age forKey:@"deviceId"];
             
             [userDict writeToFile:plistPath atomically:YES];
             [manager setAttributes:[NSDictionary dictionaryWithObject:[NSDate date] forKey:NSFileModificationDate] ofItemAtPath:NSHomeDirectory() error:nil];
@@ -100,6 +110,8 @@ static AKUser* sUser;
     self.active = NO;
     self.didNotRegister = false;
     self.uniqueId = @"";
+    self.gender = @"";
+    self.age = @"";
     [self saveSettings];
 }
 
@@ -133,6 +145,8 @@ static AKUser* sUser;
     [inspectDict setObject:self.latitude forKey:@"latitude"];
     [inspectDict setObject:self.longitude forKey:@"longitude"];
     [inspectDict setObject:self.deviceId forKey:@"deviceId"];
+    [inspectDict setObject:self.age forKey:@"age"];
+    [inspectDict setObject:self.gender forKey:@"gender"];
 
     
     NSLog(@"%@",inspectDict);

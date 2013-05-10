@@ -20,7 +20,7 @@ typedef enum tag_Command {
     listpurchases,
     readpurchase,
     updatepurchase,
-    deactivatepurchase,
+    deletepurchase,
     createdevice,
     listdevices,
     readdevice,
@@ -56,7 +56,15 @@ typedef enum tag_Command {
                      lname:(NSString*)ln
                        lat:(NSString*)lat
                        lon:(NSString*)lon
-                    active:(BOOL)active;
+                    active:(BOOL)active
+                       age:(NSString*)age
+                       sex:(NSString*)sex
+                   custom1:(NSString*)custom1
+                   custom2:(NSString*)custom2
+                   custom3:(NSString*)custom3
+                   custom4:(NSString*)custom4
+                   custom5:(NSString*)custom5
+                   custom6:(NSString*)custom6;
 -(void)readUserWithEmail:(NSString*)email password:(NSString*)pw;
 -(void)readUserVerifiedWithEmail:(NSString*)email password:(NSString*)pw;
 -(void)updateUserWithEmail:(NSString*)email
@@ -67,7 +75,15 @@ typedef enum tag_Command {
                      lname:(NSString*)ln
                        lat:(NSString*)lat
                        lon:(NSString*)lon
-                    active:(BOOL)active;
+                    active:(BOOL)active
+                       age:(NSString*)age
+                       sex:(NSString*)sex
+                   custom1:(NSString*)custom1
+                   custom2:(NSString*)custom2
+                   custom3:(NSString*)custom3
+                   custom4:(NSString*)custom4
+                   custom5:(NSString*)custom5
+                   custom6:(NSString*)custom6;
 -(void)forgotpasswordWithEmail:(NSString*)email;
 
 //User Purchases Interface
@@ -87,7 +103,7 @@ typedef enum tag_Command {
                     purchaseId:(NSString*)purchaseId
                     expiration:(NSString*)expiration
                         active:(BOOL)active;
--(void)deactivatepurchaseWithEmail:(NSString*)email
+-(void)deletepurchaseWithEmail:(NSString*)email
                           password:(NSString*)pw
                         purchaseId:(NSString*)purchaseId;
 

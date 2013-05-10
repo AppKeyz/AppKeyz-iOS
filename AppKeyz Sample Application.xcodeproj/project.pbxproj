@@ -40,8 +40,6 @@
 		BA72F2DE17322D6F007D3C62 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72F2DC17322D6F007D3C62 /* icon@2x.png */; };
 		BA7F319C172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F319A172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m */; };
 		BA7F319D172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7F319B172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib */; };
-		BA7F31AB172E41690005AD47 /* AKiPhoneUserSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F31A9172E41690005AD47 /* AKiPhoneUserSettingsVC.m */; };
-		BA7F31AC172E41690005AD47 /* AKiPhoneUserSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31AA172E41690005AD47 /* AKiPhoneUserSettingsVC.xib */; };
 		BA7F31B5172E46530005AD47 /* AKiPadLandingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F31B3172E46520005AD47 /* AKiPadLandingVC.m */; };
 		BA7F31B6172E46530005AD47 /* AKiPadLandingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31B4172E46520005AD47 /* AKiPadLandingVC.xib */; };
 		BA7F31B9172E4D910005AD47 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31B8172E4D910005AD47 /* Default-Landscape@2x.png */; };
@@ -116,9 +114,6 @@
 		BA7F3199172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKiPhoneLoginRegisterVC.h; path = iPhone/AKiPhoneLoginRegisterVC.h; sourceTree = "<group>"; };
 		BA7F319A172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKiPhoneLoginRegisterVC.m; path = iPhone/AKiPhoneLoginRegisterVC.m; sourceTree = "<group>"; };
 		BA7F319B172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKiPhoneLoginRegisterVC.xib; path = iPhone/AKiPhoneLoginRegisterVC.xib; sourceTree = "<group>"; };
-		BA7F31A8172E41690005AD47 /* AKiPhoneUserSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKiPhoneUserSettingsVC.h; path = iPhone/AKiPhoneUserSettingsVC.h; sourceTree = "<group>"; };
-		BA7F31A9172E41690005AD47 /* AKiPhoneUserSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKiPhoneUserSettingsVC.m; path = iPhone/AKiPhoneUserSettingsVC.m; sourceTree = "<group>"; };
-		BA7F31AA172E41690005AD47 /* AKiPhoneUserSettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKiPhoneUserSettingsVC.xib; path = iPhone/AKiPhoneUserSettingsVC.xib; sourceTree = "<group>"; };
 		BA7F31B2172E46520005AD47 /* AKiPadLandingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKiPadLandingVC.h; path = iPad/AKiPadLandingVC.h; sourceTree = "<group>"; };
 		BA7F31B3172E46520005AD47 /* AKiPadLandingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKiPadLandingVC.m; path = iPad/AKiPadLandingVC.m; sourceTree = "<group>"; };
 		BA7F31B4172E46520005AD47 /* AKiPadLandingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKiPadLandingVC.xib; path = iPad/AKiPadLandingVC.xib; sourceTree = "<group>"; };
@@ -293,9 +288,6 @@
 				BA7F3199172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.h */,
 				BA7F319A172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m */,
 				BA7F319B172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib */,
-				BA7F31A8172E41690005AD47 /* AKiPhoneUserSettingsVC.h */,
-				BA7F31A9172E41690005AD47 /* AKiPhoneUserSettingsVC.m */,
-				BA7F31AA172E41690005AD47 /* AKiPhoneUserSettingsVC.xib */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -389,7 +381,6 @@
 				BA5A274C172A368C006B5B25 /* README.md in Resources */,
 				BA5A2789172DEA4E006B5B25 /* AKiPhoneLandingVC.xib in Resources */,
 				BA7F319D172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib in Resources */,
-				BA7F31AC172E41690005AD47 /* AKiPhoneUserSettingsVC.xib in Resources */,
 				BA7F31B6172E46530005AD47 /* AKiPadLandingVC.xib in Resources */,
 				BA7F31B9172E4D910005AD47 /* Default-Landscape@2x.png in Resources */,
 				BA7F31BB172E4DCD0005AD47 /* Default-568h@2x.png in Resources */,
@@ -436,7 +427,6 @@
 				BA5A2784172DDE17006B5B25 /* AKUser.m in Sources */,
 				BA5A2788172DEA4E006B5B25 /* AKiPhoneLandingVC.m in Sources */,
 				BA7F319C172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m in Sources */,
-				BA7F31AB172E41690005AD47 /* AKiPhoneUserSettingsVC.m in Sources */,
 				BA7F31B5172E46530005AD47 /* AKiPadLandingVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

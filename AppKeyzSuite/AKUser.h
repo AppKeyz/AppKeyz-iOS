@@ -20,6 +20,14 @@
     BOOL didNotRegister;
     BOOL isLoggedIn;
     NSString* deviceId;
+    NSString* gender;
+    NSString* age;
+    NSString* custom1;
+    NSString* custom2;
+    NSString* custom3;
+    NSString* custom4;
+    NSString* custom5;
+    NSString* custom6;
 }
 @property (strong) NSString* userNameFirst;
 @property (strong) NSString* userNameLast;
@@ -32,6 +40,14 @@
 @property (assign) BOOL isLoggedIn;
 @property (assign) BOOL didNotRegister;
 @property (strong) NSString* deviceId;
+@property (strong) NSString* gender;
+@property (strong) NSString* age;
+@property (strong) NSString* custom1;
+@property (strong) NSString* custom2;
+@property (strong) NSString* custom3;
+@property (strong) NSString* custom4;
+@property (strong) NSString* custom5;
+@property (strong) NSString* custom6;
 
 + (AKUser*)shared;
 - (void)saveSettings;

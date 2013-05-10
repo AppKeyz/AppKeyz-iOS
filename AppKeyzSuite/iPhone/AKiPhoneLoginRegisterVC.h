@@ -23,6 +23,7 @@ typedef enum tag_ControllerMode {
     
     BOOL login;
     UITextField* fieldText;
+    UITextField* currentTextfield;
     
     AKUser* user;
     AppKeyz* appKeyz;
@@ -30,6 +31,10 @@ typedef enum tag_ControllerMode {
     NSArray* registerFields, *registerFieldLabels;
     
     UIView* footerView;
+    
+    NSString* newEmail;
+    NSString* newPassword;    
+    
 }
 @property(assign)ControllerMode controllerMode;
 @property(strong)IBOutlet UIImageView* bgImage;

@@ -10,11 +10,13 @@
 
 @class AppKeyz;
 
-@interface ViewController : UIViewController {
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     AppKeyz* appKeyz;
     
     NSString* testEmail;
     NSString* testPassword;
+    
+    IBOutlet UITableView* samplesTableView;
 }
 
 //User Actions

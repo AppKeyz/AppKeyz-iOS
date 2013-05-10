@@ -212,46 +212,54 @@
                             break;
                         case 4:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.text = user.age;
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
                                 cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                         case 5:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.text = user.gender;
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
                                 cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                         case 6:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.text = user.custom1;
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
                                 cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                         case 7:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.text = user.custom2;
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
                                 cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                         case 8:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.text = user.custom3;
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
                                 cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                         case 9:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.text = user.custom4;
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
                                 cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                         case 10:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.text = user.custom5;
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
                                 cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
                             break;
                         case 11:
                             if (indexPath.row-4 <= [registerFieldLabels count]-1) {
+                                fieldText.text = user.custom6;
                                 fieldText.placeholder = [registerFieldLabels objectAtIndex:indexPath.row-4];
                                 cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                             }
@@ -317,6 +325,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section==1) {
+        [currentTextfield resignFirstResponder];
         switch (controllerMode) {
             case loginMode:
                 [self loginUser];
@@ -351,6 +360,7 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    currentTextfield = textField;
     if ([[UIDevice currentDevice]  orientation] == UIInterfaceOrientationPortrait) {
         loginRegTableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44-216.0);
     } else {
@@ -369,8 +379,56 @@
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     
+    NSIndexPath* indexPath = [loginRegTableView indexPathForCell:textField.superview.superview];
+    if (controllerMode==editMode && indexPath.row==2)
+        newEmail = textField.text;
+    else if (controllerMode==editMode && indexPath.row==3)
+        newPassword = textField.text;
+    else
+        [self saveToUserField:indexPath.row withString:textField.text];
+    
+    currentTextfield = nil;
     
     return true;
+}
+
+-(void)saveToUserField:(NSInteger)row withString:(NSString*)string
+{   switch (controllerMode) {
+        case editMode:
+        case registerMode:
+        switch (row) {
+            case 0:
+                user.userNameFirst = string;
+                break;
+            case 1:
+                user.userNameLast = string;
+                break;
+            case 2:
+                user.userEmail = string;
+                break;
+            case 3:
+                user.userPassword = string;
+                break;
+            case 4:
+                user.age = string;
+                break;
+            case 5:
+                user.gender = string;
+                break;
+        }
+        break;
+    case loginMode:
+        switch (row) {
+            case 0:
+                user.userEmail = string;
+                break;
+            case 1:
+                user.userPassword = string;
+                break;
+        }
+        break;
+    }
+        [user saveSettings];
 }
 
 -(void)moveView:(float)offset
@@ -386,14 +444,23 @@
 -(void)registerUser
 {
     
-    user.userNameFirst = [self captureString:0];
-    user.userNameLast = [self captureString:1];
-    user.userEmail = [self captureString:2];
-    user.userPassword = [self captureString:3];
-    
-    if (IsValidEmail(user.userEmail)==YES && [user.userPassword length]>=6) {
+    if (IsValidEmail([self captureString:2])==YES && [[self captureString:3] length]>=6) {
 
-        [appKeyz createUserWithEmail:user.userEmail password:user.userPassword fname:user.userNameFirst lname:user.userNameLast lat:@"" lon:@"" active:true];
+        [appKeyz createUserWithEmail:user.userEmail
+                            password:user.userPassword
+                               fname:user.userNameFirst
+                               lname:user.userNameLast
+                                 lat:@""
+                                 lon:@""
+                              active:true
+                                 age:user.age
+                                 sex:user.gender
+                             custom1:user.custom1
+                             custom2:user.custom2
+                             custom3:user.custom3
+                             custom4:user.custom4
+                             custom5:user.custom5
+                             custom6:user.custom6];
         
     } else if (IsValidEmail(user.userEmail)==NO) {
         UIAlertView* badEmail = [[UIAlertView alloc] initWithTitle:@"Invalid Email"
@@ -417,11 +484,8 @@
 
 -(void)loginUser
 {
-    user.userEmail = [self captureString:0];
-    user.userPassword = [self captureString:1];
     
-    if ([self captureString:0].length>0 && [self captureString:1].length > 0) {
-        [user saveSettings];
+    if (user.userEmail.length>0 && user.userPassword.length>0) {
         [appKeyz readUserWithEmail:user.userEmail password:user.userPassword];
     } else {
         UIAlertView* noStuff = [[UIAlertView alloc] initWithTitle:@"Invalid Email or Password"
@@ -435,11 +499,8 @@
 
 -(void)loginUserVerified
 {
-    user.userEmail = [self captureString:0];
-    user.userPassword = [self captureString:1];
     
-    if ([self captureString:0].length>0 && [self captureString:1].length > 0) {
-        [user saveSettings];
+    if (user.userEmail.length>0 && user.userPassword.length>0) {
         [appKeyz readUserVerifiedWithEmail:user.userEmail password:user.userPassword];
     } else {
         UIAlertView* noStuff = [[UIAlertView alloc] initWithTitle:@"Invalid Email or Password"
@@ -454,25 +515,39 @@
 
 -(void)updateUser
 {
-    /*
-    user.userNameFirst = [self captureString:0];
-    user.userNameLast = [self captureString:1];
-    user.userEmail = [self captureString:2];
-    user.userPassword = [self captureString:3];
-    */
+    if (newPassword.length==0)
+        newPassword = user.userPassword;
+    if (newEmail.length==0)
+        newEmail = user.userEmail;
     
-    if (IsValidEmail([self captureString:2])==YES && [[self captureString:3] length]>=6) {
+    if (IsValidEmail(newEmail)==YES && [newPassword length]>=6) {
         
-        [appKeyz updateUserWithEmail:user.userEmail password:user.userPassword newemail:[self captureString:2] newpassword:[self captureString:3] fname:[self captureString:0] lname:[self captureString:1] lat:@"" lon:@"" active:true];
+        [appKeyz updateUserWithEmail:user.userEmail
+                            password:user.userPassword
+                            newemail:newEmail
+                         newpassword:newPassword
+                               fname:user.userNameFirst
+                               lname:user.userNameLast
+                                 lat:@""
+                                 lon:@""
+                              active:true
+                                 age:user.age
+                                 sex:user.gender
+                             custom1:user.custom1
+                             custom2:user.custom2
+                             custom3:user.custom3
+                             custom4:user.custom4
+                             custom5:user.custom5
+                             custom6:user.custom6];
         
-    } else if (IsValidEmail(user.userEmail)==NO) {
+    } else if (IsValidEmail(newEmail)==NO) {
         UIAlertView* badEmail = [[UIAlertView alloc] initWithTitle:@"Invalid Email"
                                                            message:@"Please enter a valid email."
                                                           delegate:nil
                                                  cancelButtonTitle:@"OK"
                                                  otherButtonTitles: nil];
         [badEmail show];
-    } else if ([user.userPassword length] < 6) {
+    } else if ([newPassword length] < 6) {
         UIAlertView* pwLength = [[UIAlertView alloc] initWithTitle:@"Passwords Too Short"
                                                            message:@"Password must be at least 6 characters."
                                                           delegate:nil
@@ -516,7 +591,8 @@
 
 -(NSString*)captureString:(int)row
 {
-    UITableViewCell* cell = (id)[loginRegTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+    UITableViewCell* cell = nil;
+    cell = (UITableViewCell*)[loginRegTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
     UITextField* tf = [cell.contentView viewWithTag:FIELD_TEXT_TAG];
     NSLog(@"%@", tf.text);
     return tf.text;
