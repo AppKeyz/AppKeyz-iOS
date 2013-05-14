@@ -8,12 +8,14 @@
 
 #import "AKiPhoneLoginRegisterVC.h"
 
+#define FIELD_TEXT_TAG 10
+
 @interface AKiPhoneLoginRegisterVC ()
 
 @end
 
 @implementation AKiPhoneLoginRegisterVC
-@synthesize controllerMode, bgImage;
+@synthesize controllerMode, bgImage, loginRegTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,6 +44,11 @@
                                                  selector: @selector(dismiss:)
                                                      name: @"AKupdateuser"
                                                    object: nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(orientationChanged:)
+                                                     name:@"UIDeviceOrientationDidChangeNotification"
+                                                   object: nil];
 
     }
     return self;
@@ -58,11 +65,18 @@
     
     registerFields = [[NSArray alloc] initWithObjects:@"age", @"sex", @"custom1", @"custom2", @"custom3", @"custom4", @"custom5", @"custom6", nil];
 
-    
-    if (UIScreen.mainScreen.bounds.size.height == 568)
-        self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
-    else self.bgImage.image = [UIImage imageNamed:@"Default.png"];
-    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
+            self.bgImage.image = [UIImage imageNamed:@"Default-Portrait.png"];
+        } else {
+            self.bgImage.image = [UIImage imageNamed:@"Default-Landscape.png"];
+        }
+    } else {
+        self.bgImage.image = [UIImage imageNamed:@"Default.png"];
+        if (UIScreen.mainScreen.bounds.size.height == 568) self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
+    }
+
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     
@@ -74,14 +88,100 @@
         self.navigationItem.leftBarButtonItem = cancelButton;
     }
     
-    loginRegTableView.delegate = self;
-    loginRegTableView.dataSource = self;
+    self.loginRegTableView.delegate = self;
+    self.loginRegTableView.dataSource = self;
+    
+    currentTextfield = UITextField.new;
+    
+    //reloadTv = TRUE;
+    if (controllerMode==editMode) [self viewDidAppear:true];
+}
+
+
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:false];
+    
+    UITextField* tf = (UITextField*)[[self.loginRegTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView viewWithTag:FIELD_TEXT_TAG];
+    [tf becomeFirstResponder];
+    
+    NSLog(@"%d", [[UIDevice currentDevice] orientation]);
+    
+    float tableHeight = 200.0;
+    float topOffset = 44.0;
+    float width = 320.0;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
+            tableHeight = 352.0;
+            self.bgImage.image = [UIImage imageNamed:@"Default-Portrait.png"];
+        } else {
+            tableHeight = 696.0;
+            self.bgImage.image = [UIImage imageNamed:@"Default-Landscape.png"];
+        }
+    } else {
+        if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
+            tableHeight = 200.0;
+            width = 320.0;
+            if (UIScreen.mainScreen.bounds.size.height == 568) tableHeight = 288.0;
+        } else {
+            topOffset = 34.0;
+            tableHeight = 106.0;
+            width = 480.0;
+            self.bgImage.image = [UIImage imageNamed:@"Default.png"];
+            if (UIScreen.mainScreen.bounds.size.width == 568) {
+                tableHeight = 194.0;
+                width = 568.0;
+                self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
+            }
+        }
+    }
+    float xCoord = (self.view.frame.size.width - width)/2;
+    self.loginRegTableView.frame = CGRectMake(xCoord, topOffset, width, tableHeight);
+
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)orientationChanged:(id)sender
+{
+    NSLog(@"Did change orientation");
+    float tableHeight = 200.0;
+    float topOffset = 44.0;
+    float width = 320.0;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
+            tableHeight = 352.0;
+        } else {
+            tableHeight = 696.0;
+        }
+    } else {
+        if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
+            tableHeight = 200.0;
+            width = 320.0;
+            if (UIScreen.mainScreen.bounds.size.height == 568) tableHeight = 288.0;
+        } else {
+            topOffset = 34.0;
+            tableHeight = 106.0;
+            width = 480.0;
+            if (UIScreen.mainScreen.bounds.size.width == 568) { tableHeight = 194.0; width = 568.0; }
+        }
+    }
+    float xCoord = (self.view.frame.size.width - width)/2;
+    self.loginRegTableView.frame = CGRectMake(xCoord, topOffset, width, tableHeight);
+
+    //UITextField* tf = (UITextField*)[[self.loginRegTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView viewWithTag:FIELD_TEXT_TAG];
+    //[tf becomeFirstResponder];
 }
 
 #pragma mark - Table view data source
@@ -148,7 +248,7 @@
     return footerView;
 }
 
-#define FIELD_TEXT_TAG 10
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -156,6 +256,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.backgroundColor = [UIColor colorWithWhite:0.25 alpha:0.75];
         
         fieldText = [[UITextField alloc] initWithFrame:CGRectMake(50.0, 12.5, 410.0, 20.0)];
         fieldText.tag = FIELD_TEXT_TAG;
@@ -168,12 +271,12 @@
         fieldText.delegate = self;
         [cell.contentView addSubview:fieldText];
         
+        UIView* cellView = cell.backgroundView;
+        cell.backgroundView = cellView;
+        
     } else {
         fieldText = (UITextField*)[cell.contentView viewWithTag:FIELD_TEXT_TAG];
     }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    cell.backgroundColor = [UIColor colorWithWhite:0.25 alpha:0.75];
     
     switch (indexPath.section)
     {
@@ -185,6 +288,7 @@
                     fieldText.secureTextEntry = NO;
                     fieldText.keyboardType = UIKeyboardTypeDefault;
                     fieldText.autocapitalizationType = UITextAutocapitalizationTypeWords;
+                    fieldText.enabled = true;
                     switch (indexPath.row) {
                         case 0:
                             fieldText.placeholder = @"First Name";
@@ -325,7 +429,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section==1) {
-        [currentTextfield resignFirstResponder];
+        //[currentTextfield resignFirstResponder];
+        //[self saveFromCurrentField];
         switch (controllerMode) {
             case loginMode:
                 [self loginUser];
@@ -348,27 +453,26 @@
     if ([string isEqualToString:@"\n"]) {
         //[self moveView:0];
         [textField resignFirstResponder];
-        if ([[UIDevice currentDevice]  orientation] == UIInterfaceOrientationPortrait) {
-            loginRegTableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44);
-        } else {
-            loginRegTableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44);
-        }
         return false;
     }
+    UITableViewCell* cell = (UITableViewCell*)textField.superview.superview;
+    NSIndexPath* indexPath = [self.loginRegTableView indexPathForCell:cell];
+    if (controllerMode==editMode && indexPath.row==2)
+        newEmail = [NSString stringWithFormat:@"%@%@",textField.text, string];
+    else if (controllerMode==editMode && indexPath.row==3)
+        newPassword = [NSString stringWithFormat:@"%@%@",textField.text, string];
+    else
+        [self saveToUserField:indexPath.row withString:[NSString stringWithFormat:@"%@%@",textField.text, string]];
     return true;
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+
     currentTextfield = textField;
-    if ([[UIDevice currentDevice]  orientation] == UIInterfaceOrientationPortrait) {
-        loginRegTableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44-216.0);
-    } else {
-        loginRegTableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44-162.0);
-    }
-    NSLog(@"textfield %f",textField.superview.superview.frame.origin.y);
-    
-    NSIndexPath* indexPath = [loginRegTableView indexPathForCell:textField.superview.superview];
+
+    UITableViewCell* cell = (UITableViewCell*)textField.superview.superview;
+    NSIndexPath* indexPath = [self.loginRegTableView indexPathForCell:cell];
     
     //[self moveView:textField.superview.superview.frame.origin.y];
     [loginRegTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:true];
@@ -378,8 +482,9 @@
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    
-    NSIndexPath* indexPath = [loginRegTableView indexPathForCell:textField.superview.superview];
+    /*
+    UITableViewCell* cell = (UITableViewCell*)textField.superview.superview;
+    NSIndexPath* indexPath = [self.loginRegTableView indexPathForCell:cell];
     if (controllerMode==editMode && indexPath.row==2)
         newEmail = textField.text;
     else if (controllerMode==editMode && indexPath.row==3)
@@ -388,12 +493,28 @@
         [self saveToUserField:indexPath.row withString:textField.text];
     
     currentTextfield = nil;
-    
+    currentTextfield = UITextField.new;
+    */
     return true;
 }
 
+-(void)saveFromCurrentField
+{
+    if (currentTextfield!=nil) {
+        UITableViewCell* cell = (UITableViewCell*)currentTextfield.superview.superview;
+        NSIndexPath* indexPath = [self.loginRegTableView indexPathForCell:cell];
+        if (controllerMode==editMode && indexPath.row==2)
+            newEmail = currentTextfield.text;
+        else if (controllerMode==editMode && indexPath.row==3)
+            newPassword = currentTextfield.text;
+        else
+            [self saveToUserField:indexPath.row withString:currentTextfield.text];
+    }
+}
+
 -(void)saveToUserField:(NSInteger)row withString:(NSString*)string
-{   switch (controllerMode) {
+{
+    switch (controllerMode) {
         case editMode:
         case registerMode:
         switch (row) {
@@ -428,7 +549,9 @@
         }
         break;
     }
-        [user saveSettings];
+    [user saveSettings];
+    NSLog(@"%@", string);
+    [user inspect];
 }
 
 -(void)moveView:(float)offset
@@ -444,7 +567,7 @@
 -(void)registerUser
 {
     
-    if (IsValidEmail([self captureString:2])==YES && [[self captureString:3] length]>=6) {
+    if (IsValidEmail(user.userEmail)==YES && [user.userPassword length]>=6) {
 
         [appKeyz createUserWithEmail:user.userEmail
                             password:user.userPassword
@@ -587,15 +710,6 @@
             }
             break;
     }
-}
-
--(NSString*)captureString:(int)row
-{
-    UITableViewCell* cell = nil;
-    cell = (UITableViewCell*)[loginRegTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
-    UITextField* tf = [cell.contentView viewWithTag:FIELD_TEXT_TAG];
-    NSLog(@"%@", tf.text);
-    return tf.text;
 }
 
 - (IBAction)dismiss:(id)sender

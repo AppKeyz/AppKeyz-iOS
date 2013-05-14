@@ -8,6 +8,9 @@
 
 #import "AKiPhoneLandingVC.h"
 
+#define kWhyDiagWidth 280.0
+#define kWhyDiagHeight 312.0
+
 @interface AKiPhoneLandingVC ()
 
 @end
@@ -20,6 +23,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(orientationChanged:)
+                                                     name:@"UIDeviceOrientationDidChangeNotification"
+                                                   object: nil];
     }
     return self;
 }
@@ -27,33 +34,62 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    if (UIScreen.mainScreen.bounds.size.height == 568)
-        self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
-    else self.bgImage.image = [UIImage imageNamed:@"Default.png"];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        if ([[UIDevice currentDevice] orientation]==UIDeviceOrientationPortrait) {
+            self.bgImage.image = [UIImage imageNamed:@"Default-Portrait.png"];
+        } else {
+            self.bgImage.image = [UIImage imageNamed:@"Default-Landscape.png"];
+        }
+    } else {
+        if (UIScreen.mainScreen.bounds.size.height == 568)
+            self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
+        else self.bgImage.image = [UIImage imageNamed:@"Default.png"];
+    }
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     //self.navigationController.navigationBar.hidden = YES;
 
     loginTableView.delegate = self;
     loginTableView.dataSource = self;
+    loginWindow.layer.cornerRadius = 10;
     
-    popupBox = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 280, 312)];
-    popupBox.borderStyle = UITextBorderStyleRoundedRect;
-    popupBox.enabled = false;
-    [popupView addSubview:popupBox];
-    [popupView addSubview:why];
-    [popupView addSubview:close];
-    [popupView addSubview:explain];
-    
+    popupView.layer.cornerRadius = 10;
     popupView.hidden = true;
     popupBackground.hidden = true;
+    UIImage* buttonImage = [[UIImage imageNamed:@"blackButton.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
+    UIImage *buttonImageHighlight = [[UIImage imageNamed:@"blackButtonHighlight.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
+    [close setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    [close setBackgroundImage:buttonImageHighlight forState:UIControlStateHighlighted];
+    [close setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [whyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //[whyButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    [noThanksButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //[noThanksButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)orientationChanged:(id)sender
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        if ([[UIDevice currentDevice] orientation]==UIDeviceOrientationPortrait) {
+            self.bgImage.image = [UIImage imageNamed:@"Default-Portrait.png"];
+        } else {
+            self.bgImage.image = [UIImage imageNamed:@"Default-Landscape.png"];
+        }
+    } else {
+        if (UIScreen.mainScreen.bounds.size.height == 568)
+            self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
+        else self.bgImage.image = [UIImage imageNamed:@"Default.png"];
+    }
 }
 
 #pragma mark - Table view data source
@@ -113,7 +149,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AKiPhoneLoginRegisterVC* akilrvc = AKiPhoneLoginRegisterVC.new;
+    AKiPhoneLoginRegisterVC* akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPhoneLoginRegisterVC" bundle:nil];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPadLoginRegisterVC" bundle:nil];
     
     switch (indexPath.row) {
         case 0:
@@ -132,8 +171,9 @@
 -(IBAction)whySignUp:(id)sender
 {
 
-    int marginleft = (self.view.bounds.size.width - popupView.frame.size.width)/2;
-    popupView.frame = CGRectMake(marginleft, self.view.bounds.size.height, popupView.frame.size.width, popupView.frame.size.height);
+    int marginleft = (self.view.bounds.size.width - kWhyDiagWidth)/2;
+    int margintop = (self.view.bounds.size.height - kWhyDiagHeight)/2;
+    popupView.frame = CGRectMake(marginleft, self.view.bounds.size.height, kWhyDiagWidth, kWhyDiagWidth);
     popupBackground.alpha = 0.0;
     
     popupView.hidden = NO;
@@ -142,20 +182,20 @@
     [UIView setAnimationDuration:0.4];
     popupBackground.alpha = 0.75;
     [popupView setAlpha:1.0];
-    popupView.frame = CGRectMake(20, 164, self.view.bounds.size.width, self.view.bounds.size.height);
+    popupView.frame = CGRectMake(marginleft, margintop, kWhyDiagWidth, kWhyDiagHeight);
     [UIView commitAnimations];
     [UIView setAnimationDuration:0.0];
 }
 
 -(IBAction)closePopover:(id)sender
 {
-    int marginleft = (self.view.bounds.size.width - 300)/2;
+    int marginleft = (self.view.bounds.size.width - kWhyDiagWidth)/2;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(onCompleteCancelPopup)];
     [popupBackground setAlpha:0.0];
-    popupView.frame = CGRectMake(marginleft, self.view.bounds.size.height, popupView.frame.size.width, popupView.frame.size.height);
+    popupView.frame = CGRectMake(marginleft, self.view.bounds.size.height, kWhyDiagWidth, kWhyDiagWidth);
     [UIView commitAnimations];
     [UIView setAnimationDuration:0.0];
 }

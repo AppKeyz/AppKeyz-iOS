@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA1F8A951741FFC300F91ECD /* blackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1F8A931741FFC300F91ECD /* blackButton@2x.png */; };
+		BA1F8A961741FFC300F91ECD /* blackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1F8A941741FFC300F91ECD /* blackButton.png */; };
+		BA1F8A991742006500F91ECD /* blackButtonHighlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1F8A971742006500F91ECD /* blackButtonHighlight@2x.png */; };
+		BA1F8A9A1742006500F91ECD /* blackButtonHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1F8A981742006500F91ECD /* blackButtonHighlight.png */; };
+		BA1F8A9F174205C600F91ECD /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1F8A9C174205C600F91ECD /* Default-Landscape.png */; };
+		BA1F8AA0174205C600F91ECD /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1F8A9D174205C600F91ECD /* Default-Portrait.png */; };
+		BA1F8AA41742063600F91ECD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1F8AA31742063600F91ECD /* Default@2x.png */; };
+		BA1F8AA71742088B00F91ECD /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1F8AA51742088B00F91ECD /* Default-Landscape@2x.png */; };
+		BA1F8AA81742088B00F91ECD /* Default-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1F8AA61742088B00F91ECD /* Default-Portrait@2x.png */; };
 		BA5A265A172A2E76006B5B25 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A2659172A2E76006B5B25 /* UIKit.framework */; };
 		BA5A265C172A2E76006B5B25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A265B172A2E76006B5B25 /* Foundation.framework */; };
 		BA5A265E172A2E76006B5B25 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A265D172A2E76006B5B25 /* CoreGraphics.framework */; };
@@ -14,7 +23,6 @@
 		BA5A2666172A2E76006B5B25 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5A2665172A2E76006B5B25 /* main.m */; };
 		BA5A266A172A2E76006B5B25 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5A2669172A2E76006B5B25 /* AppDelegate.m */; };
 		BA5A266C172A2E76006B5B25 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5A266B172A2E76006B5B25 /* Default.png */; };
-		BA5A266E172A2E76006B5B25 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA5A266D172A2E76006B5B25 /* Default@2x.png */; };
 		BA5A2673172A2E76006B5B25 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5A2672172A2E76006B5B25 /* ViewController.m */; };
 		BA5A2676172A2E76006B5B25 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA5A2674172A2E76006B5B25 /* ViewController_iPhone.xib */; };
 		BA5A2679172A2E76006B5B25 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA5A2677172A2E76006B5B25 /* ViewController_iPad.xib */; };
@@ -40,9 +48,6 @@
 		BA72F2DE17322D6F007D3C62 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72F2DC17322D6F007D3C62 /* icon@2x.png */; };
 		BA7F319C172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F319A172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m */; };
 		BA7F319D172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7F319B172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib */; };
-		BA7F31B5172E46530005AD47 /* AKiPadLandingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F31B3172E46520005AD47 /* AKiPadLandingVC.m */; };
-		BA7F31B6172E46530005AD47 /* AKiPadLandingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31B4172E46520005AD47 /* AKiPadLandingVC.xib */; };
-		BA7F31B9172E4D910005AD47 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31B8172E4D910005AD47 /* Default-Landscape@2x.png */; };
 		BA7F31BB172E4DCD0005AD47 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31BA172E4DCD0005AD47 /* Default-568h@2x.png */; };
 		BA7F31C8172FA18A0005AD47 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C0172FA18A0005AD47 /* plus.png */; };
 		BA7F31C9172FA18A0005AD47 /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C1172FA18A0005AD47 /* plus@2x.png */; };
@@ -54,11 +59,24 @@
 		BA7F31CF172FA18A0005AD47 /* inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31C7172FA18A0005AD47 /* inbox@2x.png */; };
 		BA7F31D11730E2AA0005AD47 /* User.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31D01730E2AA0005AD47 /* User.plist */; };
 		BA8C27C21738C4A9001BF7C3 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = BA8C27C11738C4A9001BF7C3 /* blank.png */; };
+		BAB6BB231740656C00E555EF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB6BB221740656C00E555EF /* QuartzCore.framework */; };
+		BAB6BB25174075F000E555EF /* AKiPadLandingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAB6BB24174075F000E555EF /* AKiPadLandingVC.xib */; };
+		BAB6BB2717407A1D00E555EF /* AKiPadLoginRegisterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAB6BB2617407A1D00E555EF /* AKiPadLoginRegisterVC.xib */; };
 		BAEAD32A1736FD1800C0B7F1 /* app_keyz_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEAD3201736FD1800C0B7F1 /* app_keyz_button.png */; };
 		BAEAD32B1736FD1800C0B7F1 /* app_keyz_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BAEAD3211736FD1800C0B7F1 /* app_keyz_button@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA1F8A931741FFC300F91ECD /* blackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackButton@2x.png"; sourceTree = "<group>"; };
+		BA1F8A941741FFC300F91ECD /* blackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackButton.png; sourceTree = "<group>"; };
+		BA1F8A971742006500F91ECD /* blackButtonHighlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackButtonHighlight@2x.png"; sourceTree = "<group>"; };
+		BA1F8A981742006500F91ECD /* blackButtonHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackButtonHighlight.png; sourceTree = "<group>"; };
+		BA1F8A9C174205C600F91ECD /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
+		BA1F8A9D174205C600F91ECD /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		BA1F8AA11742061600F91ECD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		BA1F8AA31742063600F91ECD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		BA1F8AA51742088B00F91ECD /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x.png"; sourceTree = "<group>"; };
+		BA1F8AA61742088B00F91ECD /* Default-Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x.png"; sourceTree = "<group>"; };
 		BA5A2656172A2E76006B5B25 /* AppKeyz Sample Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppKeyz Sample Application.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5A2659172A2E76006B5B25 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BA5A265B172A2E76006B5B25 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -70,7 +88,6 @@
 		BA5A2668172A2E76006B5B25 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BA5A2669172A2E76006B5B25 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BA5A266B172A2E76006B5B25 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		BA5A266D172A2E76006B5B25 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BA5A2671172A2E76006B5B25 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		BA5A2672172A2E76006B5B25 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		BA5A2675172A2E76006B5B25 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -114,10 +131,6 @@
 		BA7F3199172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKiPhoneLoginRegisterVC.h; path = iPhone/AKiPhoneLoginRegisterVC.h; sourceTree = "<group>"; };
 		BA7F319A172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKiPhoneLoginRegisterVC.m; path = iPhone/AKiPhoneLoginRegisterVC.m; sourceTree = "<group>"; };
 		BA7F319B172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKiPhoneLoginRegisterVC.xib; path = iPhone/AKiPhoneLoginRegisterVC.xib; sourceTree = "<group>"; };
-		BA7F31B2172E46520005AD47 /* AKiPadLandingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKiPadLandingVC.h; path = iPad/AKiPadLandingVC.h; sourceTree = "<group>"; };
-		BA7F31B3172E46520005AD47 /* AKiPadLandingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKiPadLandingVC.m; path = iPad/AKiPadLandingVC.m; sourceTree = "<group>"; };
-		BA7F31B4172E46520005AD47 /* AKiPadLandingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKiPadLandingVC.xib; path = iPad/AKiPadLandingVC.xib; sourceTree = "<group>"; };
-		BA7F31B8172E4D910005AD47 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x.png"; sourceTree = "<group>"; };
 		BA7F31BA172E4DCD0005AD47 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		BA7F31C0172FA18A0005AD47 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		BA7F31C1172FA18A0005AD47 /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
@@ -129,6 +142,9 @@
 		BA7F31C7172FA18A0005AD47 /* inbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inbox@2x.png"; sourceTree = "<group>"; };
 		BA7F31D01730E2AA0005AD47 /* User.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = User.plist; sourceTree = "<group>"; };
 		BA8C27C11738C4A9001BF7C3 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
+		BAB6BB221740656C00E555EF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BAB6BB24174075F000E555EF /* AKiPadLandingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKiPadLandingVC.xib; path = iPhone/AKiPadLandingVC.xib; sourceTree = "<group>"; };
+		BAB6BB2617407A1D00E555EF /* AKiPadLoginRegisterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKiPadLoginRegisterVC.xib; path = iPhone/AKiPadLoginRegisterVC.xib; sourceTree = "<group>"; };
 		BAEAD3201736FD1800C0B7F1 /* app_keyz_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_keyz_button.png; sourceTree = "<group>"; };
 		BAEAD3211736FD1800C0B7F1 /* app_keyz_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_keyz_button@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAB6BB231740656C00E555EF /* QuartzCore.framework in Frameworks */,
 				BA5A265A172A2E76006B5B25 /* UIKit.framework in Frameworks */,
 				BA5A265C172A2E76006B5B25 /* Foundation.framework in Frameworks */,
 				BA5A265E172A2E76006B5B25 /* CoreGraphics.framework in Frameworks */,
@@ -150,6 +167,7 @@
 		BA5A264D172A2E75006B5B25 = {
 			isa = PBXGroup;
 			children = (
+				BA1F8AA31742063600F91ECD /* Default@2x.png */,
 				BA5A2724172A368C006B5B25 /* AppKeyz */,
 				BA5A2686172A2F6E006B5B25 /* AppKeyzSuite */,
 				BA5A265F172A2E76006B5B25 /* AppKeyz Sample Application */,
@@ -169,6 +187,7 @@
 		BA5A2658172A2E76006B5B25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BAB6BB221740656C00E555EF /* QuartzCore.framework */,
 				BA5A2659172A2E76006B5B25 /* UIKit.framework */,
 				BA5A265B172A2E76006B5B25 /* Foundation.framework */,
 				BA5A265D172A2E76006B5B25 /* CoreGraphics.framework */,
@@ -193,16 +212,19 @@
 		BA5A2660172A2E76006B5B25 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BA1F8AA51742088B00F91ECD /* Default-Landscape@2x.png */,
+				BA1F8AA61742088B00F91ECD /* Default-Portrait@2x.png */,
+				BA1F8AA11742061600F91ECD /* Default@2x.png */,
+				BA1F8A9C174205C600F91ECD /* Default-Landscape.png */,
+				BA1F8A9D174205C600F91ECD /* Default-Portrait.png */,
 				BA72F2DB17322D6F007D3C62 /* icon.png */,
 				BA72F2DC17322D6F007D3C62 /* icon@2x.png */,
 				BA7F31BA172E4DCD0005AD47 /* Default-568h@2x.png */,
-				BA7F31B8172E4D910005AD47 /* Default-Landscape@2x.png */,
 				BA5A2661172A2E76006B5B25 /* AppKeyz Sample Application-Info.plist */,
 				BA5A2662172A2E76006B5B25 /* InfoPlist.strings */,
 				BA5A2665172A2E76006B5B25 /* main.m */,
 				BA5A2667172A2E76006B5B25 /* AppKeyz Sample Application-Prefix.pch */,
 				BA5A266B172A2E76006B5B25 /* Default.png */,
-				BA5A266D172A2E76006B5B25 /* Default@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -216,7 +238,6 @@
 				BA5A2782172DDE17006B5B25 /* AKUser.h */,
 				BA5A2783172DDE17006B5B25 /* AKUser.m */,
 				BA5A278A172DEA57006B5B25 /* iPhone */,
-				BA7F31B7172E465A0005AD47 /* iPad */,
 			);
 			path = AppKeyzSuite;
 			sourceTree = "<group>";
@@ -285,26 +306,22 @@
 				BA5A2785172DEA4E006B5B25 /* AKiPhoneLandingVC.h */,
 				BA5A2786172DEA4E006B5B25 /* AKiPhoneLandingVC.m */,
 				BA5A2787172DEA4E006B5B25 /* AKiPhoneLandingVC.xib */,
+				BAB6BB24174075F000E555EF /* AKiPadLandingVC.xib */,
 				BA7F3199172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.h */,
 				BA7F319A172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m */,
 				BA7F319B172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib */,
+				BAB6BB2617407A1D00E555EF /* AKiPadLoginRegisterVC.xib */,
 			);
 			name = iPhone;
-			sourceTree = "<group>";
-		};
-		BA7F31B7172E465A0005AD47 /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-				BA7F31B2172E46520005AD47 /* AKiPadLandingVC.h */,
-				BA7F31B3172E46520005AD47 /* AKiPadLandingVC.m */,
-				BA7F31B4172E46520005AD47 /* AKiPadLandingVC.xib */,
-			);
-			name = iPad;
 			sourceTree = "<group>";
 		};
 		BA7F31BF172FA18A0005AD47 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BA1F8A971742006500F91ECD /* blackButtonHighlight@2x.png */,
+				BA1F8A981742006500F91ECD /* blackButtonHighlight.png */,
+				BA1F8A931741FFC300F91ECD /* blackButton@2x.png */,
+				BA1F8A941741FFC300F91ECD /* blackButton.png */,
 				BA8C27C11738C4A9001BF7C3 /* blank.png */,
 				BAEAD3201736FD1800C0B7F1 /* app_keyz_button.png */,
 				BAEAD3211736FD1800C0B7F1 /* app_keyz_button@2x.png */,
@@ -374,15 +391,12 @@
 			files = (
 				BA5A2664172A2E76006B5B25 /* InfoPlist.strings in Resources */,
 				BA5A266C172A2E76006B5B25 /* Default.png in Resources */,
-				BA5A266E172A2E76006B5B25 /* Default@2x.png in Resources */,
 				BA5A2676172A2E76006B5B25 /* ViewController_iPhone.xib in Resources */,
 				BA5A2679172A2E76006B5B25 /* ViewController_iPad.xib in Resources */,
 				BA5A274B172A368C006B5B25 /* LICENSE in Resources */,
 				BA5A274C172A368C006B5B25 /* README.md in Resources */,
 				BA5A2789172DEA4E006B5B25 /* AKiPhoneLandingVC.xib in Resources */,
 				BA7F319D172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib in Resources */,
-				BA7F31B6172E46530005AD47 /* AKiPadLandingVC.xib in Resources */,
-				BA7F31B9172E4D910005AD47 /* Default-Landscape@2x.png in Resources */,
 				BA7F31BB172E4DCD0005AD47 /* Default-568h@2x.png in Resources */,
 				BA7F31C8172FA18A0005AD47 /* plus.png in Resources */,
 				BA7F31C9172FA18A0005AD47 /* plus@2x.png in Resources */,
@@ -398,6 +412,17 @@
 				BAEAD32A1736FD1800C0B7F1 /* app_keyz_button.png in Resources */,
 				BAEAD32B1736FD1800C0B7F1 /* app_keyz_button@2x.png in Resources */,
 				BA8C27C21738C4A9001BF7C3 /* blank.png in Resources */,
+				BAB6BB25174075F000E555EF /* AKiPadLandingVC.xib in Resources */,
+				BAB6BB2717407A1D00E555EF /* AKiPadLoginRegisterVC.xib in Resources */,
+				BA1F8A951741FFC300F91ECD /* blackButton@2x.png in Resources */,
+				BA1F8A961741FFC300F91ECD /* blackButton.png in Resources */,
+				BA1F8A991742006500F91ECD /* blackButtonHighlight@2x.png in Resources */,
+				BA1F8A9A1742006500F91ECD /* blackButtonHighlight.png in Resources */,
+				BA1F8A9F174205C600F91ECD /* Default-Landscape.png in Resources */,
+				BA1F8AA0174205C600F91ECD /* Default-Portrait.png in Resources */,
+				BA1F8AA41742063600F91ECD /* Default@2x.png in Resources */,
+				BA1F8AA71742088B00F91ECD /* Default-Landscape@2x.png in Resources */,
+				BA1F8AA81742088B00F91ECD /* Default-Portrait@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +452,6 @@
 				BA5A2784172DDE17006B5B25 /* AKUser.m in Sources */,
 				BA5A2788172DEA4E006B5B25 /* AKiPhoneLandingVC.m in Sources */,
 				BA7F319C172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m in Sources */,
-				BA7F31B5172E46530005AD47 /* AKiPadLandingVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,8 +569,8 @@
 				INFOPLIST_FILE = "AppKeyz Sample Application/AppKeyz Sample Application-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "EA5A85B1-C402-4924-9373-CE68F130327A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EA5A85B1-C402-4924-9373-CE68F130327A";
+				PROVISIONING_PROFILE = "8F60FA3A-D7ED-4E8B-837B-455D50013EE3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8F60FA3A-D7ED-4E8B-837B-455D50013EE3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

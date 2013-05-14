@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "AKiPhoneLandingVC.h"
-#import "AKiPadLandingVC.h"
 #import "AKiPhoneLoginRegisterVC.h"
 
 @interface AppKeyzSuite : NSObject  {

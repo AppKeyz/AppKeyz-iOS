@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "AKiPhoneLoginRegisterVC.h"
 
 @interface AKiPhoneLandingVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
     IBOutlet UITableView* loginTableView;
     UIImageView* bgImage;
+    
+    IBOutlet UIView* loginWindow;
     
     IBOutlet UIView* popupBackground;
     IBOutlet UIView* popupView;
@@ -20,6 +23,9 @@
     IBOutlet UILabel* why;
     IBOutlet UIButton* close;
     IBOutlet UITextView* explain;
+    
+    IBOutlet UIButton* whyButton;
+    IBOutlet UIButton* noThanksButton;
     
     UITextField* fieldText;
     
