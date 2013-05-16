@@ -44,6 +44,7 @@
 		BA5A2784172DDE17006B5B25 /* AKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5A2783172DDE17006B5B25 /* AKUser.m */; };
 		BA5A2788172DEA4E006B5B25 /* AKiPhoneLandingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5A2786172DEA4E006B5B25 /* AKiPhoneLandingVC.m */; };
 		BA5A2789172DEA4E006B5B25 /* AKiPhoneLandingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA5A2787172DEA4E006B5B25 /* AKiPhoneLandingVC.xib */; };
+		BA6877BD17452F05008C3EEE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BA6877BC17452F05008C3EEE /* README.md */; };
 		BA72F2DD17322D6F007D3C62 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72F2DB17322D6F007D3C62 /* icon.png */; };
 		BA72F2DE17322D6F007D3C62 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72F2DC17322D6F007D3C62 /* icon@2x.png */; };
 		BA7F319C172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F319A172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m */; };
@@ -126,6 +127,7 @@
 		BA5A2785172DEA4E006B5B25 /* AKiPhoneLandingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKiPhoneLandingVC.h; path = iPhone/AKiPhoneLandingVC.h; sourceTree = "<group>"; };
 		BA5A2786172DEA4E006B5B25 /* AKiPhoneLandingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKiPhoneLandingVC.m; path = iPhone/AKiPhoneLandingVC.m; sourceTree = "<group>"; };
 		BA5A2787172DEA4E006B5B25 /* AKiPhoneLandingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKiPhoneLandingVC.xib; path = iPhone/AKiPhoneLandingVC.xib; sourceTree = "<group>"; };
+		BA6877BC17452F05008C3EEE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		BA72F2DB17322D6F007D3C62 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		BA72F2DC17322D6F007D3C62 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		BA7F3199172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKiPhoneLoginRegisterVC.h; path = iPhone/AKiPhoneLoginRegisterVC.h; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		BA5A2660172A2E76006B5B25 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BA6877BC17452F05008C3EEE /* README.md */,
 				BA1F8AA51742088B00F91ECD /* Default-Landscape@2x.png */,
 				BA1F8AA61742088B00F91ECD /* Default-Portrait@2x.png */,
 				BA1F8AA11742061600F91ECD /* Default@2x.png */,
@@ -423,6 +426,7 @@
 				BA1F8AA41742063600F91ECD /* Default@2x.png in Resources */,
 				BA1F8AA71742088B00F91ECD /* Default-Landscape@2x.png in Resources */,
 				BA1F8AA81742088B00F91ECD /* Default-Portrait@2x.png in Resources */,
+				BA6877BD17452F05008C3EEE /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,15 +566,15 @@
 		BA5A267E172A2E76006B5B25 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike Hayes";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mike Hayes";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AppKeyz Sample Application/AppKeyz Sample Application-Prefix.pch";
 				INFOPLIST_FILE = "AppKeyz Sample Application/AppKeyz Sample Application-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8F60FA3A-D7ED-4E8B-837B-455D50013EE3";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8F60FA3A-D7ED-4E8B-837B-455D50013EE3";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

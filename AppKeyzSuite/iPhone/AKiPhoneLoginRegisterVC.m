@@ -90,6 +90,8 @@
     
     self.loginRegTableView.delegate = self;
     self.loginRegTableView.dataSource = self;
+    self.loginRegTableView.backgroundView = nil;
+    self.loginRegTableView.backgroundColor = [UIColor clearColor];
     
     currentTextfield = UITextField.new;
     
@@ -106,8 +108,17 @@
     UITextField* tf = (UITextField*)[[self.loginRegTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView viewWithTag:FIELD_TEXT_TAG];
     [tf becomeFirstResponder];
     
-    NSLog(@"%d", [[UIDevice currentDevice] orientation]);
-    
+    id sender;
+    [self orientationChanged:sender];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+- (void)orientationChanged:(id)sender
+{
     float tableHeight = 200.0;
     float topOffset = 44.0;
     float width = 320.0;
@@ -122,67 +133,42 @@
             self.bgImage.image = [UIImage imageNamed:@"Default-Landscape.png"];
         }
     } else {
+        self.bgImage.image = [UIImage imageNamed:@"Default.png"];
+        if (UIScreen.mainScreen.bounds.size.height == 568)
+            self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
         if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
             tableHeight = 200.0;
             width = 320.0;
-            if (UIScreen.mainScreen.bounds.size.height == 568) tableHeight = 288.0;
+            if (UIScreen.mainScreen.bounds.size.height == 568)
+                tableHeight = 288.0;
         } else {
             topOffset = 34.0;
             tableHeight = 106.0;
             width = 480.0;
-            self.bgImage.image = [UIImage imageNamed:@"Default.png"];
             if (UIScreen.mainScreen.bounds.size.width == 568) {
                 tableHeight = 194.0;
                 width = 568.0;
-                self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
             }
+            
         }
     }
     float xCoord = (self.view.frame.size.width - width)/2;
     self.loginRegTableView.frame = CGRectMake(xCoord, topOffset, width, tableHeight);
-
+    [self.view setNeedsDisplay];
     
-    
+    NSLog(@"%@", CGRectCreateDictionaryRepresentation(self.loginRegTableView.frame));
 }
 
-- (void)didReceiveMemoryWarning
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return true;
 }
 
-- (void)orientationChanged:(id)sender
+-(NSUInteger)supportedInterfaceOrientations
 {
-    NSLog(@"Did change orientation");
-    float tableHeight = 200.0;
-    float topOffset = 44.0;
-    float width = 320.0;
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
-            tableHeight = 352.0;
-        } else {
-            tableHeight = 696.0;
-        }
-    } else {
-        if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
-            tableHeight = 200.0;
-            width = 320.0;
-            if (UIScreen.mainScreen.bounds.size.height == 568) tableHeight = 288.0;
-        } else {
-            topOffset = 34.0;
-            tableHeight = 106.0;
-            width = 480.0;
-            if (UIScreen.mainScreen.bounds.size.width == 568) { tableHeight = 194.0; width = 568.0; }
-        }
-    }
-    float xCoord = (self.view.frame.size.width - width)/2;
-    self.loginRegTableView.frame = CGRectMake(xCoord, topOffset, width, tableHeight);
-
-    //UITextField* tf = (UITextField*)[[self.loginRegTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].contentView viewWithTag:FIELD_TEXT_TAG];
-    //[tf becomeFirstResponder];
+    return UIInterfaceOrientationMaskAll;
 }
+
 
 #pragma mark - Table view data source
 
@@ -234,7 +220,7 @@
             //set title, font size and font color
             [button setTitle:@"Forgot Password?" forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
-            [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             
             //set action of the button
             [button addTarget:self action:@selector(forgotPassword:)
@@ -393,7 +379,7 @@
         case 1:
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             fieldText.enabled = false;
-            
+            fieldText.secureTextEntry = false;
             switch (controllerMode) {
                 case loginMode:
                     fieldText.text = @"Log In";

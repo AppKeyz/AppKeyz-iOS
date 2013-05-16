@@ -8,9 +8,6 @@
 
 #import "AKiPhoneLandingVC.h"
 
-#define kWhyDiagWidth 280.0
-#define kWhyDiagHeight 312.0
-
 @interface AKiPhoneLandingVC ()
 
 @end
@@ -54,6 +51,8 @@
     loginTableView.delegate = self;
     loginTableView.dataSource = self;
     loginWindow.layer.cornerRadius = 10;
+    loginTableView.backgroundView = nil;
+    loginTableView.backgroundColor = [UIColor clearColor];
     
     popupView.layer.cornerRadius = 10;
     popupView.hidden = true;
@@ -70,6 +69,25 @@
     //[noThanksButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:true];
+    
+    
+    if ([AKUser shared].isLoggedIn==true) {
+        AKiPhoneLoginRegisterVC* akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPhoneLoginRegisterVC" bundle:nil];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPadLoginRegisterVC" bundle:nil];
+        
+        akilrvc.controllerMode = editMode;
+        [self.navigationController pushViewController:akilrvc animated:true];
+    } else {
+        id sender;
+        [self orientationChanged:sender];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -80,6 +98,11 @@
 {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
+        float xCoord = (self.view.frame.size.width - 320.0)/2;
+        float yCoord = (self.view.frame.size.height - 140.0)/2;
+        loginTableView.frame = CGRectMake(xCoord, yCoord, 320.0, 140.0);
+        whyButton.frame = CGRectMake( xCoord+68, yCoord+160, 184.0, 33.0);
+        noThanksButton.frame = CGRectMake( xCoord+109, yCoord+213, 102.0, 33.0);
         if ([[UIDevice currentDevice] orientation]==UIDeviceOrientationPortrait) {
             self.bgImage.image = [UIImage imageNamed:@"Default-Portrait.png"];
         } else {
@@ -90,7 +113,19 @@
             self.bgImage.image = [UIImage imageNamed:@"Default-568h@2x.png"];
         else self.bgImage.image = [UIImage imageNamed:@"Default.png"];
     }
+    
 }
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return true;
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
 
 #pragma mark - Table view data source
 
@@ -170,10 +205,19 @@
 
 -(IBAction)whySignUp:(id)sender
 {
-
-    int marginleft = (self.view.bounds.size.width - kWhyDiagWidth)/2;
-    int margintop = (self.view.bounds.size.height - kWhyDiagHeight)/2;
-    popupView.frame = CGRectMake(marginleft, self.view.bounds.size.height, kWhyDiagWidth, kWhyDiagWidth);
+    //280 x 312 in Portrait; 312 x 280 in landscape
+    
+    diaWidth = 312.0;
+    diaHeight = 246.0;
+    lscpTop = 18.0;
+    if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
+        diaWidth = 280.0;
+        diaHeight = 312.0;
+        lscpTop = 0.0;
+    }
+    float marginleft = (self.view.bounds.size.width - diaWidth)/2;
+    float margintop = (self.view.bounds.size.height - diaHeight)/2;
+    popupView.frame = CGRectMake(marginleft, self.view.bounds.size.height, diaWidth, diaHeight);
     popupBackground.alpha = 0.0;
     
     popupView.hidden = NO;
@@ -182,20 +226,20 @@
     [UIView setAnimationDuration:0.4];
     popupBackground.alpha = 0.75;
     [popupView setAlpha:1.0];
-    popupView.frame = CGRectMake(marginleft, margintop, kWhyDiagWidth, kWhyDiagHeight);
+    popupView.frame = CGRectMake(marginleft, margintop+lscpTop, diaWidth, diaHeight);
     [UIView commitAnimations];
     [UIView setAnimationDuration:0.0];
 }
 
 -(IBAction)closePopover:(id)sender
 {
-    int marginleft = (self.view.bounds.size.width - kWhyDiagWidth)/2;
+    int marginleft = (self.view.bounds.size.width - diaWidth)/2;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(onCompleteCancelPopup)];
     [popupBackground setAlpha:0.0];
-    popupView.frame = CGRectMake(marginleft, self.view.bounds.size.height, kWhyDiagWidth, kWhyDiagWidth);
+    popupView.frame = CGRectMake(marginleft, self.view.bounds.size.height, diaWidth, diaHeight);
     [UIView commitAnimations];
     [UIView setAnimationDuration:0.0];
 }

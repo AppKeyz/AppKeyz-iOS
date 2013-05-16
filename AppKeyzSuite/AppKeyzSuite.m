@@ -60,8 +60,6 @@
 
 +(void)editUser:(UIViewController*)vc
 {
-    if ([AKUser shared].didNotRegister==true) {
-        
         AKiPhoneLandingVC* landing = [[AKiPhoneLandingVC alloc] initWithNibName:@"AKiPhoneLandingVC" bundle:nil];
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -71,22 +69,7 @@
         }
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [vc presentModalViewController:navController animated:YES];
-        
-    } else {
-        if ([AKUser shared].isLoggedIn==true) {
-            AKiPhoneLoginRegisterVC* akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPhoneLoginRegisterVC" bundle:nil];
-            
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-            {
-                akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPadLoginRegisterVC" bundle:nil];
-            }
-            akilrvc.controllerMode = editMode;
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:akilrvc];
-            navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            [vc presentModalViewController:navController animated:YES];
-        }
-    }
+        [vc presentModalViewController:navController animated:true];
 }
 
 +(void)logout:(UIViewController*)vc
@@ -102,7 +85,7 @@
         }
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:landing];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [vc presentModalViewController:navController animated:YES];
+        [vc presentModalViewController:navController animated:true];
 
     }
 }

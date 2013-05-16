@@ -29,6 +29,9 @@
     
     UITextField* fieldText;
     
+    float diaWidth;
+    float diaHeight;
+    float lscpTop;
 }
 @property(strong) IBOutlet UIImageView* bgImage;
 
