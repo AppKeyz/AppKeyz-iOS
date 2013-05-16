@@ -12,8 +12,8 @@ Installation
 
 Installation consists of two different levels of SDK integration. One level contains just the API calls library, and the other also includes the authentication module.
 
-## Installing ONLY the API Library
-
+###Installing ONLY the API Library
+------
 Add AppKeyz.h to your <Application Name>-Prefix.pch file:
 
 ```objective-C
@@ -33,7 +33,8 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 ```
 
 
-## Installing the App Keyz Suite with authentication module
+### Installing the App Keyz Suite with authentication module
+------
 
 Add the 'QuartzCore' framework to your project.
 
@@ -70,8 +71,8 @@ The 'setRegisterFields' method sets optional registeration fields (Age, Gender a
 [AppKeyzSuite setRegisterFields:[NSArray arrayWithObjects:nil]];
 ```
 
-Using the AppKeyz API Library only
--------
+###Using the AppKeyz API Library only
+------
 
 The AppKeyz library includes AFNetworing (thanks mattt) and UIDevice-with-UniqueIdentifier-for-iOS-5 (thanks gekitz).
 
@@ -105,10 +106,10 @@ And subscribe to NSNotificationCenter notifications in your viewControllers. For
 
 More detail can be found about each API call in the wiki article on <a href="#">using the AppKeyz API library</a>. Also a detailed explaination of each API call can be found in the <a href="#">App Keyz Client API v2.0 document</a>.
 
-### Note: if you wish to use the AppKeyz login API, you can use the AKUser model, found in the AppKeyzSuite directory, or remove the assignments inside 'consumeUser'.
+#### Note: if you wish to use the AppKeyz login API, you can use the AKUser model, found in the AppKeyzSuite directory, or remove the assignments inside 'consumeUser'.
 
 
-Using the AppKeyz Suite
+###Using the AppKeyz Suite
 ------
 
 The AppKeyz suite works in combination with the AppKeyz API Library mentioned in the above section.
