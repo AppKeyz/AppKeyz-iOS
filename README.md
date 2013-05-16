@@ -116,4 +116,5 @@ The AppKeyz suite works in combination with the AppKeyz API Library mentioned in
 
 If you follow the setup steps, your viewController will present a set of 'login or register' screens that will capture login or register details from the user and register them with the AppKeyz server, then save the details to an AKUser singleton. You may use the stock AKUser model and customize it, or replace with your own user model. Note that you'll need to replace AKUser methods in AppKeyz.m and AKiPhoneLoginRegisterVC.m.
 
+The login screen will work for any iOS device and CAN rotate to any orientation. However, it is is recommended that the screens only be used in one orientation, as the background image will distort when the screen rotates.
 
