@@ -104,7 +104,7 @@ And subscribe to NSNotificationCenter notifications in your viewControllers. For
                                            object: nil];
 ```
 
-More detail can be found about each API call in the wiki article on <a href="#">using the AppKeyz API library</a>. Also a detailed explaination of each API call can be found in the <a href="#">App Keyz Client API v2.0 document</a>.
+More detail can be found about each API call in the wiki article on <a href="#">using the AppKeyz API library</a>. Also a detailed explaination of each API call can be found in the AppKeyz_Client_SDK_v2.0_0504.doc file in the root directory.
 
 #### Note: if you wish to use the AppKeyz login API, you can use the AKUser model, found in the AppKeyzSuite directory, or remove the assignments inside 'consumeUser'.
 
