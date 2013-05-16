@@ -118,3 +118,5 @@ If you follow the setup steps, your viewController will present a set of 'login 
 
 The login screen will work for any iOS device and CAN rotate to any orientation. However, it is is recommended that the screens only be used in one orientation, as the background image will distort when the screen rotates.
 
+------
+This document &copy; 2013 AppKeyz, Inc.
