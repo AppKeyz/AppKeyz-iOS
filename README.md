@@ -1,11 +1,11 @@
-App Keyz SDK for iOS
+AppKeyz SDK for iOS
 ============
 
-This SDK is designed to allow a developer to easily add either the App Keyz API by itself, or a suite also containing a "drop-in" authentication module.
+This SDK is designed to allow a developer to easily add either the AppKeyz API by itself, or a suite also containing a "drop-in" authentication module.
 
 This repository is a sample app that demonstrates all API calls as well as the authentication. Authentication module works on iPhone & iPad in either landscape or potrait.
 
-The App Keyz SDK requires iOS 5.1+
+The AppKeyz SDK requires iOS 5.1+
 
 Installation
 ------------
@@ -33,7 +33,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 ```
 
 
-### Installing the App Keyz Suite with authentication module
+### Installing the AppKeyz Suite with authentication module
 ------
 
 Add the 'QuartzCore' framework to your project.
