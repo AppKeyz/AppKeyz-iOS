@@ -1,11 +1,11 @@
-App Keyz SDK for iOS
+AppKeyz SDK for iOS
 ============
 
-This SDK is designed to allow a developer to easily add either the App Keyz API by itself, or a suite also containing a "drop-in" authentication module.
+This SDK is designed to allow a developer to easily add either the AppKeyz API by itself, or a suite also containing a "drop-in" authentication module.
 
 This repository is a sample app that demonstrates all API calls as well as the authentication. Authentication module works on iPhone & iPad in either landscape or potrait.
 
-The App Keyz SDK requires iOS 5.1+
+The AppKeyz SDK requires iOS 5.1+
 
 Installation
 ------------
@@ -33,7 +33,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 ```
 
 
-### Installing the App Keyz Suite with authentication module
+### Installing the AppKeyz Suite with authentication module
 ------
 
 Add the 'QuartzCore' framework to your project.
@@ -120,7 +120,7 @@ And subscribe to NSNotificationCenter notifications in your viewControllers. For
                                            object: nil];
 ```
 
-More detail can be found about each API call in the wiki article on <a href="#">using the AppKeyz API library</a>. Also a detailed explaination of each API call can be found in the <a href="#">App Keyz Client API v2.0 document</a>.
+More detail can be found about each API call in the wiki article on <a href="https://github.com/AppKeyz/app-keyz-ios/wiki/AppKeyz-API-Library">using the AppKeyz API library</a>. Also a detailed explaination of each API call can be found in the AppKeyz_Client_SDK_v2.0_0504.doc file in the root directory.
 
 #### Note: if you wish to use the AppKeyz login API, you can use the AKUser model, found in the AppKeyzSuite directory, or remove the assignments inside 'consumeUser'.
 
@@ -132,4 +132,7 @@ The AppKeyz suite works in combination with the AppKeyz API Library mentioned in
 
 If you follow the setup steps, your viewController will present a set of 'login or register' screens that will capture login or register details from the user and register them with the AppKeyz server, then save the details to an AKUser singleton. You may use the stock AKUser model and customize it, or replace with your own user model. Note that you'll need to replace AKUser methods in AppKeyz.m and AKiPhoneLoginRegisterVC.m.
 
+The login screen will work for any iOS device and CAN rotate to any orientation. However, it is is recommended that the screens only be used in one orientation, as the background image will distort when the screen rotates.
 
+------
+This document &copy; 2013 AppKeyz, Inc.
