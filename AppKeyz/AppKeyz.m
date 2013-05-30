@@ -140,87 +140,336 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     if (cmd==readuserverified && [[responseObject objectForKey:@"emailverified"] boolValue]==false)
         cmd = readuserverifiedfail;
     
-    if (rspCode==0)
-    {
-        switch (cmd) {
-            case createuser:
-                message = @"User created successfully.";
-                break;
-            case readuser:
-                message = @"User accout retreived successfully";
-                [self consumeUser:responseObject];
-                break;
-            case readuserverified:
-                message = @"User accout retreived successfully"; 
-                if (![[responseObject objectForKey:@"emailverified"] boolValue]) message = @"AppKeyz login is for verified users only.";
-                [self consumeUser:responseObject];
-                break;
-            case readuserverifiedfail:
-                message = @"AppKeyz login is for verified users only.";
-                break;
-            case updateuser:
-                message = @"User information updated successfully.";
-                break;
-            case forgotpassword:
-                message = @"Password reset email sent.";
-                break;
-            case createpurchase:
-                message = @"Purchase process successfully.";
-                [self.productIds addObject:responseObject];
-                break;
-            case listpurchases:
-                self.productIds = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"purchases"]]; //Array
-                break;
-            case readpurchase:
-                [responseObject objectForKey:@"productsku"]; //String
-                [[responseObject objectForKey:@"purchaseprice"] floatValue]; //float
-                [responseObject objectForKey:@"purchasedate"]; //String 2013-01-01 format
-                [responseObject objectForKey:@"consumableid"]; //String
-                [responseObject objectForKey:@"expiration"]; //String
-                [[responseObject objectForKey:@"active"] boolValue]; //BOOL
-                break;
-            case updatepurchase:
-                break;
-            case deletepurchase:
-                break;
-            case createdevice:
-                break;
-            case listdevices:
-                [responseObject objectForKey:@"deviceids"]; //Array
-                break;
-            case readdevice:
-                [responseObject objectForKey:@"deviceid"]; //String
-                [responseObject objectForKey:@"devicetype"]; //String
-                [responseObject objectForKey:@"deviceip"]; //String
-                [responseObject objectForKey:@"devicetoken"]; //String
-                break;
-            case updatedevice:
-                break;
-            case deletedevice:
-                break;
-            case listconsumables:
-                [responseObject objectForKey:@"consumables"]; //Array
-                break;
-            case readconsumable:
-                [responseObject objectForKey:@"name"]; //String
-                [[responseObject objectForKey:@"balance"] floatValue]; //float
-                break;
-            case updateconsumable:
-                break;
-        }
-        NSLog(@"%@",[cmdStrings objectAtIndex:cmd]);
-        [[NSNotificationCenter defaultCenter] postNotificationName: [NSString stringWithFormat:@"AK%@", [cmdStrings objectAtIndex:cmd]] //exa. AKcreateuser
-                                                            object: nil
-                                                          userInfo: nil];
+    switch (cmd) {
+        case createuser:
+            switch (rspCode) {
+                case 0:
+                    message = @"User created successfully.";
+                    break;        
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 3:
+                    //Uniqueid has already been taken within the scope of this app.
+                    break;
+                case 4:
+                    //This username already exists
+                    break;
+            }
+            break;
+        case readuser:
+            switch (rspCode) {
+                case 0:
+                    message = @"User accout retreived successfully";
+                    [self consumeUser:responseObject];
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+            }
+            break;
+        case readuserverified:
+            switch (rspCode) {
+                case 0:
+                    message = @"User accout retreived successfully";
+                    if (![[responseObject objectForKey:@"emailverified"] boolValue]) message = @"AppKeyz login is for verified users only.";
+                    [self consumeUser:responseObject];
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+            }
+            break;
+        case readuserverifiedfail:
+            switch (rspCode) {
+                case 0:
+                    message = @"AppKeyz login is for verified users only.";
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+            }
+            break;
+        case updateuser:
+            switch (rspCode) {
+                case 0:
+                    message = @"User information updated successfully.";
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+            }
+            break;
+        case forgotpassword:
+            switch (rspCode) {
+                case 0:
+                    message = @"Password reset email sent.";
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+            }
+            break;
+        case createpurchase:
+            switch (rspCode) {
+                case 0:
+                    message = @"Purchase process successfully.";
+                    [self.productIds addObject:responseObject];
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+                case 4:
+                    //Invalid Purchase
+                    break;
+            }
+            break;
+        case listpurchases:     
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    self.productIds = [NSMutableArray arrayWithArray:[responseObject objectForKey:@"purchases"]]; //Array
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+            }
+            break;
+        case readpurchase:
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    [responseObject objectForKey:@"productsku"]; //String
+                    [[responseObject objectForKey:@"purchaseprice"] floatValue]; //float
+                    [responseObject objectForKey:@"purchasedate"]; //String 2013-01-01 format
+                    [responseObject objectForKey:@"consumableid"]; //String
+                    [responseObject objectForKey:@"expiration"]; //String
+                    [[responseObject objectForKey:@"active"] boolValue]; //BOOL
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+                case 4:
+                    //Invalid Purchase
+                    break;
+            }
+            break;
+        case updatepurchase:
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    //Success
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+                case 4:
+                    //Invalid Purchase
+                    break;
+            }
+            break;
+        case deletepurchase:
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    //Success
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+                case 4:
+                    //Invalid Purchase
+                    break;
+            }
+            break;
+        case createdevice:
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    //Success
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+                case 3:
+                    //Duplicate Device
+                    break;
+                case 4:
+                    //Invalid Device
+                    break;
+                case 5:
+                    //Too many devices
+                    break;
+            }
+
+            break;
+        case listdevices:
+            
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    [responseObject objectForKey:@"deviceids"]; //Array
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+            }
+            break;
+        case readdevice:
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    [responseObject objectForKey:@"deviceid"]; //String
+                    [responseObject objectForKey:@"devicetype"]; //String
+                    [responseObject objectForKey:@"deviceip"]; //String
+                    [responseObject objectForKey:@"devicetoken"]; //String
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+                case 4:
+                    //Invalid Device
+                    break;
+            }
+            break;
+        case updatedevice:
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    //Success
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+                case 3:
+                    //Duplicate Device
+                    break;
+                case 4:
+                    //Invalid Device
+                    break;
+            }
+            break;
+        case deletedevice:
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    //Success
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+                case 4:
+                    //Invalid Device
+                    break;
+            }
+            break;
+        case listconsumables:
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    [responseObject objectForKey:@"consumables"]; //Array
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+            }
+            break;
+        case readconsumable:
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    [responseObject objectForKey:@"name"]; //String
+                    [[responseObject objectForKey:@"balance"] floatValue]; //float
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+            }
+            break;
+        case updateconsumable:
+            switch (rspCode) {
+                case 0:
+                    message = nil;
+                    //Success
+                    break;
+                case 1:
+                    //Bad Parameters.  Usually means you're missing apiaction or apptoken
+                    break;
+                case 2:
+                    //This Email does not does exist in our system, please Register or log in using a different email
+                    break;
+                case 4:
+                    //Invalid Consumable
+                    break;
+            }
+            break;
     }
     
+    if (rspCode==100) message = nil; //Server error message for dubugging purposes only
     
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@ says:", appName]
-                                                 message:message
-                                                delegate:nil
-                                       cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [av show];
+    NSLog(@"%@",[cmdStrings objectAtIndex:cmd]);
+    [[NSNotificationCenter defaultCenter] postNotificationName: [NSString stringWithFormat:@"AK%@", [cmdStrings objectAtIndex:cmd]] //exa. AKcreateuser
+                                                        object: nil
+                                                      userInfo: nil];
     
+    if (message!=nil) {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@ says:", appName]
+                                                     message:message
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [av show];
+    }
 }
 
 //User Interface

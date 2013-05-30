@@ -86,14 +86,30 @@ You can capture callbacks from the API inside 'consumeResponse':
 
 ```objective-c
 case readpurchase:
-    [responseObject objectForKey:@"productsku"]; //String
-    [[responseObject objectForKey:@"purchaseprice"] floatValue]; //float
-    [responseObject objectForKey:@"purchasedate"]; //String 2013-01-01 format
-    [responseObject objectForKey:@"consumableid"]; //String
-    [responseObject objectForKey:@"expiration"]; //String
-    [[responseObject objectForKey:@"active"] boolValue]; //BOOL
+    switch (rspCode) {
+        case 0:
+            message = nil;
+            [responseObject objectForKey:@"productsku"]; //String
+            [[responseObject objectForKey:@"purchaseprice"] floatValue]; //float
+            [responseObject objectForKey:@"purchasedate"]; //String 2013-01-01 format
+            [responseObject objectForKey:@"consumableid"]; //String
+            [responseObject objectForKey:@"expiration"]; //String
+            [[responseObject objectForKey:@"active"] boolValue]; //BOOL
+            break;
+        case 1:
+            //Bad Parameters.  Usually means you're missing apiaction or apptoken
+            break;
+        case 2:
+            //This Email does not does exist in our system, please Register or log in using a different email
+            break;
+        case 4:
+            //Invalid Purchase
+            break;
+    }
     break;
 ```
+
+####A Note about AlertViews: In the consumeResponse method, each command has a place for the developer to capture returned values (in the case of rspCode==0) and set AlertView messages. By default, you must set the success message (0). The server returns it's own message for rspCode==1,2,3,4,5 of 100. Feel free to set your own message. You may set 'message' to nil to prevent the AlertView from showing at all.
 
 And subscribe to NSNotificationCenter notifications in your viewControllers. For example for 'readpurchase':
 
