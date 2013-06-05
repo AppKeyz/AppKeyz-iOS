@@ -111,6 +111,10 @@ case readpurchase:
 
 ####A Note about AlertViews:
 In the consumeResponse method, each command has a place for the developer to capture returned values (in the case of rspCode==0) and set AlertView messages. By default, you must set the success message (0). The server returns it's own message for rspCode==1,2,3,4,5 of 100. Feel free to set your own message. You may set 'message' to nil to prevent the AlertView from showing at all.
+
+The sample app shows an example of each API call in ViewController.m and the output of each call can be seen in the xcode console.
+
+
 And subscribe to NSNotificationCenter notifications in your viewControllers. For example for 'readpurchase':
 
 ```objective-C
