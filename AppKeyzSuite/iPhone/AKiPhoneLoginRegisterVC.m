@@ -99,7 +99,12 @@
     if (controllerMode==editMode) [self viewDidAppear:true];
 }
 
-
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:true];
+    
+    [currentTextfield resignFirstResponder];
+}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -184,6 +189,7 @@
     int rows = 1;
     
     switch (controllerMode) {
+        case akLoginMode:
         case loginMode:
             if (section==0) rows = 2;
             else rows = 1;
@@ -198,39 +204,77 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==2 && controllerMode==loginMode)
-        return 50;
-    else
-        return UITableViewAutomaticDimension;
+    switch (controllerMode) {
+        case loginMode:
+            switch (section) {
+                case 0:
+                    return UITableViewAutomaticDimension;
+                    break;
+                case 1:
+                case 2:
+                    return 50;
+                    break;
+            }
+            break;
+        case akLoginMode:
+            switch (section) {
+                case 0:
+                    return UITableViewAutomaticDimension;
+                    break;
+                case 1:
+                    return 50;
+                    break;
+            }
+            break;
+        case editMode:
+        case registerMode:
+            return UITableViewAutomaticDimension;
+            break;
+    }
+    return UITableViewAutomaticDimension;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+- (UIButton*)footerLabel:(NSString*)title
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:CGRectMake(10, 3, 300, 44)];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    if (controllerMode==loginMode) {
-        if(footerView == nil) {
-            //allocate the view if it doesn't exist yet
-            footerView  = [[UIView alloc] init];
-            
-            //create the button
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            
-            //the button should be as big as a table view cell
-            [button setFrame:CGRectMake(10, 3, 300, 44)];
-            
-            //set title, font size and font color
-            [button setTitle:@"Forgot Password?" forState:UIControlStateNormal];
-            [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
-            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            
-            //set action of the button
-            [button addTarget:self action:@selector(forgotPassword:)
-             forControlEvents:UIControlEventTouchUpInside];
-            
-            //add the button to the view
-            [footerView addSubview:button];
+    //set action of the button
+    [button addTarget:self action:@selector(forgotPassword:)
+     forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{    
+    if (section==1) {
+        if (controllerMode==loginMode) {
+          //  if (footerView==nil) {
+               // footerView = nil;
+                footerView  = [[UIView alloc] init];
+                [footerView addSubview:[self footerLabel:@"-Or-"]];
+        //    }
+        } else if (controllerMode==akLoginMode) {
+        //    if (footerView==nil) {
+             //   footerView = nil;
+                footerView  = [[UIView alloc] init];
+            [footerView addSubview:[self footerLabel:@"Forgot Password?"]];
+         //   }
         }
+    } else if (section==2) {
+        if (controllerMode==loginMode) {
+         //   if(footerView == nil) {
+              //  footerView = nil;
+                footerView  = [[UIView alloc] init];
+            [footerView addSubview:[self footerLabel:@"Forgot Password?"]];
+         //   }
+        }
+    } else if (section==0) {
+        footerView = nil;
     }
-    //return the view for the footer
     return footerView;
 }
 
@@ -356,6 +400,7 @@
                             break;
                     }
                     break;
+                case akLoginMode:
                 case loginMode:
                     switch (indexPath.row) {
                         case 0:
@@ -381,6 +426,16 @@
             fieldText.enabled = false;
             fieldText.secureTextEntry = false;
             switch (controllerMode) {
+                case akLoginMode:
+                {
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                    fieldText.enabled = false;
+                    UIImageView* akLogin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_keyz_button.png"]];
+                    cell.imageView.image = [UIImage imageNamed:@"blank.png"];
+                    //[cell.contentView addSubview:akLogin];
+                    cell.backgroundView = akLogin;
+                }
+                    break;
                 case loginMode:
                     fieldText.text = @"Log In";
                     cell.imageView.image = [UIImage imageNamed:@"user.png"];
@@ -427,9 +482,12 @@
             case editMode:
                 [self updateUser];
                 break;
+            case akLoginMode:
+                [self loginUserVerified];
+                break;
         }
     }
-    if (indexPath.section==2) [self loginUserVerified];
+    if (indexPath.section==2) [self akLoginView];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -604,6 +662,17 @@
                                                  otherButtonTitles: nil];
         [noStuff show];
     }
+}
+
+-(void)akLoginView
+{
+    AKiPhoneLoginRegisterVC* akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPhoneLoginRegisterVC" bundle:nil];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPadLoginRegisterVC" bundle:nil];
+    
+    akilrvc.controllerMode = akLoginMode;
+    [self.navigationController pushViewController:akilrvc animated:true];
 }
 
 -(void)loginUserVerified

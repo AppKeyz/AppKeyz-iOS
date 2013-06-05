@@ -11,7 +11,8 @@
 typedef enum tag_ControllerMode {
     loginMode,
     registerMode,
-    editMode
+    editMode,
+    akLoginMode
 } ControllerMode;
 
 @class AKUser;
