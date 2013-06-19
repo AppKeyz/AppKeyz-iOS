@@ -74,7 +74,7 @@ The 'setRegisterFields' method sets optional registeration fields (Age, Gender a
 ###Using the AppKeyz API Library only
 ------
 
-The AppKeyz library includes AFNetworing (thanks mattt) and UIDevice-with-UniqueIdentifier-for-iOS-5 (thanks gekitz).
+The AppKeyz library includes AFNetworing (thanks mattt), UIDevice-with-UniqueIdentifier-for-iOS-5 (thanks gekitz) and UIAlertView-Blocks (thanks jivadevoe).
 
 The AppKeyz library is setup as a singleton, so you can call the API from your view controller like so:
 
