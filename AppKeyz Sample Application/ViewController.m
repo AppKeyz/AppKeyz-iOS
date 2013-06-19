@@ -249,6 +249,8 @@
 //Purchase Actions
 -(IBAction)createPurchase:(id)sender
 {
+    [[AKUser shared] logout];//Logout to present login alertview
+    
     int x = arc4random()%3;
     NSLog(@"%i",x);
     switch (x) {

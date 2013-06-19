@@ -31,15 +31,25 @@ typedef enum tag_Command {
     updateconsumable
 } Command;
 
+typedef enum tag_DirectRoute {
+    none,
+    directRouteLogin,
+    directRouteRegister,
+    directRouteEditRegister
+} DirectRoute;
+
 @interface AppKeyz : NSObject {
     NSArray* cmdStrings;
     NSArray* registerFields;
     
     //for testing purposes
     NSMutableArray* productIds;
+    
+    DirectRoute directRoute;
 }
 @property(strong) NSArray* registerFields;
 @property(strong) NSMutableArray* productIds;
+@property(assign) DirectRoute directRoute;
 
 +(AppKeyz*)shared;
 

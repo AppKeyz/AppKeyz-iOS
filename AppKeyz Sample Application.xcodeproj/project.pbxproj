@@ -47,6 +47,10 @@
 		BA6877BD17452F05008C3EEE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BA6877BC17452F05008C3EEE /* README.md */; };
 		BA72F2DD17322D6F007D3C62 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72F2DB17322D6F007D3C62 /* icon.png */; };
 		BA72F2DE17322D6F007D3C62 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA72F2DC17322D6F007D3C62 /* icon@2x.png */; };
+		BA7D678117717F54003A09A3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BA7D677A17717F54003A09A3 /* README.md */; };
+		BA7D678217717F54003A09A3 /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7D677C17717F54003A09A3 /* RIButtonItem.m */; };
+		BA7D678317717F54003A09A3 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7D677E17717F54003A09A3 /* UIActionSheet+Blocks.m */; };
+		BA7D678417717F54003A09A3 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7D678017717F54003A09A3 /* UIAlertView+Blocks.m */; };
 		BA7F319C172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7F319A172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m */; };
 		BA7F319D172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA7F319B172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib */; };
 		BA7F31BB172E4DCD0005AD47 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA7F31BA172E4DCD0005AD47 /* Default-568h@2x.png */; };
@@ -130,6 +134,13 @@
 		BA6877BC17452F05008C3EEE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		BA72F2DB17322D6F007D3C62 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		BA72F2DC17322D6F007D3C62 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		BA7D677A17717F54003A09A3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BA7D677B17717F54003A09A3 /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
+		BA7D677C17717F54003A09A3 /* RIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIButtonItem.m; sourceTree = "<group>"; };
+		BA7D677D17717F54003A09A3 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		BA7D677E17717F54003A09A3 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
+		BA7D677F17717F54003A09A3 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		BA7D678017717F54003A09A3 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		BA7F3199172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKiPhoneLoginRegisterVC.h; path = iPhone/AKiPhoneLoginRegisterVC.h; sourceTree = "<group>"; };
 		BA7F319A172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKiPhoneLoginRegisterVC.m; path = iPhone/AKiPhoneLoginRegisterVC.m; sourceTree = "<group>"; };
 		BA7F319B172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKiPhoneLoginRegisterVC.xib; path = iPhone/AKiPhoneLoginRegisterVC.xib; sourceTree = "<group>"; };
@@ -235,6 +246,7 @@
 		BA5A2686172A2F6E006B5B25 /* AppKeyzSuite */ = {
 			isa = PBXGroup;
 			children = (
+				BA7D677917717F54003A09A3 /* UIAlertView-Blocks */,
 				BA7F31BF172FA18A0005AD47 /* Resources */,
 				BA5A277F172DDD3D006B5B25 /* AppKeyzSuite.h */,
 				BA5A2780172DDD3D006B5B25 /* AppKeyzSuite.m */,
@@ -316,6 +328,20 @@
 				BAB6BB2617407A1D00E555EF /* AKiPadLoginRegisterVC.xib */,
 			);
 			name = iPhone;
+			sourceTree = "<group>";
+		};
+		BA7D677917717F54003A09A3 /* UIAlertView-Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				BA7D677A17717F54003A09A3 /* README.md */,
+				BA7D677B17717F54003A09A3 /* RIButtonItem.h */,
+				BA7D677C17717F54003A09A3 /* RIButtonItem.m */,
+				BA7D677D17717F54003A09A3 /* UIActionSheet+Blocks.h */,
+				BA7D677E17717F54003A09A3 /* UIActionSheet+Blocks.m */,
+				BA7D677F17717F54003A09A3 /* UIAlertView+Blocks.h */,
+				BA7D678017717F54003A09A3 /* UIAlertView+Blocks.m */,
+			);
+			path = "UIAlertView-Blocks";
 			sourceTree = "<group>";
 		};
 		BA7F31BF172FA18A0005AD47 /* Resources */ = {
@@ -427,6 +453,7 @@
 				BA1F8AA71742088B00F91ECD /* Default-Landscape@2x.png in Resources */,
 				BA1F8AA81742088B00F91ECD /* Default-Portrait@2x.png in Resources */,
 				BA6877BD17452F05008C3EEE /* README.md in Resources */,
+				BA7D678117717F54003A09A3 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +483,9 @@
 				BA5A2784172DDE17006B5B25 /* AKUser.m in Sources */,
 				BA5A2788172DEA4E006B5B25 /* AKiPhoneLandingVC.m in Sources */,
 				BA7F319C172E3FFA0005AD47 /* AKiPhoneLoginRegisterVC.m in Sources */,
+				BA7D678217717F54003A09A3 /* RIButtonItem.m in Sources */,
+				BA7D678317717F54003A09A3 /* UIActionSheet+Blocks.m in Sources */,
+				BA7D678417717F54003A09A3 /* UIAlertView+Blocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

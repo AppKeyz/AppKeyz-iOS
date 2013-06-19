@@ -80,7 +80,7 @@
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     
-    if (controllerMode==editMode) {
+    if ([AppKeyz shared].directRoute!=none) {
         UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
                                                         style:UIBarButtonItemStylePlain
                                                        target:self

@@ -73,18 +73,35 @@
 {
     [super viewWillAppear:true];
     
+    AKiPhoneLoginRegisterVC* akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPhoneLoginRegisterVC" bundle:nil];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPadLoginRegisterVC" bundle:nil];
     
-    if ([AKUser shared].isLoggedIn==true) {
-        AKiPhoneLoginRegisterVC* akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPhoneLoginRegisterVC" bundle:nil];
-        
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-            akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPadLoginRegisterVC" bundle:nil];
-        
-        akilrvc.controllerMode = editMode;
-        [self.navigationController pushViewController:akilrvc animated:true];
-    } else {
+    switch ([AppKeyz shared].directRoute) {
+        case directRouteLogin:
+        {
+            akilrvc.controllerMode = loginMode;
+        }
+            break;
+        case directRouteRegister:
+        {
+            akilrvc.controllerMode = registerMode;
+        }
+            break;
+        case directRouteEditRegister:
+        {
+            akilrvc.controllerMode = editMode;
+        }
+            break;
+        case none:
+            break;
+    }
+    
+    if ([AppKeyz shared].directRoute==none) {
         id sender;
         [self orientationChanged:sender];
+    } else {
+        [self.navigationController pushViewController:akilrvc animated:true];
     }
 }
 

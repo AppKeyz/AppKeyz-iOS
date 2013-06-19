@@ -129,6 +129,7 @@ More detail can be found about each API call in the wiki article on <a href="htt
 #### Note: if you wish to use the AppKeyz login API, you can use the AKUser model, found in the AppKeyzSuite directory, or remove the assignments inside 'consumeUser'.
 
 
+
 ###Using the AppKeyz Suite
 ------
 
@@ -137,6 +138,8 @@ The AppKeyz suite works in combination with the AppKeyz API Library mentioned in
 If you follow the setup steps, your viewController will present a set of 'login or register' screens that will capture login or register details from the user and register them with the AppKeyz server, then save the details to an AKUser singleton. You may use the stock AKUser model and customize it, or replace with your own user model. Note that you'll need to replace AKUser methods in AppKeyz.m and AKiPhoneLoginRegisterVC.m.
 
 The login screen will work for any iOS device and CAN rotate to any orientation. However, it is is recommended that the screens only be used in one orientation, as the background image will distort when the screen rotates.
+
+#### Note: We've recently added an alertview to popup if a user isn't already registered or logged in, to give the user a chance to login or register before a potential purchase. You may chose whether or not to use it. It can simply be removed from createPurchase.
 
 ------
 This document &copy; 2013 AppKeyz, Inc.

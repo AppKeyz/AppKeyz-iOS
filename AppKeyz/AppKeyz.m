@@ -13,7 +13,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
 
 
 @implementation AppKeyz
-@synthesize registerFields, productIds;
+@synthesize registerFields, productIds, directRoute;
 
 +(AppKeyz*)shared
 {
@@ -599,18 +599,27 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
                        balance:(float)balance
                     expiration:(NSString*)expiration
 {
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:@"createpurchase" forKey:@"apiaction"];
-    [parameters setObject:kAppToken forKey:@"apptoken"];
-    
-    [parameters setObject:email forKey:@"email"];
-    [parameters setObject:pw forKey:@"password"];
-    [parameters setObject:sku forKey:@"productsku"];
-    [parameters setObject:[self floatToString:price] forKey:@"purchaseprice"];
-    [parameters setObject:[self floatToString:balance] forKey:@"balance"];
-    [parameters setObject:expiration forKey:@"expiration"];
-    
-    [self postParams:parameters command:createpurchase];
+    NSLog(@"user logged out: %i",[AKUser shared].isLoggedIn);
+    if ([AKUser shared].isLoggedIn != true)
+    {
+        NSLog(@"isn't logged in"); 
+        [AppKeyzSuite loginRegAlertView];
+    }
+    else
+    {
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+        [parameters setObject:@"createpurchase" forKey:@"apiaction"];
+        [parameters setObject:kAppToken forKey:@"apptoken"];
+        
+        [parameters setObject:email forKey:@"email"];
+        [parameters setObject:pw forKey:@"password"];
+        [parameters setObject:sku forKey:@"productsku"];
+        [parameters setObject:[self floatToString:price] forKey:@"purchaseprice"];
+        [parameters setObject:[self floatToString:balance] forKey:@"balance"];
+        [parameters setObject:expiration forKey:@"expiration"];
+        
+        [self postParams:parameters command:createpurchase];
+    }
 }
 
 -(void)listpurchasesWithEmail:(NSString*)email
@@ -808,5 +817,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     
     [self postParams:parameters command:updateconsumable];
 }
+
+
 
 @end
