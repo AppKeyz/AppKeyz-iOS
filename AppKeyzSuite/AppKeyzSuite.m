@@ -127,25 +127,25 @@
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *vc = window.rootViewController;
     
-    RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Cancel" action:^{
+    RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"No Thanks" action:^{
         // this is the code that will be executed when the user taps "No"
         // this is optional... if you leave the action as nil, it won't do anything
         // but here, I'm showing a block just to show that you can use one if you want to.
     }];
     
-    RIButtonItem *loginItem = [RIButtonItem itemWithLabel:@"Sign In" action:^{
+    RIButtonItem *loginItem = [RIButtonItem itemWithLabel:@"Login In" action:^{
         // this is the code that will be executed when the user taps "Yes"
         // delete the object in question...
         [AppKeyzSuite loginScreen:vc];
     }];
-    RIButtonItem *registerItem = [RIButtonItem itemWithLabel:@"Join AppKeyz!" action:^{
+    RIButtonItem *registerItem = [RIButtonItem itemWithLabel:@"Create Account" action:^{
         // this is the code that will be executed when the user taps "Yes"
         // delete the object in question...
         [AppKeyzSuite registerScreen:vc];
     }];
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"Without joining, you will be unable to access certain features, restore purchases to other iOS devices, contact AppKeyz about your account or use your apps on other mobile devices."
+                                                        message:@"Without logging in, you will be unable to access your account, update your account of any purchases or access these purchases from other devices."
                                                cancelButtonItem:cancelItem
                                                otherButtonItems:loginItem, registerItem, nil];
     [alertView show];

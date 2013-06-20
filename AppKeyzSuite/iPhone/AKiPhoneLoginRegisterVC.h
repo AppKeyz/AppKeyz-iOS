@@ -39,6 +39,8 @@ UITextFieldDelegate, UIAlertViewDelegate, UIApplicationDelegate> {
     
     BOOL reloadTv;
     
+    UIView* defaultBgView;
+    
 }
 @property(assign)ControllerMode controllerMode;
 @property(strong)IBOutlet UIImageView* bgImage;

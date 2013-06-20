@@ -180,7 +180,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     int sections = 2;
-    if (controllerMode==loginMode) sections = 3;
+    if (controllerMode==loginMode || controllerMode==registerMode) sections = 3;
     return sections;
 }
 
@@ -206,6 +206,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     switch (controllerMode) {
         case loginMode:
+        case registerMode:
             switch (section) {
                 case 0:
                     return UITableViewAutomaticDimension;
@@ -227,7 +228,6 @@
             }
             break;
         case editMode:
-        case registerMode:
             return UITableViewAutomaticDimension;
             break;
     }
@@ -251,7 +251,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {    
     if (section==1) {
-        if (controllerMode==loginMode) {
+        if (controllerMode==loginMode || controllerMode==registerMode) {
           //  if (footerView==nil) {
                // footerView = nil;
                 footerView  = [[UIView alloc] init];
@@ -265,7 +265,7 @@
          //   }
         }
     } else if (section==2) {
-        if (controllerMode==loginMode) {
+        if (controllerMode==loginMode || controllerMode==registerMode) {
          //   if(footerView == nil) {
               //  footerView = nil;
                 footerView  = [[UIView alloc] init];
@@ -301,8 +301,8 @@
         fieldText.delegate = self;
         [cell.contentView addSubview:fieldText];
         
-        UIView* cellView = cell.backgroundView;
-        cell.backgroundView = cellView;
+        defaultBgView = cell.backgroundView;
+        cell.backgroundView = defaultBgView;
         
     } else {
         fieldText = (UITextField*)[cell.contentView viewWithTag:FIELD_TEXT_TAG];
@@ -312,6 +312,9 @@
     {
         case 0:
             cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.backgroundView = defaultBgView;
+            fieldText.enabled = true;
+            fieldText.hidden = false;
             switch (controllerMode) {
                 case registerMode:
                 case editMode:
@@ -424,7 +427,9 @@
         case 1:
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             fieldText.enabled = false;
+            fieldText.hidden = false;
             fieldText.secureTextEntry = false;
+            cell.backgroundView = defaultBgView;
             switch (controllerMode) {
                 case akLoginMode:
                 {
@@ -451,14 +456,15 @@
             }
             break;
         case 2:
-            if (controllerMode==loginMode) {
+            //if (controllerMode==loginMode || controllerMode==registerMode) {
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 fieldText.enabled = false;
+            fieldText.hidden = true;
                 UIImageView* akLogin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_keyz_button.png"]];
                 cell.imageView.image = [UIImage imageNamed:@"blank.png"];
                 //[cell.contentView addSubview:akLogin];
                 cell.backgroundView = akLogin;
-            }
+           // }
             break;
     }
     
