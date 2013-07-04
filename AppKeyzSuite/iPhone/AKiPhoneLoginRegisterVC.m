@@ -180,7 +180,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     int sections = 2;
-    if (controllerMode==loginMode || controllerMode==registerMode) sections = 3;
+    if (controllerMode==registerMode) sections = 3;
     return sections;
 }
 
@@ -205,7 +205,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     switch (controllerMode) {
-        case loginMode:
         case registerMode:
             switch (section) {
                 case 0:
@@ -217,6 +216,7 @@
                     break;
             }
             break;
+        case loginMode:
         case akLoginMode:
             switch (section) {
                 case 0:
@@ -251,13 +251,13 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {    
     if (section==1) {
-        if (controllerMode==loginMode || controllerMode==registerMode) {
+        if (controllerMode==registerMode) {
           //  if (footerView==nil) {
                // footerView = nil;
                 footerView  = [[UIView alloc] init];
                 [footerView addSubview:[self footerLabel:@"-Or-"]];
         //    }
-        } else if (controllerMode==akLoginMode) {
+        } else if (controllerMode==loginMode || controllerMode==akLoginMode) {
         //    if (footerView==nil) {
              //   footerView = nil;
                 footerView  = [[UIView alloc] init];
@@ -265,7 +265,7 @@
          //   }
         }
     } else if (section==2) {
-        if (controllerMode==loginMode || controllerMode==registerMode) {
+        if (controllerMode==registerMode) {
          //   if(footerView == nil) {
               //  footerView = nil;
                 footerView  = [[UIView alloc] init];
@@ -456,15 +456,13 @@
             }
             break;
         case 2:
-            //if (controllerMode==loginMode || controllerMode==registerMode) {
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                fieldText.enabled = false;
-            fieldText.hidden = true;
-                UIImageView* akLogin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_keyz_button.png"]];
-                cell.imageView.image = [UIImage imageNamed:@"blank.png"];
-                //[cell.contentView addSubview:akLogin];
-                cell.backgroundView = akLogin;
-           // }
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            fieldText.enabled = false;
+            fieldText.hidden = false;
+            fieldText.secureTextEntry = false;
+            cell.backgroundView = defaultBgView;
+            fieldText.text = @"Log In";
+            cell.imageView.image = [UIImage imageNamed:@"user.png"];
             break;
     }
     
@@ -493,7 +491,7 @@
                 break;
         }
     }
-    if (indexPath.section==2) [self akLoginView];
+    if (indexPath.section==2) [self loginView];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -669,6 +667,18 @@
         [noStuff show];
     }
 }
+
+-(void)loginView
+{
+    AKiPhoneLoginRegisterVC* akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPhoneLoginRegisterVC" bundle:nil];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        akilrvc = [[AKiPhoneLoginRegisterVC alloc] initWithNibName:@"AKiPadLoginRegisterVC" bundle:nil];
+    
+    akilrvc.controllerMode = loginMode;
+    [self.navigationController pushViewController:akilrvc animated:true];
+}
+
 
 -(void)akLoginView
 {
