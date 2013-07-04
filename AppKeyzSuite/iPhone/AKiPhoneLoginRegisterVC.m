@@ -131,10 +131,10 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         if ([UIApplication sharedApplication].statusBarOrientation==UIInterfaceOrientationPortrait) {
-            tableHeight = 352.0;
+            tableHeight = 696.0;
             self.bgImage.image = [UIImage imageNamed:@"Default-Portrait.png"];
         } else {
-            tableHeight = 696.0;
+            tableHeight = 352.0;
             self.bgImage.image = [UIImage imageNamed:@"Default-Landscape.png"];
         }
     } else {
@@ -312,7 +312,6 @@
     {
         case 0:
             cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.backgroundView = defaultBgView;
             fieldText.enabled = true;
             fieldText.hidden = false;
             switch (controllerMode) {
@@ -429,18 +428,7 @@
             fieldText.enabled = false;
             fieldText.hidden = false;
             fieldText.secureTextEntry = false;
-            cell.backgroundView = defaultBgView;
             switch (controllerMode) {
-                case akLoginMode:
-                {
-                    cell.accessoryType = UITableViewCellAccessoryNone;
-                    fieldText.enabled = false;
-                    UIImageView* akLogin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"app_keyz_button.png"]];
-                    cell.imageView.image = [UIImage imageNamed:@"blank.png"];
-                    //[cell.contentView addSubview:akLogin];
-                    cell.backgroundView = akLogin;
-                }
-                    break;
                 case loginMode:
                     fieldText.text = @"Log In";
                     cell.imageView.image = [UIImage imageNamed:@"user.png"];
@@ -460,7 +448,6 @@
             fieldText.enabled = false;
             fieldText.hidden = false;
             fieldText.secureTextEntry = false;
-            cell.backgroundView = defaultBgView;
             fieldText.text = @"Log In";
             cell.imageView.image = [UIImage imageNamed:@"user.png"];
             break;
