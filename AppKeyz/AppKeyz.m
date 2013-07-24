@@ -110,7 +110,7 @@ NSString* const kAppToken = @"ci48xk6m"; //REPLACE WITH YOUR APP TOKEN
     [AKUser shared].userNameFirst = [responseObject objectForKey:@"firstname"]; //String
     [AKUser shared].userNameLast = [responseObject objectForKey:@"lastname"]; //String
     [responseObject objectForKey:@"deviceids"]; //Array
-    [responseObject objectForKey:@"productskus"]; //Array
+    [responseObject objectForKey:@"purchaseids"]; //Array
     [responseObject objectForKey:@"consumables"]; //Array
     [AKUser shared].uniqueId = [responseObject objectForKey:@"uniqueid"]; //String
     [AKUser shared].latitude = [responseObject objectForKey:@"longitude"]; //String
